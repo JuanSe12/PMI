@@ -1,0 +1,20 @@
+{
+  "name": "PMI",
+  "version": "1.0.0",
+  "description": "Project Manager Information",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "Conjuring Code",
+  "license": "Sofka",
+  "dependencies": {
+    "ejs": "^2.5.5",
+    "express": "^4.15.2",
+    "nodemon": "^1.18.9"
+  },
+  "keywords": [
+    "express"
+  ]
+}
