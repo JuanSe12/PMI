@@ -2,7 +2,7 @@
   "name": "PMI",
   "version": "1.0.0",
   "description": "",
-  "main": "src/assets/js/index.js",
+  "main": "module.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack -w"
