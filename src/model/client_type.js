@@ -1,0 +1,4 @@
+class ClientType extends BasicInformation{
+
+    
+}
