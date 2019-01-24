@@ -1,0 +1,29 @@
+body {
+    margin-left: 12pt;
+    padding: 0%;
+}
+h1.title {
+
+    font-size: 420%;
+    text-transform: uppercase;
+    color: chocolate;
+    font-weight: bold;
+}
+
+div.sofkiano-info {
+   margin-left: 6pt;
+   margin-top: 6pt; 
+   padding: 0pt;
+    color: chocolate;
+ 
+}
+
+.collapsible-body p {
+    margin-left: 0.4rem;
+    padding: .7rem;
+}
+.collapsible-header{
+    padding-top: 0.5rem;
+    padding-left: 2rem;
+}
+
