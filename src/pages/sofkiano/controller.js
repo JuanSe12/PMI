@@ -1,5 +1,6 @@
 'use strict';
 
+
 let sofkiano = {
     id: 1,
     firtsName: "pepito",
@@ -23,8 +24,8 @@ class Data {
         for (var i = 0; i < 10; i++) {
             let li = 
             `<li class="collection-item avatar">
-                <div class="collapsible-header responsiveText"><img src="../../assets/images/person.png" alt="" class="resize circle">First</div>
-                <div class="collapsible-body responsiveText">${sofkiano.firtsName } ${sofkiano.lastName}</div>
+                <div class="collapsible-header"><img src="../../assets/images/person.png" alt="" class="resize circle fixing"><div class="responsiveText fixing marginText">${sofkiano.firtsName } ${sofkiano.lastName}</div></div>
+                <div class="collapsible-body responsiveText">Showing</div>
             </li>`;
            template += li;     
         }

@@ -1,5 +1,6 @@
 body {
-    margin-left: 12pt;
+    margin-left:4%;
+    margin-right:1%;
     padding: 0%;
 }
 h1.title {
@@ -34,6 +35,15 @@ div.sofkiano-info {
 
 .responsiveText{
     font-size:2vw;
+    
+}
+
+.fixing{
+    display: inline-block;
+}
+
+.marginText{
+   margin: 3%;
 }
 @media (max-width: 600px) {
     .responsiveText{

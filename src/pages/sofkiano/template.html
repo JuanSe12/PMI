@@ -9,15 +9,17 @@
          href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <link rel = "stylesheet"
          href = "../../assets/css/sofkiano.css">
-         <link rel = "stylesheet"
-         href = "../../public/style/index.css">
-      <script type = "text/javascript"
+    <script type = "text/javascript"
          src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
       <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
       </script>
+      <script src="../menu/controller.js"></script>
    </head>
    
-   <body>
+   <body onload="initialRender()">
+      <div id="menu">
+        
+      </div>
     <div style="position: relative;">
        <div class="tab">
            <h1 class="title">Sofkianos</h1>
