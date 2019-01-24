@@ -1,49 +1,35 @@
 'use strict';
+
+let sofkiano = {
+    id: 1,
+    firtsName: "pepito",
+    lastName: "perez"
+}
+
 class Data {
 
     constructor() {
-
     }
 
+
     fill() {
+        var div = document.getElementById("sofkianos-list");
+        let template = "";
 
-        let ul = document.getElementById("myList");
+        /*sofkianos.forEach(sofkiano => {
+            sofkiano.lastName
+        });*/
+
         for (var i = 0; i < 10; i++) {
-
-            let [li, div1, div2, img, span, divInfo, pName, pDocType, pDocNumber, pFeature, pTecno] = 
-                this.creatingElements();
-
-            li.setAttribute("class", "collection-item avatar");
-
-            img.setAttribute("class", "circle ");
-            img.setAttribute("src", "../../assets/images/person.png ");
-            img.setAttribute("alt", "Not avaible");
-
-
-            div1.setAttribute("class", "collapsible-header");
-            div2.setAttribute("class", "collapsible-body");
-            divInfo.setAttribute("class", "sofkiano-info");
-            span.setAttribute("class","tittle");
-            span.appendChild(document.createTextNode("Names"));
-
-            div1.appendChild(img);
-            div1.appendChild(span);
-           // span.appendChild(document.createTextNode("Lorem ipsum dolor sit amet."));
-            // div2.appendChild(span);
-            div2.appendChild(divInfo);
-
-            
-           
-            divInfo.appendChild(pDocType);
-            pDocType.appendChild(document.createTextNode("Document type"));
-            divInfo.appendChild(pDocNumber);
-            pDocNumber.appendChild(document.createTextNode("Document number"));
-
-            li.appendChild(div1);
-            li.appendChild(div2);
-            ul.appendChild(li);
-
+            let li = 
+            `<li class="collection-item avatar">
+                <div class="collapsible-header"><img src="../../public/images/yuna.JPG" alt="" class="circle">First</div>
+                <div class="collapsible-body">${sofkiano.firtsName } ${sofkiano.lastName}</div>
+            </li>`;
+           template += li;     
         }
+        div.innerHTML = template;
+        
     }
 
     creatingElements() {
