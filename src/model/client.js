@@ -1,4 +1,4 @@
-class Client{
+export default class Client{
     constructor(id, name, nit, size, sector, clintType){
         this.id = id;
         this.name = name;

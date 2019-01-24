@@ -1,4 +1,4 @@
-class BasicInformation{
+export default class BasicInformation{
 
     constructor(id, name, description){
         this.id = id;
@@ -6,5 +6,4 @@ class BasicInformation{
         this.description = description;
     }
 
-    
 }

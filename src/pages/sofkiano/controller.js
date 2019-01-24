@@ -1,5 +1,5 @@
 'use strict';
-
+import  DataService from "../../services/data_service.js";
 
 let sofkiano = {
     id: 1,
@@ -16,7 +16,9 @@ class Data {
     fill() {
         var ul = document.getElementById("sofkianos-list");
         let template = "";
-
+        DataService.getAllSofkianos().then(sofkiano=>{
+            console.log(sofkiano);
+        })
         /*sofkianos.forEach(sofkiano => {
             sofkiano.lastName
         });*/ 
