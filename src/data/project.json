@@ -1,0 +1,18 @@
+[
+    {
+       "id": 1,
+       "name": "Genesis Sofka",
+       "description": "",
+       "state": 1,
+       "client": 1,
+       "thechnologies":[ 1, 2, 3, 4 ]
+    },
+    {
+        "id": 1,
+        "name": "Atlantico",
+        "description": "",
+        "state": 1,
+        "client": 2,
+        "thechnologies":[ 2, 3, 4 ]
+     }
+]
