@@ -1,16 +1,25 @@
 let DataService = {
+
     
-    loadClientType: function(){
-        let clientTypes =[];
-        this.loadJsonFromFile('client_type.json')
-        .then(clientTypesJson=>{ 
-            clientTypesJson.forEach(type => {
-                clientTypes.push(Object.cast(type, ClientType));
-            });
-            this.clientTypes = clientTypes;
-        });
+    loadClient: function(){
+        this.load('client.json',Client,'clients');
     },
     
+    loadClientType: function(){
+        this.load('client_type.json',ClientType,'clientTypes');
+    },
+    
+    load: function(filename,constructor,variableName){
+        let variables =[];
+        this.loadJsonFromFile(filename)
+            .then(jsonArray=>{ 
+                jsonArray.forEach(item => {
+                    variables.push(Object.cast(item, constructor));
+                });
+                this[variableName] = variables;
+                console.log(this);
+            });
+    },
     
     loadJsonFromFile: function(filename){
         return new Promise((resolve, reject) =>{
@@ -32,3 +41,5 @@ Object.cast = function cast(rawObj, constructor)
         obj[i] = rawObj[i];
     return obj;
 }
+
+

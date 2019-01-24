@@ -8,7 +8,7 @@
         "externalExperience": "36",
         "internalExperience": "1",
         "feactures": [ 1, 2 ],
-        "thechnologies": [ 2, 4, 5 ] 
+        "technologies": [ 2, 4, 5 ] 
     },
     {
         "id": 2,
@@ -19,7 +19,7 @@
         "externalExperience": "12",
         "internalExperience": "1",
         "feactures": [ 1, 2 ],
-        "thechnologies": [ 2, 4, 5 ] 
+        "technologies": [ 2, 4, 5 ] 
     },
     {
         "id": 3,
@@ -30,6 +30,6 @@
         "externalExperience": "12",
         "internalExperience": "1",
         "feactures": [ 1, 2 ],
-        "thechnologies": [ 2, 4, 5 ] 
+        "technologies": [ 2, 4, 5 ] 
     }
 ]

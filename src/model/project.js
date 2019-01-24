@@ -1,11 +1,11 @@
 class Project{
-    constructor(id, name, description, state, client, thechnologies){
+    constructor(id, name, description, state, client, technologies){
         this.id = id;
         this.name = name;
         this.description = description;
         this.state = state;
         this.client = client;
-        this.thechnologies = thechnologies
+        this.technologies = technologies
     }
 
     getState(){
