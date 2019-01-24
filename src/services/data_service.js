@@ -5,6 +5,7 @@ import ProjectState from "../model/project_state.js";
 import Project from "../model/project.js";
 import Sofkiano from "../model/sofkiano.js";
 import Technology from "../model/technology.js";
+import Config from "../config/config.js"
 
 export default class DataService {
 
@@ -62,7 +63,7 @@ export default class DataService {
 
     static loadJsonFromFile(filename){
         return new Promise((resolve, reject) =>{
-            $.getJSON(`./src/data/${filename}`, function(json) {
+            $.getJSON(`${Config.baseUrl()}/src/data/${filename}`, function(json) {
                 resolve(json)
             })
             .fail(function(){
