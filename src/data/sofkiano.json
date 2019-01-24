@@ -30,6 +30,6 @@
         "externalExperience": "12",
         "internalExperience": "1",
         "feactures": [ "Lider", "Eficaz" ],
-        "technologies": [{"name":"Angular","img":"../../assets/images/tecnologhies/angular.png"},  {"name":"Node","img":".././assets/images/tecnologhies/node.png"},  {"name":"Java","img":"../../assets/images/tecnologhies/java.png"} ] 
+        "technologies": [{"name":"Angular","img":"../../assets/images/tecnologhies/angular.png"},  {"name":"Node","img":"../../assets/images/tecnologhies/node.png"},  {"name":"Java","img":"../../assets/images/tecnologhies/java.png"} ] 
     }
 ]
