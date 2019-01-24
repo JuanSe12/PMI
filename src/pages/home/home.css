@@ -1,0 +1,45 @@
+body {
+    margin-left: 12pt;
+    padding: 0%;    
+}
+
+.collapsible {
+    max-width: 70%;
+    box-align: center;
+    margin: auto;
+    padding-left: 2rem;
+    padding-bottom:2rem;
+}
+
+h1.title {
+
+    font-size: 420%;
+    text-transform: uppercase;
+    color: chocolate;
+    font-weight: bold;
+    text-align: center
+}
+
+.collapsible-body p {
+    /* margin-left: 1rem; */
+    padding-top: 0%;
+    padding-left: 0.75rem;
+    padding-bottom:1rem; 
+    font-size: 1.1rem;
+}
+
+.collapsible-header{
+    padding-top: 0.5rem;
+    padding-left: 2rem;
+    /* border-bottom: 0rem; */
+}
+
+.vertical{
+    background-color: blue;
+    
+}
+
+/*.resize{
+    width:50%; 
+    height:50%;
+}*/
