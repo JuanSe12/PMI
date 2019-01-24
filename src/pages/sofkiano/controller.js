@@ -2,7 +2,7 @@ import  DataService from "../../services/data_service.js";
 
 DataService.getAllSofkianos()
 .then(sofkianos =>{
-    let template;
+    let template="";
     var ul = document.getElementById("sofkianos-list");
     sofkianos.map(sofkiano=>{
 
@@ -11,8 +11,8 @@ DataService.getAllSofkianos()
 
         let li = 
         `<li class="collection-item avatar">
-            <div class="collapsible-header"><img src="../../assets/images/person.png" 
-            alt="" class="resize circle"> ${sofkiano.firtsName } ${sofkiano.lastName}</div>
+            <div class="collapsible-header "><img src="../../assets/images/person.png" 
+            alt="" class="resize circle "> ${sofkiano.firtsName } ${sofkiano.lastName}</div>
            
             <div class="collapsible-body ">               
             <form class="col s12">

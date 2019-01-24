@@ -8,7 +8,7 @@ body {
 }
 
 .collapsible {
-    max-width: 70%;
+    max-width: 80%;
     box-align: center;
     margin: auto;
     padding-left: 2rem;
@@ -17,11 +17,12 @@ body {
 
 h1.title {
 
-    font-size: 400%;
+    font-size: 350%;
     /* text-transform: uppercase; */
-    color: chocolate;
-    font-weight:950; 
-    text-align: center; 
+    color: #ffab40;
+    /* font-weight:950;  */
+    /* text-align: center;  */
+    margin-left: 15%;
     font-family: 'Arial'
 }
 
@@ -32,6 +33,8 @@ div.sofkiano-info {
     color: chocolate;
  
 }
+
+
 
 .collapsible-body p {
     padding-top: 0%;
