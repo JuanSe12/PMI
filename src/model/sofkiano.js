@@ -1,4 +1,4 @@
-class Sofkiano{
+export default class Sofkiano{
     constructor(id, firtsName, lastName, documentType, documentNumber, 
         externalExperience, internalExperience, feactures, technologies){
         this.id = id;
