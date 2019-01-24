@@ -32,3 +32,12 @@ div.sofkiano-info {
     height:10%;
 }
 
+.responsiveText{
+    font-size:2vw;
+}
+@media (max-width: 600px) {
+    .responsiveText{
+        font-size:3vw;
+    }
+
+}
