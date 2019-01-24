@@ -1,6 +1,6 @@
 class Sofkiano{
     constructor(id, firtsName, lastName, documentType, documentNumber, 
-        externalExperience, internalExperience, feactures, thechnologies){
+        externalExperience, internalExperience, feactures, technologies){
         this.id = id;
         this.firtsName = firtsName;
         this.lastName = lastName;
@@ -9,7 +9,7 @@ class Sofkiano{
         this.externalExperience = externalExperience;
         this.internalExperience = internalExperience;
         this.feactures = feactures;
-        this.thechnologies = thechnologies;
+        this.technologies = technologies;
     }
     getFeatures(){
         let feactures = []

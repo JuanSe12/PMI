@@ -1,4 +1,4 @@
-class Thechnology extends BasicInformation{
+class Technology extends BasicInformation{
 
     constructor(id, name, description, icon){
         super(id, name, description);
