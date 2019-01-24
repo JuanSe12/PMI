@@ -81,19 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./module.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/pages/menu/controller.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./module.js":
-/*!*******************!*\
-  !*** ./module.js ***!
-  \*******************/
+/***/ "./src/pages/menu/controller.js":
+/*!**************************************!*\
+  !*** ./src/pages/menu/controller.js ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("class Config{\r\n    urlRoot(){\r\n        return 'localhost';\r\n    };\r\n}\r\n\r\nmodule.exports = Config;\n\n//# sourceURL=webpack:///./module.js?");
+eval("const path = './src/pages/menu/template.html';\r\n\r\nfunction initialRender(){\r\n    $('#menu').load(path);\r\n};\n\n//# sourceURL=webpack:///./src/pages/menu/controller.js?");
 
 /***/ })
 
