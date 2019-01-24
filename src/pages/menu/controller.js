@@ -1,6 +1,5 @@
-const path = './pages/menu/'
+const path = './src/pages/menu/template.html';
 
 function initialRender(){
-    let menu = document.getElementById('menu');
-    menu.innerHTML=`<object type="text/html" data="${path}template.html" ></object>`;
+    $('#menu').load(path);
 };
