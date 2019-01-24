@@ -62,7 +62,7 @@ export default class DataService {
 
     static loadJsonFromFile(filename){
         return new Promise((resolve, reject) =>{
-            $.getJSON(`./src/data/${filename}`, function(json) {
+            $.getJSON(`http://localhost/src/data/${filename}`, function(json) {
                 resolve(json)
             })
             .fail(function(){
