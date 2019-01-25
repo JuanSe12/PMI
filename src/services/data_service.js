@@ -7,40 +7,53 @@ import Sofkiano from "../model/sofkiano.js";
 import Technology from "../model/technology.js";
 import Config from "../config/config.js"
 
+const CLIENT_TYPE_FILENAME = 'client_type.json';
+const CLIENT_FILENAME = 'client.json';
+const FEATURES_FILENAME = 'feature.json';
+const PROJECT_STATE_FILENAME = 'project_state.json';
+const PROJECT_FILENAME = 'project.json';
+const SOFKIANO_FILENAME = 'sofkiano.json';
+const TECHNOLOGY_FILENAME = 'technology.json';
+
+
 export default class DataService {
 
     static getAllClientTypes(){
-        return this.load('client_type.json',ClientType);
+        return this.load(CLIENT_TYPE_FILENAME,ClientType);
     }
 
 
     static getAllClients(){
-        return this.load('client.json', Client);
+        return this.load(CLIENT_FILENAME, Client);
     }
 
 
     static getAllFeatures(){
-        return this.load('feature.json', Feature);
+        return this.load(FEATURES_FILENAME, Feature);
     }
 
 
     static getAllProjectStates(){
-        return this.load('project_state.json', ProjectState);
+        return this.load(PROJECT_STATE_FILENAME, ProjectState);
     }
 
 
     static getAllProjects(){
-        return this.load('project.json', Project);
+        return this.load(PROJECT_FILENAME, Project);
     }
 
 
     static getAllSofkianos(){
-        return this.load('sofkiano.json', Sofkiano);
+        return this.load(SOFKIANO_FILENAME, Sofkiano);
     }
 
 
     static getAllTechnologies(){
-        return this.load('technology.json', Technology);
+        return this.load(TECHNOLOGY_FILENAME, Technology);
+    }
+
+    static getTechnologiesByIds(ids){
+        return this.load
     }
 
 
