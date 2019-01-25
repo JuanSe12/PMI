@@ -1,5 +1,15 @@
 import Route from "../../services/route.js";
 
-document.getElementById('menu-home').addEventListener('click', () =>{
-    Route.routeTo('test2');
+document.getElementById("projects").addEventListener('click', () =>{
+    Route.routeTo("home");
+      
+})
+document.getElementById("clients").addEventListener('click', () =>{
+    Route.routeTo("client");
+      
+})
+
+document.getElementById("sofkianoss").addEventListener('click', () =>{
+    Route.routeTo("sofkiano");
+      
 })
