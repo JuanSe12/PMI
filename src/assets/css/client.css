@@ -1,0 +1,25 @@
+.img-size {
+    width: 40% !important;
+}
+.title-client{
+    font-size: 20px;
+}
+.modify-header {
+    padding-top: 1rem !important;
+}
+.size-row {
+    margin-bottom: 0px !important;
+}
+.edit-buttom{
+    color: #333 !important;
+}
+.collapsible-modify{
+    padding: 20px !important; 
+}
+.form-input {
+    margin-top: 10px;
+}
+.title-input{
+    color: #333 !important;
+    font-size: 15px !important;
+}
