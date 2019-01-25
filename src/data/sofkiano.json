@@ -1,0 +1,35 @@
+[
+    {
+        "id": 1,
+        "firtsName": "Juan Esteban",
+        "lastName": "Rios Arango",
+        "documentType": "CC",
+        "documentNumber": 1040749576,
+        "externalExperience": "36",
+        "internalExperience": "1",
+        "feactures": [ 1, 2 ],
+        "technologies": [ 2, 4, 5 ] 
+    },
+    {
+        "id": 2,
+        "firtsName": "Melisa",
+        "lastName": "Barba",
+        "documentType": "CC",
+        "documentNumber": 94687049,
+        "externalExperience": "12",
+        "internalExperience": "1",
+        "feactures": [ 1, 2 ],
+        "technologies": [ 2, 4, 5 ] 
+    },
+    {
+        "id": 3,
+        "firtsName": "Alexander",
+        "lastName": "XXX",
+        "documentType": "CC",
+        "documentNumber": 92873982,
+        "externalExperience": "12",
+        "internalExperience": "1",
+        "feactures": [ 1, 2 ],
+        "technologies": [ 2, 4, 5 ] 
+    }
+]

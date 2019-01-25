@@ -1,5 +1,5 @@
-const path = './src/pages/menu/template.html';
+import Route from "../../services/route.js";
 
-function initialRender(){
-    $('#menu').load(path);
-};
+document.getElementById('menu-home').addEventListener('click', () =>{
+    Route.routeTo('test2');
+})
