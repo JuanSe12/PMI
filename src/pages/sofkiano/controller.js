@@ -1,4 +1,5 @@
 import  DataService from "../../services/data_service.js";
+import Config from "../../config/config.js"
 
 DataService.getAllSofkianos()
 .then(sofkianos =>{
@@ -9,9 +10,15 @@ DataService.getAllSofkianos()
         let tecnologhies= fillTecno(sofkiano);
         let skills = fillSkills(sofkiano);
 
+        sofkiano.getThechnologies().then(
+            data => {
+                console.log(data)
+            }
+        )
+
         let li = 
         `<li class="collection-item avatar">
-            <div class="collapsible-header "><img src="./src/assets/images/person.png" 
+            <div class="collapsible-header "><img src="${Config.baseUrl()}/src/assets/images/person.png" 
             alt="" class="resize circle "> ${sofkiano.firtsName } ${sofkiano.lastName}</div>
            
             <div class="collapsible-body ">               
