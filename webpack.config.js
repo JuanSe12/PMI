@@ -1,7 +1,10 @@
 module.exports = {
-    mode: 'development',
-    entry: "./src/pages/menu/controller.js",
+  mode: 'development',
+  entry: {
+    controller:"./src/pages/menu/controller.js",
+    controller: "./src/pages/home/controller.js"
+  },          
     output: {
-      filename: './bundle.js',
-    },
-  };
+    filename: './bundle.js',
+  },
+};
