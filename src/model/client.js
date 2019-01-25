@@ -1,3 +1,5 @@
+import DataService from "../services/data_service.js";
+
 export default class Client{
     constructor(id, name, nit, size, sector, clintType){
         this.id = id;
@@ -11,4 +13,9 @@ export default class Client{
     static getSectors(){
         return ['privado', 'publico']
     }
+
+    getClient(){
+        return DataService.getClientTypeByIds(new Arrar(this.clintType))
+    }
+
 }

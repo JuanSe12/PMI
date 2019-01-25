@@ -1,7 +1,14 @@
 import DataService from "../../services/data_service.js"
 
-DataService.getAllProjects().then(
+DataService.getAllSofkianos().then(
     data => {
-        console.log(data)
+        data.forEach(sofkiano => {
+            sofkiano.getTechnologies().then(
+                (thechnologies) =>{
+                    console.log(thechnologies)
+                }
+            )
+        });
+        
     }
 )
