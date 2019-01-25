@@ -20,7 +20,7 @@ DataService.getAllProjects()
                                 <h4>${project.name} </h4>
                             </div>
                             <div>
-                                ${project.client.name}
+                                ${project.client}
                             </div>
                         </div>
                         <div class="col s2 vertical">
