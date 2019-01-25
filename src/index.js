@@ -1,4 +1,4 @@
 import Route from "./services/route.js";
 
 Route.renderMenu();
-Route.routeTo('sofkiano');
+Route.routeTo('test');
