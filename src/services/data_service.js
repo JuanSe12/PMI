@@ -51,13 +51,9 @@ export default class DataService {
     static getAllTechnologies(){
         return this.load(TECHNOLOGY_FILENAME, Technology);
     }
+   
 
-    static getTechnologiesByIds(ids){
-        return this.load
-    }
-
-
-    static load(filename,constructor){
+    static load(filename, constructor){
         let variables =[];
         return new Promise((resolve, reject) =>{
             DataService.loadJsonFromFile(filename)
@@ -72,7 +68,7 @@ export default class DataService {
             });
         });
     }
-    
+
 
     static loadJsonFromFile(filename){
         return new Promise((resolve, reject) =>{
@@ -82,6 +78,65 @@ export default class DataService {
             .fail(function(){
                 reject('error')
             })
+        });
+    }
+
+
+    static getClientTypeByIds(ids){
+        return this.loadByIds(CLIENT_TYPE_FILENAME, ClientType, ids)
+    }
+
+
+    static getClientByIds(ids){
+        return this.loadByIds(CLIENT_FILENAME, Client, ids)
+    }
+
+
+    static getFeaturesByIds(ids){
+        return this.loadByIds(FEATURES_FILENAME, Feature, ids)
+    }
+
+
+    static getProjectStateByIds(ids){
+        return this.loadByIds(PROJECT_STATE_FILENAME, ProjectState, ids)
+    }
+
+
+    static getProjectByIds(ids){
+        return this.loadByIds(PROJECT_FILENAME, Project, ids)
+    }
+
+
+    static getSofkianoByIds(ids){
+        return this.loadByIds(SOFKIANO_FILENAME, Sofkiano, ids)
+    }
+
+
+    static getTechnologiesByIds(ids){
+        return this.loadByIds(TECHNOLOGY_FILENAME, Technology, ids)
+    }
+
+
+    static loadByIds(filename, constructor, ids){
+        ids.sort((a,b) =>{ 
+            return a-b
+        });
+        let variables =[];
+        return new Promise((resolve, reject) =>{
+            DataService.loadJsonFromFile(filename)
+            .then(jsonArray=>{
+                let index = 0
+                jsonArray.forEach(item => {
+                    if( ids[index] === item.id ){
+                        variables.push(Object.cast(item, constructor));
+                        index++;
+                    }
+                });
+                resolve(variables)
+            })
+            .catch(err =>{
+                reject(err)
+            });
         });
     }
     

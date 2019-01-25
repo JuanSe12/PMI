@@ -6,7 +6,8 @@
        "state": 1,
        "client": 1,
        "technologies":[ 1, 2, 3, 4 ],
-       "img":"../../assets/images/angular.png"
+       "img":"../../assets/images/angular.png",
+       "sofkianos": [ 1 , 2]
     },
     {
         "id": 2,
@@ -15,6 +16,7 @@
         "state": 1,
         "client": 2,
         "technologies":[ 2, 3, 4 ],
-        "img": "../../assets/images/default.png"
+        "img": "../../assets/images/default.png",
+        "sofkianos": []
      }
 ]
