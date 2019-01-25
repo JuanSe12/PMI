@@ -7,8 +7,8 @@
         "documentNumber": 1040749576,
         "externalExperience": "36",
         "internalExperience": "1",
-        "feactures": [ 1, 2 ],
-        "technologies": [ 2, 4, 5 ] 
+        "feactures": [ "Honesto", "Lider" ],
+        "technologies": [ {"name":"Angular","img":"../../assets/images/tecnologhies/angular.png"},  {"name":"CSS","img":"../../assets/images/tecnologhies/css.png"},  {"name":"Java","img":"../../assets/images/tecnologhies/java.png"} ] 
     },
     {
         "id": 2,
@@ -18,8 +18,8 @@
         "documentNumber": 94687049,
         "externalExperience": "12",
         "internalExperience": "1",
-        "feactures": [ 1, 2 ],
-        "technologies": [ 2, 4, 5 ] 
+        "feactures": [ "Responsable", "Trabajador" ],
+        "technologies": [{"name":"Angular","img":"../../assets/images/tecnologhies/angular.png"},  {"name":"CSS","img":"../../assets/images/tecnologhies/css.png"},  {"name":"Python","img":"../../assets/images/tecnologhies/python.png"} ] 
     },
     {
         "id": 3,
@@ -29,7 +29,7 @@
         "documentNumber": 92873982,
         "externalExperience": "12",
         "internalExperience": "1",
-        "feactures": [ 1, 2 ],
-        "technologies": [ 2, 4, 5 ] 
+        "feactures": [ "Lider", "Eficaz" ],
+        "technologies": [{"name":"Angular","img":"../../assets/images/tecnologhies/angular.png"},  {"name":"Node","img":"../../assets/images/tecnologhies/node.png"},  {"name":"Java","img":"../../assets/images/tecnologhies/java.png"} ] 
     }
 ]
