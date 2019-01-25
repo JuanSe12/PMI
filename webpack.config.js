@@ -5,6 +5,6 @@ module.exports = {
       controller: "./src/pages/sofkiano/controller.js"
     },
     output: {
-      filename: './bundle.js',
-    },
-  };
+    filename: './bundle.js',
+  },
+};

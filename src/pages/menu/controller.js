@@ -1,9 +1,7 @@
 import Route from "../../services/route.js";
 
-
-
 document.getElementById("projects").addEventListener('click', () =>{
-    Route.routeTo("project");
+    Route.routeTo("home");
       
 })
 document.getElementById("clients").addEventListener('click', () =>{
