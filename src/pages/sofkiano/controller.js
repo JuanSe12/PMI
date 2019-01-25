@@ -11,7 +11,7 @@ DataService.getAllSofkianos()
 
         let li = 
         `<li class="collection-item avatar">
-            <div class="collapsible-header "><img src="../../assets/images/person.png" 
+            <div class="collapsible-header "><img src="./src/assets/images/person.png" 
             alt="" class="resize circle "> ${sofkiano.firtsName } ${sofkiano.lastName}</div>
            
             <div class="collapsible-body ">               
@@ -46,6 +46,7 @@ DataService.getAllSofkianos()
        template += li;     
     })
     ul.innerHTML=template;
+    console.log(document.getElementById("first_name"));
 })
 
 
