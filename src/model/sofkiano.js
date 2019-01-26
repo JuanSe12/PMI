@@ -1,3 +1,5 @@
+import DataService from "../services/data_service.js";
+
 export default class Sofkiano{
     constructor(id, firtsName, lastName, documentType, documentNumber, 
         externalExperience, internalExperience, feactures, technologies){
@@ -11,12 +13,14 @@ export default class Sofkiano{
         this.feactures = feactures;
         this.technologies = technologies;
     }
+
+
     getFeatures(){
-        let feactures = []
-        this.feactures.forEach(feature => {
-            //TODO: get features from JSON features
-            feactures.push()
-        });
-        return feactures;
+       return DataService.getFeaturesByIds(this.feactures);
+    }
+
+
+    getTechnologies(){
+        return DataService.getTechnologiesByIds(this.technologies);
     }
 }
