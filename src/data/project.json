@@ -5,7 +5,8 @@
        "description": "",
        "state": 1,
        "client": 1,
-       "technologies":[ 1, 2, 3, 4 ]
+       "technologies":[ 1, 2, 3, 4 ],
+       "sofkianos": [ 1 , 2]
     },
     {
         "id": 1,
@@ -13,6 +14,7 @@
         "description": "",
         "state": 1,
         "client": 2,
-        "technologies":[ 2, 3, 4 ]
+        "technologies":[ 2, 3, 4 ],
+        "sofkianos": []
      }
 ]
