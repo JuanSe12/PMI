@@ -8,11 +8,11 @@ DataService.getAllSofkianos()
     sofkianos.map(sofkiano=>{
 
         let tecnologhies= fillTecno(sofkiano);
-        let skills = fillSkills(sofkiano);
+        
 
-        sofkiano.getThechnologies().then(
+        sofkiano.getTechnologies().then(
             data => {
-                console.log(data)
+                let skills = fillSkills(data);
             }
         )
 
