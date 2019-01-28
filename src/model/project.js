@@ -1,14 +1,16 @@
 import DataService from "../services/data_service.js";
 
 export default class Project{
-    constructor(id, name, description, state, client, technologies, sofkianos){
+    constructor(id, name, description, state, client, dateInit, dateFinish,technologies, sofkianos){
         this.id = id;
         this.name = name;
         this.description = description;
         this.state = state;
         this.client = client;
-        this.technologies = technologies
-        this.sofkianos = sofkianos
+        this.dateInit = dateInit;
+        this.dateFinish = dateFinish;
+        this.technologies = technologies;
+        this.sofkianos = sofkianos;
     }
 
 
@@ -29,6 +31,16 @@ export default class Project{
 
     getTechnologies(){
         return DataService.getTechnologiesByIds(this.technologies)
+    }
+
+
+    getDateInit(){
+        return new Date(...this.dateInit)
+    }
+
+
+    getDateFinish(){
+        return new Date(...this.dateFinish)
     }
 
 }
