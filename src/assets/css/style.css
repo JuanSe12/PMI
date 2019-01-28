@@ -144,7 +144,7 @@
   background-position:  center center;
   background-repeat: no-repeat;
   background-image: url(direccion);
-  height: 66px;
+  height: 44px;
   background-color:#333;
 }
 
@@ -163,4 +163,49 @@
   object-fit: cover;
   height: 104%;
   width: 90%;
+}
+
+
+/* input search diseño y forma css */
+.searchbar {
+  background-color: white !important;
+    font-size: 1rem !important;
+    color: black;
+    width: 15rem !important;
+    height: 0.3rem !important;
+    border: none !important;
+    outline: none !important;
+    border-radius: 10rem !important;
+    box-shadow: 0 1rem 2rem rgba(black, .1) !important;
+    padding: 1rem !important;
+    position: relative !important;
+    transition: all .2s !important;
+    transition-delay: .1s !important;
+    left: 80%;
+    top: 8%;
+}
+
+.button {
+  height: 2rem;
+  position: absolute;
+  top: 0.3rem;
+  right: 2rem;
+  transition: all .2s;
+  transition-delay: .1s;
+}
+
+.button:hover {
+  top: 0.4rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  right: 2%;
+  cursor: pointer;
+}
+.button:active{
+  -webkit-filter: grayscale(100%);
+}
+
+
+.searchbar::placeholder {
+  opacity: .5;
 }
