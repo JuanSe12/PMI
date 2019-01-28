@@ -5,6 +5,8 @@
        "description": "",
        "state": 1,
        "client": 1,
+       "dateInit": [2018, 11, 24, 10, 33, 30, 0],
+       "dateFinish": [2019, 11, 24, 10, 33, 30, 0],
        "technologies":[ 1, 2, 3, 4 ],
        "img":"../../assets/images/angular.png",
        "sofkianos": [ 1 , 2]
@@ -15,6 +17,8 @@
         "description": "",
         "state": 1,
         "client": 2,
+        "dateInit": [2019, 1, 24, 8, 33, 30, 0],
+       "dateFinish": [2019, 6, 24, 10, 33, 30, 0],
         "technologies":[ 2, 3, 4 ],
         "img": "../../assets/images/default.png",
         "sofkianos": []
