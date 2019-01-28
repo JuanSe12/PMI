@@ -1,42 +1,31 @@
 import DataService from "../../services/data_service.js";
 import Config from "../../config/config.js"
-import init from "../../init.js";
 
 
-Object.setPrototypeOf(init, {
-    "initsofkiano": function () {
-
-        fillSofkiano();
-    }
-});
-
-
-function fillSofkiano() {
+export default function fillSofkiano() {
     DataService.getAllSofkianos()
-        .then(sofkianos => {
-            let template = "";
-            var ul = document.getElementById("sofkianos-list");
-            sofkianos.map(sofkiano => {
+    .then(sofkianos => {
+        let template = "";
+        var ul = document.getElementById("sofkianos-list");
+        sofkianos.map(sofkiano => {
 
-                let tecnologhies = "";
-                let skills = "";
+            let tecnologhies = "";
+            let skills = "";
 
-                sofkiano.getTechnologies()
-                    .then(
-                        data => {
-                            tecnologhies = fillTecno(data);
-                        })
-                    .then(data => {
-                        sofkiano.getFeatures().then(data => {
-                            console.log(sofkiano);
-                            skills = fillSkills(data);
-                        })
-                            .then(data => {
-                                let li =
-                                    `<li class="collection-item avatar">
-                               
-                    <div class="collapsible-header ">
-                    <img src="${Config.baseUrl()}/src/assets/images/person.png" 
+            sofkiano.getTechnologies()
+                .then(
+                    data => {
+                        tecnologhies = fillTecno(data);
+                    })
+                .then(data => {
+                    sofkiano.getFeatures().then(data => {
+                        console.log(sofkiano);
+                        skills = fillSkills(data);
+                    })
+                        .then(data => {
+                            let li =
+                                `<li class="collection-item avatar">
+                    <div class="collapsible-header "><img src="${Config.baseUrl()}/src/assets/images/person.png" 
                     alt="" class="resize circle "> ${sofkiano.firtsName} ${sofkiano.lastName}</div>
                    
                     <div class="collapsible-body ">               
@@ -68,24 +57,27 @@ function fillSofkiano() {
                     </form>                
                     </div>
                 </li>`;
-                                template += li;
+                            template += li;
 
-                            })
-                            .then(data => {
+                        })
+                        .then(data => {
 
-                                ul.innerHTML = template;
-                            })
-                    })
-                    .catch(() => {
-                        throw new Error('Somenthing Wrong');
-                    })
+                            ul.innerHTML = template;
+                        })
+                })
+                .catch(() => {
+                    throw new Error('Somenthing Wrong');
+                })
 
 
-
-            })
 
         })
+
+    })
 }
+
+
+
 
 function fillTecno(sofkiano) {
     let tecnoTemplate = "";
