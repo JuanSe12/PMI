@@ -1,9 +1,7 @@
 import  DataService from "../../services/data_service.js";
 import Config from "../../config/config.js"
 
-$(document).ready(function(){
-    console.log("Hola juan");
-})
+
 
 
 DataService.getAllSofkianos()
@@ -67,7 +65,12 @@ DataService.getAllSofkianos()
                
                 ul.innerHTML=template;
             })
-        })     
+        })
+        .catch(()=>{
+            throw new Error('Algo falló');
+        })
+
+             
        
     })
        

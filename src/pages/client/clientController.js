@@ -20,7 +20,7 @@ class Data {
                   <div class="col s10">
                   <div class="row">
                     <div class="col s5">
-                      <img src="../../assets/images/person.png" 
+                      <img src="./src/assets/images/person.png" 
                     alt="" class="img-size circle">
                     </div>
                     <div class="col s7">

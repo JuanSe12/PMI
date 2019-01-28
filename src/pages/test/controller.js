@@ -1,14 +1,15 @@
-import DataService from "../../services/data_service.js"
+import DataService from "../../services/data_service.js";
+import init from "../../init.js";
 
-DataService.getAllSofkianos().then(
-    data => {
-        data.forEach(sofkiano => {
-            sofkiano.getTechnologies().then(
-                (thechnologies) =>{
-                    console.log(thechnologies)
-                }
-            )
-        });
-        
+Object.setPrototypeOf(init, {
+    "inittest": function() {
+        /*
+        aqui va toda la logica para renderizar el html
+         */
+        hola();
     }
-)
+});
+
+function hola(){
+    console.log('holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+}
