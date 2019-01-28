@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [
     {
        "id": 1,
@@ -19,4 +20,25 @@
         "img": "../../assets/images/default.png",
         "sofkianos": []
      }
+=======
+[
+    {
+       "id": 1,
+       "name": "Genesis Sofka",
+       "description": "Proyecto sobre Genesis",
+       "state": 1,
+       "client": 1,
+       "technologies":[ 1, 2, 3, 4 ],
+       "img":"../../assets/images/angular.png"
+    },
+    {
+        "id": 2,
+        "name": "Atlantico",
+        "description": "Proyecto sobre Atlantico",
+        "state": 1,
+        "client": 2,
+        "technologies":[ 2, 3, 4 ],
+        "img": "../../assets/images/default.png"
+     }
+>>>>>>> 79272f32af56a1fff730051180db6957da8ab367
 ]
