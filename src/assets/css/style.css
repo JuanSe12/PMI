@@ -1,3 +1,7 @@
+#contenedor_super{
+  min-height: 100%;
+}
+
 .fa-2x {
   font-size: 1em;
   vertical-align: 20% !important;
@@ -100,11 +104,14 @@
   transition: width 0.5s;
 }
 
+
 #container{
-  width: 95%;
-  margin-left: 5%;
+  width: 90%;
+  height: 574px;
+  margin-left: 3%;
   position: absolute;
   transition: all 0.5s;
+  overflow: auto;
 }
 
 #menu:hover + #container{
