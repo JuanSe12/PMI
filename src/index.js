@@ -9,7 +9,10 @@ document.getElementById('input-filter').onchange = function(event){
 
     DataService.getAllSofkianos().then(
         sofkianos => {
-            
+            let datos = new Set()
+            sofkianos.forEach(sofkiano => {
+                
+            });
         }
     )
 
