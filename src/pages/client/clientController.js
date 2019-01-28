@@ -92,7 +92,7 @@ function addSessionStorage(data) {
   return arrayObject;
 }
 
-function editData(num) {;
+function editData(num) {
   let data = JSON.parse(localStorage.data);
   let objectEdit = {
     clientType: document.getElementById(`type${num}`).value,
@@ -116,11 +116,13 @@ function toggle(num) {
     sector: "sector" + num
   }
   if (document.getElementById(id.nit).disabled) {
+    
     document.getElementById(id.nit).disabled = false;
     document.getElementById(id.type).disabled = false;
     document.getElementById(id.size).disabled = false;
     document.getElementById(id.sector).disabled = false;
   } else {
+    document.getElementById(`btnSave${num}`).style.display="none";
     document.getElementById(id.nit).disabled = true;
     document.getElementById(id.type).disabled = true;
     document.getElementById(id.size).disabled = true;
