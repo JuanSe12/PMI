@@ -1,15 +1,11 @@
 import Route from "../../services/route.js";
 
-document.getElementById("projects").addEventListener('click', () =>{
-    Route.routeTo("home");
-      
-})
-document.getElementById("clients").addEventListener('click', () =>{
-    Route.routeTo("client");
-      
-})
-
-document.getElementById("sofkianoss").addEventListener('click', () =>{
+$("#sofkianoss").on('click',function(){
     Route.routeTo("sofkiano");
-      
+})
+$("#projects").on('click',function(){
+    Route.routeTo("project");
+})
+$("#clients").on('click',function(){
+    Route.routeTo("client");
 })

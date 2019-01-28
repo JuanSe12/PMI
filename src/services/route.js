@@ -1,3 +1,4 @@
+'use strict';
 import Config from "../config/config.js"
 import init from "../init.js"
 
@@ -6,6 +7,7 @@ const ID_MENU_CONTAINER = 'menu';
 
 export default class Route{
     static routeTo(path){
+        
         getElementAndRender(path);
     }
 

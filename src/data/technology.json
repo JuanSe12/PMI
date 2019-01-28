@@ -3,11 +3,11 @@
       "id": 1,
       "name": "Angular",
       "description": "",
-      "icon": "/src/assets/images/tecnologhies/angular.png"
+      "icon": "./src/assets/images/tecnologhies/angular.png"
    },
    {
       "id": 2,
-      "name": "Reac",
+      "name": "React",
       "description": "",
       "icon": ""
    },
@@ -15,7 +15,7 @@
       "id": 3,
       "name": "Java",
       "description": "",
-      "icon": "/src/assets/images/tecnologhies/java.png"
+      "icon": "./src/assets/images/tecnologhies/java.png"
    },
    {
       "id": 4,
@@ -33,18 +33,18 @@
       "id": 6,
       "name":"CSS",
       "description": "",
-      "icon":"/src/assets/images/tecnologhies/css.png"
+      "icon":"./src/assets/images/tecnologhies/css.png"
    },
    {
       "id": 7,
       "name":"Python",
       "description": "",
-      "icon":"/src/assets/images/tecnologhies/python.png"
+      "icon":"./src/assets/images/tecnologhies/python.png"
    },
    {
       "id": 8,
       "name":"Node",
       "description": "",
-      "icon":"/src/assets/images/tecnologhies/node.png"
+      "icon":"./src/assets/images/tecnologhies/node.png"
    }
 ]
