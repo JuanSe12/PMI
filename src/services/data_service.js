@@ -166,48 +166,67 @@ export default class DataService {
 
     static save(model){
         if(model instanceof ClientType){
-            this.saveNewOrEditModel(CLIENT_TYPE_FILENAME, ClientType, model)
+            return this.saveNewOrEditModel(CLIENT_TYPE_FILENAME, ClientType, model)
         }
         else if(model instanceof Client){
-            this.saveNewOrEditModel(CLIENT_FILENAME, Client, model)
+            return this.saveNewOrEditModel(CLIENT_FILENAME, Client, model)
         }
         else if(model instanceof Feature){
-            this.saveNewOrEditModel(FEATURES_FILENAME, Feature, model)
+            return this.saveNewOrEditModel(FEATURES_FILENAME, Feature, model)
         }
         else if(model instanceof ProjectState){
-            this.saveNewOrEditModel(PROJECT_STATE_FILENAME, ProjectState, model)
+            return this.saveNewOrEditModel(PROJECT_STATE_FILENAME, ProjectState, model)
         }
         else if(model instanceof Project){
-            this.saveNewOrEditModel(PROJECT_FILENAME, Project, model)
+            return this.saveNewOrEditModel(PROJECT_FILENAME, Project, model)
         }
         else if(model instanceof Sofkiano){
-            this.saveNewOrEditModel(SOFKIANO_FILENAME, Sofkiano, model)
+            return this.saveNewOrEditModel(SOFKIANO_FILENAME, Sofkiano, model)
         }
         else if(model instanceof Technology){
-            this.saveNewOrEditModel(TECHNOLOGY_FILENAME, Technology, model)
+            return this.saveNewOrEditModel(TECHNOLOGY_FILENAME, Technology, model)
         }
     }
 
 
     static saveNewOrEditModel(filename,constructor, instance){
-        this.load(filename, constructor).then(
-            models =>{
-                let client = models.find(o => o.id === instance.id)
-
-                if(client){
-                    let index = this.getIndex(client.id, models);
-                    instance.id = client.id;
-                    models.splice(index,1,instance)
+        return new Promise((resolve, reject) =>{
+            this.load(filename, constructor).then(
+                models =>{
+                    let client = models.find(o => o.id === instance.id)
+    
+                    if(client){
+                        let index = this.getIndex(client.id, models);
+                        instance.id = client.id;
+                        try {
+                            models.splice(index,1,instance)
+                            DataService.saveLocalStorage(filename,models)
+                            resolve(instance)                            
+                        } catch (error) {
+                            reject(error)
+                        }
+                    }
+                    else{
+                        let id = DataService.getLastId(models)
+                        instance.id = id + 1;
+                        try {
+                            models.push(instance)
+                            DataService.saveLocalStorage(filename,models)
+                            resolve(instance)                  
+                        } catch (error) {
+                            reject(error)
+                        }  
+                    }
+                    
+                    
                 }
-                else{
-                    let id = DataService.getLastId(models)
-                    instance.id = id + 1;
-                    models.push(instance)
-                }
-
-                DataService.saveLocalStorage(filename,models)
-            }
-        )
+            )
+            .catch(err=>{
+                reject(err)
+            })
+        });
+        
+        
     }
 
 
