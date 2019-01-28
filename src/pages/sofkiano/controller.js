@@ -1,6 +1,11 @@
 import  DataService from "../../services/data_service.js";
 import Config from "../../config/config.js"
 
+$(document).ready(function(){
+    console.log("Hola juan");
+})
+
+
 DataService.getAllSofkianos()
 .then(sofkianos =>{
     let template="";
