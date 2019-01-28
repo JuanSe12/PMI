@@ -17,14 +17,14 @@ export default class Project{
     getState(){
         let ids = new Array();
         ids.push(this.state)
-        return DataService.getProjectStateByIds(new Array(this.state));
+        return DataService.getProjectStateByIds(ids);
     }
 
 
     getClient(){
         let ids = new Array();
         ids.push(this.client)
-        return DataService.getClientByIds(new Array(this.client));
+        return DataService.getClientByIds(ids);
     }
 
 
