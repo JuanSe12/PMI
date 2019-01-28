@@ -17,19 +17,6 @@ export default class Route{
 }
 
 function getElementAndRender(path, idElement=ID_CONTAINER){
-<<<<<<< HEAD
-    let file = `${Config.baseUrl()}/src/pages/${path}/template.html`;
-  
-     $(`#${idElement}`).load(file);       
-    
-     
-     
-    
-}
-
-
-
-=======
     let file = `${Config.baseUrl()}/src/pages/${path}/template.html`
     $(`#${idElement}`).load(file);
 
@@ -40,4 +27,3 @@ function getElementAndRender(path, idElement=ID_CONTAINER){
     }
     
 }
->>>>>>> b508ed2bd7d791d5999f82b894588f948d71b467
