@@ -20,7 +20,7 @@ class Data {
                   <div class="col s10">
                   <div class="row">
                     <div class="col s5">
-                      <img src="../../assets/images/person.png" 
+                      <img src="./src/assets/images/person.png" 
                     alt="" class="img-size circle">
                     </div>
                     <div class="col s7">
@@ -29,7 +29,7 @@ class Data {
                   </div>
                   </div>
                   <div class="col s2">
-                    <a class="edit-buttom" id="editButtom"><i class="fas fa-edit"></i></a>
+                    <a class="edit-buttom" id="editButtom${indexClient}"><i class="fas fa-edit"></i></a>
                   </div>
                 </div>
                 </div>
@@ -39,21 +39,21 @@ class Data {
                     <div class="col s12">
                       <div class="row form-input">
                         <div class="input-field col s6">
-                          <input disabled value="${data[indexClient].nit}" id="nit" type="text" class="validate">
+                          <input disabled value="${data[indexClient].nit}" id="nit${indexClient}" type="text" class="validate">
                           <label class="active title-input">Nit</label>
                         </div>
                         <div class="input-field col s6">
-                        <input disabled value="${data[indexClient].clientType}" id="type" type="text" class="validate">
+                        <input disabled value="${data[indexClient].clientType}" id="type${indexClient}" type="text" class="validate">
                         <label class="active title-input">Type</label>
                         </div>      
                       </div>           
                       <div class="row form-input">
                         <div class="input-field col s6">
-                          <input disabled value="${data[indexClient].size}" id="size" type="text" class="validate">
+                          <input disabled value="${data[indexClient].size}" id="size${indexClient}" type="text" class="validate">
                           <label class="active title-input">Size</label>
                         </div>
                         <div class="input-field col s6">
-                        <input disabled value="${data[indexClient].sector}" id="sector" type="text" class="validate">
+                        <input disabled value="${data[indexClient].sector}" id="sector${indexClient}" type="text" class="validate">
                         <label class="active title-input">Sector</label>
                         </div>      
                       </div>  

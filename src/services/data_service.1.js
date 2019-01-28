@@ -15,6 +15,7 @@ const PROJECT_FILENAME = 'project.json';
 const SOFKIANO_FILENAME = 'sofkiano.json';
 const TECHNOLOGY_FILENAME = 'technology.json';
 
+let localStorage = window.localStorage
 
 export default class DataService {
 
@@ -56,7 +57,7 @@ export default class DataService {
     static load(filename, constructor){
         let variables =[];
         return new Promise((resolve, reject) =>{
-            DataService.loadJsonFromFile(filename)
+            DataService.loadJsonFromFileOrLocalStorage(filename)
             .then(jsonArray=>{ 
                 jsonArray.forEach(item => {
                     variables.push(Object.cast(item, constructor));
@@ -69,16 +70,33 @@ export default class DataService {
         });
     }
 
-
-    static loadJsonFromFile(filename){
+    
+    static loadJsonFromFileOrLocalStorage(filename){
         return new Promise((resolve, reject) =>{
-            $.getJSON(`${Config.baseUrl()}/src/data/${filename}`, function(json) {
+            if(this.dataIsLocalStorage(filename)){
+                let json = JSON.parse(localStorage.getItem(filename))
                 resolve(json)
-            })
-            .fail(function(){
-                reject('error')
-            })
+            }
+            else{
+                $.getJSON(`${Config.baseUrl()}/src/data/${filename}`, function(json) {
+                    DataService.saveLocalStorage(filename,json);
+                    resolve(json)
+                })
+                .fail(function(){
+                    reject('error')
+                })
+            }
         });
+    }
+
+
+    static dataIsLocalStorage(filename){
+        return localStorage.getItem(filename) ? true : false;
+    }
+
+
+    static saveLocalStorage(filename ,data){
+        localStorage.setItem(filename, JSON.stringify(data));
     }
 
 
@@ -123,7 +141,7 @@ export default class DataService {
         });
         let variables =[];
         return new Promise((resolve, reject) =>{
-            DataService.loadJsonFromFile(filename)
+            DataService.loadJsonFromFileOrLocalStorage(filename)
             .then(jsonArray=>{
                 let index = 0
                 jsonArray.forEach(item => {
@@ -139,6 +157,72 @@ export default class DataService {
             });
         });
     }
+
+
+    static save(model){
+        if(model instanceof ClientType){
+            this.saveNewOrEditModel(CLIENT_TYPE_FILENAME, ClientType, model)
+        }
+        else if(model instanceof Client){
+            this.saveNewOrEditModel(CLIENT_FILENAME, Client, model)
+        }
+        else if(model instanceof Feature){
+            this.saveNewOrEditModel(FEATURES_FILENAME, Feature, model)
+        }
+        else if(model instanceof ProjectState){
+            this.saveNewOrEditModel(PROJECT_STATE_FILENAME, ProjectState, model)
+        }
+        else if(model instanceof Project){
+            this.saveNewOrEditModel(PROJECT_FILENAME, Project, model)
+        }
+        else if(model instanceof Sofkiano){
+            this.saveNewOrEditModel(SOFKIANO_FILENAME, Sofkiano, model)
+        }
+        else if(model instanceof Technology){
+            this.saveNewOrEditModel(TECHNOLOGY_FILENAME, Technology, model)
+        }
+    }
+
+
+    static saveNewOrEditModel(filename,constructor, instance){
+        this.load(filename, constructor).then(
+            models =>{
+                let client = models.find(o => o.id === instance.id)
+
+                if(client){
+                    let index = this.getIndex(client.id, models);
+                    instance.id = client.id;
+                    models.splice(index,1,instance)
+                }
+                else{
+                    let id = DataService.getLastId(models)
+                    instance.id = id + 1;
+                    models.push(instance)
+                }
+
+                DataService.saveLocalStorage(filename,models)
+            }
+        )
+    }
+
+
+    static getLastId(models){
+        let id = 0;
+        models.forEach(model => {
+            id < model.id ? id = model.id : id = id;
+        });
+        return id;
+    }
+
+
+    static getIndex(id,models){
+        let i = 0
+        models.forEach((model,index) => {
+            model.id === id ? i = index : i = i;
+        });
+        return i;
+    }
+    
     
 }
 
@@ -149,3 +233,6 @@ Object.cast = function cast(rawObj, constructor)
         obj[i] = rawObj[i];
     return obj;
 }
+
+
+
