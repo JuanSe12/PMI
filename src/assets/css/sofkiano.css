@@ -16,12 +16,12 @@ body {
 h1.title {
 
     font-size: 350%;
-     text-transform: uppercase; 
+     
     color: #ffab40;
     /* font-weight:950;  */
     /* text-align: center;  */
     margin-left: 10%;
-    font-family: 'Arial'
+    
 }
 
 div.sofkiano-info {
