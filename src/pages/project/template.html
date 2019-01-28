@@ -1,61 +1,58 @@
+<div class="container">
+    <div class="collapsible content-project">
+        <div class="row">
+            <div class="col s12">
+                <div class="icons">
+                    <i class="material-icons md-36">edit</i>
+                </div>
+            </div>
+        </div>
+        <h1 class="title" id="title-project">Project Title</h1>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        Objetivo:
+                        <input disabled value="Parrafo objetivo" id="input-project-objetive" type="text" class="validate">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        Fecha Inicio:
+                        <input disabled value="Fecha" id="input-project-start-date" class="datepicker">
+                    </div>
+                    <div class="input-field col s6">
+                        Fecha Fin:
+                        <input disabled value="Fecha" id="input-project-finish-date" class="datepicker">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <h5>Tecnologías:</h5>
+                    </div>
+                    <div class="col s12" id="container-tech">
 
-    <h1 class="title">Project Title</h1>
-    <div class="container">
-        <div class="collapsible content-project" id="project-view">
-            <div class="row">
-                <form class="col s12">
-                    <div class="icons">
-                        <i class="material-icons md-36">edit</i>
                     </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            Objetivo:
-                            <input disabled value="Parrafo objetivo" id="disabled" type="text" class="validate">
-                        </div>
-                        <div class="input-field col s6">
-                            Fecha Inicio/Fecha Fin:
-                            <input disabled value="Fecha" id="disabled" type="text" class="validate">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col s12">
-                            Descripción:
-                        </div>
-                        <div class="input-field col s6">
-                            <textarea id="textarea1" class="materialize-textarea"></textarea>
-                        </div>
-                    </div>
-                    <!--<div class="row">
-                        <div class="col s12">
-                            <h5>Tecnologías:</h5>
-                        </div>
-                        <div class="col s12">
-                            <div class="chip">
-                                <img src="../../assets/images/angular.png" alt="chip">
-                                Angular
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
+                </div>
+                <div class="row">
                         <div class="col s12">
                             <h5>Cliente</h5>
                         </div>
                         <div class="col s12">
                             <ul class="">
-                                <li class="collection-item avatar">
-                                    <img src="./person.png" alt="" class="resize circle ">
+                                <li class="collection-item avatar" id="business-name">
+                                    <img src="" alt="" class="resize circle ">
                                     Nombre Empresa
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <div class="row">
+                   <!-- <div class="row">
                         <div class="col s12">
                             <h5>Sofkianos</h5>
                         </div>
                         <div class="col s12">
-                            <ul class="">
+                            <ul class="" id>
                                 <li class="collection-item avatar">
                                     <img src="./person.png" alt="" class="resize circle ">
                                     <br>
@@ -72,8 +69,12 @@
                             </ul>
                         </div>
                     </div>-->
-                </form>
-            </div>
+            </form>
         </div>
     </div>
-   
+    <script>
+        $(document).ready(function () {
+            $('.datepicker').datepicker();
+        });
+    </script>
+</div>

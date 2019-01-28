@@ -2,15 +2,51 @@ import DataService from "../../services/data_service.js";
 
 
 export default function fillProjects() {
-    DataService.getAllProjects()
-        .then(projects => {
+    DataService.getProjectByIds([1]).then(
+        projects => {
+            var content = document.getElementById("container-tech");
+            let template = "";
+            let project = projects[0];
+            let startDate = project.getDateInit();
+            let finishDate = project.getDateFinish();
+            let tecnologhies = "";
+            console.log(project)
+            let nameBusiness= "";
+            project.getClient().then(
+                client =>{
+                    console.log(client[0])
+                }
+            )
+            
+            document.getElementById('title-project').innerText = project.name;
+            document.getElementById('input-project-objetive').value = project.description;
+            document.getElementById('input-project-start-date').value = startDate;
+            document.getElementById('input-project-finish-date').value = finishDate;
+           // document.getElementById('business-name').value = project.;
+
+
+            project.getTechnologies().then(tech=>{
+                tecnologhies = fillTecno(tech);
+            }).then(tech=>{
+                template += tecnologhies;
+            }).then(tech =>{
+                content.innerHTML = template;
+            })   
+    })
+   /* DataService.getAllProjects().then(projects => {
             console.log("Entró al promise");
-            var ul = document.getElementById("business-list");
+
+            var content = document.getElementById("project-view");
             let template = "";
 
+            console.log(projects[0]);
+
             projects.map(project => {
-                let li =
-                    `<li class="collection-item avatar">
+                
+
+                //let div = 
+              /*  let li =
+                    `<div class="collection-item avatar">
             <div class="collapsible-header">
                 <div class="col s12">
                     <div class="row">
@@ -31,9 +67,25 @@ export default function fillProjects() {
                     </div>
                 </div>
             </div>
-        </li>`;
-                template += li;
+        </div>`;
+               // template += div;
             })
-            ul.innerHTML = template;
-        })
+           //content.innerHTML = template;
+        })*/
+}
+
+function fillTecno(projects) {
+    let tecnoTemplate = "";
+    for (let project of projects) {
+        let tecnoChips =
+            `<div class="chips">                  
+            <div class="chip">                  
+                <img src="${project.icon}" alt=""> 
+                ${project.name}
+            </div>
+        </div> `;
+        tecnoTemplate += tecnoChips;
+        console.log(project.name);
+    }
+    return tecnoTemplate;
 }
