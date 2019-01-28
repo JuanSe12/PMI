@@ -8,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
-    <!----<link rel = "stylesheet"
-         href = "./home.css"> -->
+    <link rel="stylesheet" href="./view-project.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
     </script>
@@ -17,18 +16,42 @@
 
 <body>
     <h1 class="title">Project Title</h1>
-    <div class="collapsible">
-        <div">
-            <form  style="padding: 1%">
-                <div class="col s12"> 
-                    This is an inline input field:
-                    <div class="input-field inline  ">
-                        <input id="email_inline" type="email" class="validate">
-                        <label for="email_inline">Email</label>
+    <div class="container">
+        <div class="collapsible content-project">
+            <div class="row">
+                <form class="col s12">
+                    <!----<div class="row">
+                        <div class="col s12">
+                            Descipción:
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea disabled id="textarea1" class="materialize-textarea"></textarea>
+                        </div>
+                    </div>-->
+                    <div class="row">
+                        <div class="input-field col s6">
+                            Objetivo:
+                            <input disabled value="Parrafo objetivo" id="disabled" type="text" class="validate">
+                        </div>
+                        <div class="input-field col s6">
+                                Fecha Inicio/Fecha Fin:
+                                <input disabled value="Fecha" id="disabled" type="text" class="validate">
+                            </div>
                     </div>
-                </div>
-            </form>
-        </div>  
+                    <div class="row">
+                        <div class="col s12">                            
+                            Tecnologías:
+                        </div>
+                        <div class="col s12">
+                                <div class="chip">
+                                        <img src="../../assets/images/angular.png" alt="chip">
+                                        Angular
+                                </div>
+                        </div>                        
+                    </div>
+                </form>
+            </div>
+     </div>
     </div>
 </body>
 
