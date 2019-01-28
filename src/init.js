@@ -2,6 +2,7 @@
 
 import fillSofkiano from "./pages/sofkiano/controller.js";
 import fillProjects from "./pages/project/controller.js";
+//import fillClients from "./pages/client/clientController.js";
 let init = {}
 
 Object.setPrototypeOf(init, {
@@ -11,6 +12,5 @@ Object.setPrototypeOf(init, {
     "initproject": function () {
         fillProjects();
     }
-
 });
 export default init;
