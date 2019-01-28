@@ -1,18 +1,19 @@
 'use strict';
 
 import dataService from '../../services/data_service.js';
+import clientModel from '../../model/client.js';
 
 export default async function fillClient() {
-  let data = [];
+  let arrayObject = [];
   try {
-    data = await dataService.getAllClients();
+    arrayObject = await dataService.getAllClients();
   } catch (error) {
     console.log(error)
   }
   var ul = document.getElementById("client-list");
   let template = "";
-  let arrayObject = addSessionStorage(data);
   for (let indexClient = 0; indexClient < arrayObject.length; indexClient++) {
+    debugger;
     let li =
       `<li class="collection-item avatar">
                 <div class="collapsible-header modify-header">
@@ -79,36 +80,38 @@ export default async function fillClient() {
     $(`#btnSave${i}`).click(function (event) {
       let num = event.delegateTarget.id;
       let res = num.substring(7, num.length);
-      editData(res);
+      editData(res, arrayObject);
     })
   }
 }
 
-function addSessionStorage(data) {
+/*function addSessionStorage(data) {
   if(!localStorage.data){
     localStorage.data = JSON.stringify(data);
   }
-  let arrayObject = JSON.parse(localStorage.data);
+  let arrayObject = JSON.parse(localStorage);
   return arrayObject;
-}
+}*/
 
-function editData(num) {
-  let data = JSON.parse(localStorage.data);
-  let objectEdit = {
-    clientType: document.getElementById(`type${num}`).value,
-    id: data[num].id,
-    name: data[num].name,
-    nit: document.getElementById(`nit${num}`).value,
-    sector: document.getElementById(`sector${num}`).value,
-    size: document.getElementById(`size${num}`).value
-  }
-  data[num] = objectEdit;
-  localStorage.data = JSON.stringify(data);
+async function editData(num, arrayObject) {
+  debugger;
+  let objectEdit = new clientModel(
+    arrayObject[num].id,
+    arrayObject[num].name,
+    document.getElementById(`nit${num}`).value,
+    document.getElementById(`size${num}`).value,
+    document.getElementById(`sector${num}`).value,
+    parseInt(document.getElementById(`type${num}`).value)
+  )
+
+  var prueba = await dataService.save(objectEdit);
+  //arrayObject[num] = objectEdit;
+  //localStorage.data = JSON.stringify(data);
   disabledInput(num);
 }
 
 function toggle(num) {
-  document.getElementById(`btnSave${num}`).style.display="block";
+  document.getElementById(`btnSave${num}`).style.display = "block";
   let id = {
     nit: "nit" + num,
     type: "type" + num,
@@ -116,21 +119,18 @@ function toggle(num) {
     sector: "sector" + num
   }
   if (document.getElementById(id.nit).disabled) {
-    
+
     document.getElementById(id.nit).disabled = false;
     document.getElementById(id.type).disabled = false;
     document.getElementById(id.size).disabled = false;
     document.getElementById(id.sector).disabled = false;
   } else {
-    document.getElementById(`btnSave${num}`).style.display="none";
-    document.getElementById(id.nit).disabled = true;
-    document.getElementById(id.type).disabled = true;
-    document.getElementById(id.size).disabled = true;
-    document.getElementById(id.sector).disabled = true;
+    document.getElementById(`btnSave${num}`).style.display = "none";
+    disabledInput(num);
   }
 }
 
-function disabledInput(num){
+function disabledInput(num) {
   document.getElementById(`nit${num}`).disabled = true;
   document.getElementById(`type${num}`).disabled = true;
   document.getElementById(`size${num}`).disabled = true;
