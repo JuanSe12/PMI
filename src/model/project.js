@@ -15,12 +15,16 @@ export default class Project{
 
 
     getState(){
-        return DataService.getProjectStateByIds(new Array(this.state));
+        let ids = new Array();
+        ids.push(this.state)
+        return DataService.getProjectStateByIds(ids);
     }
 
 
     getClient(){
-        return DataService.getClientByIds(new Array(this.client));
+        let ids = new Array();
+        ids.push(this.client)
+        return DataService.getClientByIds(ids);
     }
 
 
