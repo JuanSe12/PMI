@@ -15,7 +15,9 @@ export default class Client{
     }
 
     getClient(){
-        return DataService.getClientTypeByIds(new Arrar(this.clientType))
+        let ids = new Array();
+        ids.push(this.clientType)
+        return DataService.getClientTypeByIds(ids)
     }
 
 }
