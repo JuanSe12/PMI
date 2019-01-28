@@ -1,13 +1,13 @@
 import DataService from "../services/data_service.js";
 
 export default class Client{
-    constructor(id, name, nit, size, sector, clintType){
+    constructor(id, name, nit, size, sector, clientType){
         this.id = id;
         this.name = name;
         this.nit = nit;
         this.size = size;
         this.sector = sector;
-        this.clintType = clintType;
+        this.clientType = clientType;
     }
 
     static getSectors(){
@@ -15,7 +15,9 @@ export default class Client{
     }
 
     getClient(){
-        return DataService.getClientTypeByIds(new Arrar(this.clintType))
+        let ids = new Array();
+        ids.push(this.clientType)
+        return DataService.getClientTypeByIds(ids)
     }
 
 }
