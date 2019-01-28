@@ -2,7 +2,7 @@
     {
        "id": 1,
        "name": "Genesis Sofka",
-       "description": "",
+       "description": "Proyecto sobre Genesis",
        "state": 1,
        "client": 1,
        "technologies":[ 1, 2, 3, 4 ],
@@ -11,7 +11,7 @@
     {
         "id": 2,
         "name": "Atlantico",
-        "description": "",
+        "description": "Proyecto sobre Atlantico",
         "state": 1,
         "client": 2,
         "technologies":[ 2, 3, 4 ],
