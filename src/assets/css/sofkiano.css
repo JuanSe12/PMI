@@ -9,20 +9,18 @@ body {
 
 .collapsible {
     max-width: 80%;
-    box-align: center;
     margin: auto;
     padding-left: 2rem;
-    padding-bottom:2rem;
 }
 
 h1.title {
 
     font-size: 350%;
-    /* text-transform: uppercase; */
+     text-transform: uppercase; 
     color: #ffab40;
     /* font-weight:950;  */
     /* text-align: center;  */
-    margin-left: 15%;
+    margin-left: 10%;
     font-family: 'Arial'
 }
 
@@ -73,10 +71,9 @@ label.active {
 }
 
 div.chips {
-    padding-left: 2rem;
-    padding-bottom:2rem;
+  
     display: inline-block;
-    padding-right: 1.4rem;
+   border-bottom: none;
 
 }
 

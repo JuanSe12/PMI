@@ -17,14 +17,14 @@ DataService.getAllProjects()
                         </div>
                         <div class="col s8">
                             <div>
-                                <h4>${project.name} </h4>
+                                ${project.name} 
                             </div>
                             <div>
                                 ${project.client}
                             </div>
                         </div>
                         <div class="col s2 vertical">
-                            <i>${project.state}</i>                           
+                            ${project.state}                           
                         </div>
                     </div>
                 </div>
