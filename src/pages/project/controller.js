@@ -46,24 +46,4 @@ export default async function fillProjects() {
                 ul.innerHTML = template;},150);         
             
         })
-        
 }
-
-function fillTecno(projects) {
-    let tecnoTemplate = "";
-    for (let project of projects) {
-        let tecnoChips =
-            `<div class="chips">                  
-            <div class="chip">                  
-                <img src="${project.icon}" alt=""> 
-                ${project.name}
-            </div>
-        </div> `;
-        tecnoTemplate += tecnoChips;
-        //console.log(project.name);
-    }
-    return tecnoTemplate;
-}
-
-
-
