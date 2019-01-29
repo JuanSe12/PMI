@@ -131,9 +131,12 @@ function toggle(num) {
   }
 }
 
+
+
 function disabledInput(num) {
   document.getElementById(`nit${num}`).disabled = true;
   document.getElementById(`type${num}`).disabled = true;
   document.getElementById(`size${num}`).disabled = true;
   document.getElementById(`sector${num}`).disabled = true;
 }
+
