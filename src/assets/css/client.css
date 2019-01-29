@@ -1,6 +1,4 @@
-.img-size {
-    width: 30% !important;
-}
+
 .title-client{
     font-size: 16px;
     font-weight: bold;
@@ -24,12 +22,16 @@
 .title-input{
     color: #333 !important;
     font-size: 15px !important;
-}.img-size {
-    width: 30% !important;
 }
+
+.img-size {
+    width: 65% !important;
+}
+
 .title-client{
     font-size: 16px;
 }
+
 .modify-header {
     padding-top: 1rem !important;
 }
@@ -40,6 +42,9 @@
 .edit-buttom{
     color: #333 !important;
 }
+.edit-buttom:hover{
+    color: orange !important;
+}
 .collapsible-modify{
     padding: 10px !important; 
 }
@@ -49,9 +54,8 @@
 .title-input{
     color: #333 !important;
     font-size: 15px !important;
-}.img-size {
-    width: 30% !important;
 }
+
 .title-client{
     font-size: 16px;
 }

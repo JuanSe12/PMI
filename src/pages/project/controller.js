@@ -1,5 +1,5 @@
 import DataService from "../../services/data_service.js";
-
+import Config from "../../config/config.js"
 
 export default function fillProjects() {
     DataService.getAllProjects()
@@ -16,7 +16,7 @@ export default function fillProjects() {
                         <div class=" col s10">
                             <div class="row ">
                                 <div class=" col s4">
-                                    <img src="${project.img}" alt="NO">
+                                    <img class="img-size circle" src="${Config.baseUrl()+project.img}" alt="NO">
                                 </div>
                                 <div class=" col s4 ">
                                     <div> <p class="title-client"> ${project.name}<p></div>

@@ -29,12 +29,12 @@ export default function fillSofkiano() {
                                     <div class="row size-row">
                                       <div class="col s10">
                                         <div class="row">
-                                          <div class="col s5">
-                                            <img src="${Config.baseUrl()}/src/assets/images/person.png"
-                                          alt="" class="img-size circle">
+                                          <div class="col s4">
+                                            <img class="img-size circle" 
+                                                src="${Config.baseUrl()+sofkiano.img}"
+                                          alt="" >
                                           </div>
                                           <div class="col s7">
-                                          
                                             <p class="title-client"> ${sofkiano.firtsName} ${sofkiano.lastName} </p>
                                           </div>
                                         </div>

@@ -2,8 +2,10 @@
 
 import dataService from '../../services/data_service.js';
 import crudService from '../../services/crudService.js';
+import Config from "../../config/config.js";
 
 export default async function fillClient() {
+
   let arrayObject = [];
   try {
     arrayObject = await dataService.getAllClients();
@@ -19,12 +21,11 @@ export default async function fillClient() {
                   <div class="row size-row">
                     <div class="col s10">
                       <div class="row">
-                        <div class="col s5">
-                          <img src="./src/assets/images/person.png"
-                        alt="" class="img-size circle">
+                        <div class="col s4">
+                          <img src="${Config.baseUrl()+arrayObject[indexClient].img}"
+                        alt="" class="img-size ">
                         </div>
-                        <div class="col s7">
-                        
+                        <div class="col s7">                        
                           <p class="title-client">${arrayObject[indexClient].name}</p>
                         </div>
                       </div>
@@ -82,7 +83,7 @@ export default async function fillClient() {
       let position = idBtnSave.substring(7, idBtnSave.length);
       let num = 1;
       crudService(position, arrayObject, num).then(response => {
-        debugger;
+      
         if(response.message == "Se edito el dato con éxito"){
           disabledInput(position);
           alert(response.message);
