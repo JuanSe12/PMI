@@ -1,7 +1,7 @@
 'use strict';
 
 import dataService from '../../services/data_service.js';
-import clientModel from '../../model/client.js';
+import crudService from '../../services/crudService.js';
 
 export default async function fillClient() {
   let arrayObject = [];
@@ -13,7 +13,6 @@ export default async function fillClient() {
   var ul = document.getElementById("client-list");
   let template = "";
   for (let indexClient = 0; indexClient < arrayObject.length; indexClient++) {
-    debugger;
     let li =
       `<li class="collection-item avatar">
                 <div class="collapsible-header modify-header">
@@ -25,12 +24,13 @@ export default async function fillClient() {
                         alt="" class="img-size circle">
                         </div>
                         <div class="col s7">
+                        
                           <p class="title-client">${arrayObject[indexClient].name}</p>
                         </div>
                       </div>
                     </div>
                     <div class="col s2">
-                      <a class="edit-buttom" id="editButtom${indexClient}"><i class="fas fa-edit"></i></a>
+                      <a class="edit-buttom" id="editButtom${indexClient}"><i class="material-icons">edit</i></i></a>
                     </div>
                   </div>
                 </div>
@@ -78,36 +78,20 @@ export default async function fillClient() {
       toggle(res);
     })
     $(`#btnSave${i}`).click(function (event) {
-      let num = event.delegateTarget.id;
-      let res = num.substring(7, num.length);
-      editData(res, arrayObject);
+      let idBtnSave = event.delegateTarget.id;
+      let position = idBtnSave.substring(7, idBtnSave.length);
+      let num = 1;
+      crudService(position, arrayObject, num).then(response => {
+        debugger;
+        if(response.message == "Se edito el dato con éxito"){
+          disabledInput(position);
+          alert(response.message);
+        } else {
+          alert(response.message);
+        }
+      });
     })
   }
-}
-
-/*function addSessionStorage(data) {
-  if(!localStorage.data){
-    localStorage.data = JSON.stringify(data);
-  }
-  let arrayObject = JSON.parse(localStorage);
-  return arrayObject;
-}*/
-
-async function editData(num, arrayObject) {
-  debugger;
-  let objectEdit = new clientModel(
-    arrayObject[num].id,
-    arrayObject[num].name,
-    document.getElementById(`nit${num}`).value,
-    document.getElementById(`size${num}`).value,
-    document.getElementById(`sector${num}`).value,
-    parseInt(document.getElementById(`type${num}`).value)
-  )
-
-  var prueba = await dataService.save(objectEdit);
-  //arrayObject[num] = objectEdit;
-  //localStorage.data = JSON.stringify(data);
-  disabledInput(num);
 }
 
 function toggle(num) {
@@ -130,9 +114,12 @@ function toggle(num) {
   }
 }
 
+
+
 function disabledInput(num) {
   document.getElementById(`nit${num}`).disabled = true;
   document.getElementById(`type${num}`).disabled = true;
   document.getElementById(`size${num}`).disabled = true;
   document.getElementById(`sector${num}`).disabled = true;
 }
+
