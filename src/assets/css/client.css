@@ -75,3 +75,6 @@
     color: #333 !important;
     font-size: 15px !important;
 }
+.selectEdit{
+    display: none;
+}

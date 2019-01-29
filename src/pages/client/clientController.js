@@ -29,7 +29,7 @@ export default async function fillClient() {
                       </div>
                     </div>
                     <div class="col s2">
-                      <a class="edit-buttom" id="editButtom${indexClient}"><i class="material-icons">edit</i></a>
+                      <a style="display:none;" class="edit-buttom" id="editButtom${indexClient}"><i class="material-icons">edit</i></a>
                     </div>
                   </div>
                 </div>
@@ -52,8 +52,15 @@ export default async function fillClient() {
                           <input disabled value="${arrayObject[indexClient].size}" id="size${indexClient}" type="text" class="validate">
                           <label class="active title-input">Size</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="selectViewInformation input-field col s6">
                           <select disabled id="sector${indexClient}">
+                            <option value="publico">Público</option>
+                            <option value="privado">Privado</option>
+                          </select>
+                          <label>Sector</label>
+                        </div>
+                        <div class="selectEdit input-field col s6">
+                          <select id="sectorEdit${indexClient}">
                             <option value="publico">Público</option>
                             <option value="privado">Privado</option>
                           </select>
@@ -73,12 +80,15 @@ export default async function fillClient() {
   }
 
   ul.innerHTML = template;
-  $(document).ready(function () {
-    $('select').formSelect();
-  });
+  effectView();
+  addEvent(arrayObject);
 
+}
+
+function addEvent(arrayObject) {
   for (var i = 0; i < arrayObject.length; i++) {
     $(`#sector${i}`).val(arrayObject[i].sector);
+    $(`#sectorEdit${i}`).val(arrayObject[i].sector);
     $(`#editButtom${i}`).click(function (event) {
       let num = event.delegateTarget.id;
       let res = num.substring(10, num.length);
@@ -100,6 +110,20 @@ export default async function fillClient() {
   }
 }
 
+function effectView() {
+  $(document).ready(function () {
+    $('select').formSelect();
+
+    $(".collapsible").hover(function (i) {
+      $(".edit-buttom").css("display", "block");
+    }, function () {
+      $(".edit-buttom").css("display", "none");
+    });
+
+
+  });
+}
+
 function toggle(num) {
   document.getElementById(`btnSave${num}`).style.display = "block";
   let id = {
@@ -113,8 +137,8 @@ function toggle(num) {
     document.getElementById(id.nit).disabled = false;
     document.getElementById(id.type).disabled = false;
     document.getElementById(id.size).disabled = false;
-    //document.getElementById(id.sector).disabled = false;
-    $(`#${id.sector}`).prop('disabled', false);
+    $(".selectViewInformation").css("display", "none");
+    $(".selectEdit").css("display", "block");
   } else {
     document.getElementById(`btnSave${num}`).style.display = "none";
     disabledInput(num);
@@ -127,4 +151,6 @@ function disabledInput(num) {
   document.getElementById(`size${num}`).disabled = true;
   document.getElementById(`sector${num}`).disabled = true;
   document.getElementById(`btnSave${num}`).style.display = "none";
+  $(".selectViewInformation").css("display", "block");
+  $(".selectEdit").css("display", "none");
 }
