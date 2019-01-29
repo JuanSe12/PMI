@@ -28,8 +28,8 @@
         "name": "Metro",
         "nit": 45674,
         "size": 5000,
-        "sector": "privado",
-        "clientType": 1 
+        "sector": "publico",
+        "clientType": 2 
     },
     {
         "id": 5,
