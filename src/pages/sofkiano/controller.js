@@ -20,19 +20,11 @@ export default function fillSofkiano() {
                             <div class="col s10">
                                 <div class="row">
                                     <div class="col s4">
-<<<<<<< HEAD
-                                        <img src="${sofkiano.img}" alt="" class="img-size circle"> 
-                                    </div>
-                                    <div class="col s6">
-                                         <p class="title-sofkiano">${sofkiano.firtsName} ${sofkiano.lastName}</p>
-                                    </div>
-=======
                                         <img src="${Config.baseUrl()+sofkiano.img}" alt="" class="img-size circle"> 
                                     </div>
                                     <div class="col s6">
                                          <p class="title-sofkiano">${sofkiano.firtsName} ${sofkiano.lastName}</p>
                                     </div>
->>>>>>> c5eefc283d6e10b8f934b46fc8196ebd11da9f20
                                 </div>
                                
                             </div>
@@ -41,10 +33,6 @@ export default function fillSofkiano() {
                             </div>    
                         </div>
                    </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> c5eefc283d6e10b8f934b46fc8196ebd11da9f20
                     <div class="collapsible-body ">               
                     <form class="col s12">
                       <div class="row">
