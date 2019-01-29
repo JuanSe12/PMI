@@ -1,0 +1,8 @@
+.input-predict{
+    position: absolute;
+    z-index: 3;
+    width: 30%;
+    height: 50%;
+    background: white;
+    right: 0;
+}
