@@ -15,10 +15,9 @@ body {
 
 h1.title {
 
-    font-size: 350%;
-     
+    font-size: 290%;     
     color: #ffab40;
-    /* font-weight:950;  */
+     font-weight:350;  
     /* text-align: center;  */
     margin-left: 10%;
     
@@ -43,6 +42,10 @@ div.sofkiano-info {
 .collapsible-header{
     padding-top: 0.5rem;
     padding-left: 2rem;
+}
+div.collapsible-header:hover{
+background: #FAFAFA;
+
 }
 
 .resize{
@@ -75,5 +78,9 @@ div.chips {
     display: inline-block;
    border-bottom: none;
 
+}
+
+div.row-left {
+    margin: 0rem;
 }
 

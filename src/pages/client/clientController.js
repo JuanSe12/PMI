@@ -25,12 +25,13 @@ export default async function fillClient() {
                         alt="" class="img-size circle">
                         </div>
                         <div class="col s7">
+                        
                           <p class="title-client">${arrayObject[indexClient].name}</p>
                         </div>
                       </div>
                     </div>
                     <div class="col s2">
-                      <a class="edit-buttom" id="editButtom${indexClient}"><i class="fas fa-edit"></i></a>
+                      <a class="edit-buttom" id="editButtom${indexClient}"><i class="material-icons">edit</i></i></a>
                     </div>
                   </div>
                 </div>

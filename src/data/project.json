@@ -22,5 +22,29 @@
         "technologies":[ 2, 3, 4 ],
         "img": "./src/assets/images/default.png",
         "sofkianos": []
-     }
+     },
+     {
+         "id": 3,
+         "name": "Proyecto código",
+         "description": "",
+         "state": 1,
+         "client": 2,
+         "dateInit": [2019, 1, 24, 8, 33, 30, 0],
+        "dateFinish": [2019, 6, 24, 10, 33, 30, 0],
+         "technologies":[ 2, 3, 4 ],
+         "img": "./src/assets/images/default.png",
+         "sofkianos": []
+      },
+      {
+          "id": 4,
+          "name": "Atlantico",
+          "description": "Lorem asd",
+          "state": 1,
+          "client": 2,
+          "dateInit": [2019, 1, 24, 8, 33, 30, 0],
+         "dateFinish": [2019, 6, 24, 10, 33, 30, 0],
+          "technologies":[ 2, 3, 4 ],
+          "img": "./src/assets/images/default.png",
+          "sofkianos": []
+       }
 ]
