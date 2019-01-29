@@ -55,6 +55,10 @@
     color: #333 !important;
     font-size: 15px !important;
 }
+.input.validate.valid{
+    border-bottom: 1px solid #ffab40;
+    box-shadow: orange;
+}
 
 .title-client{
     font-size: 16px;

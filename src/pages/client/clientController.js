@@ -46,13 +46,13 @@ export default async function fillClient() {
                         </div>
                         <div class="input-field col s6">
                         <input disabled value="${arrayObject[indexClient].clientType}" id="type${indexClient}" type="text" class="validate">
-                        <label class="active title-input">Type</label>
+                        <label class="active title-input">Tipo</label>
                         </div>
                       </div>
                       <div class="row form-input">
                         <div class="input-field col s6">
                           <input disabled value="${arrayObject[indexClient].size}" id="size${indexClient}" type="text" class="validate">
-                          <label class="active title-input">Size</label>
+                          <label class="active title-input">Tamaño de la empresa</label>
                         </div>
                         <div class="input-field col s6">
                         <input disabled value="${arrayObject[indexClient].sector}" id="sector${indexClient}" type="text" class="validate">
