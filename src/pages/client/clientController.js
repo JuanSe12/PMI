@@ -81,7 +81,6 @@ export default async function fillClient() {
       let position = idBtnSave.substring(7, idBtnSave.length);
       let num = 1;
       crudService(position, arrayObject, num).then(response => {
-        debugger;
         if(response.message == "Se edito el dato con éxito"){
           disabledInput(position);
           alert(response.message);

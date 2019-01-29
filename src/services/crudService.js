@@ -48,8 +48,7 @@ export default async function (num, arrayObject, defineModel) {
         default:
             break;
     }
-    debugger;
-    var response = await dataService.save(objectEdit)
+    let response = await dataService.save(objectEdit)
     if (typeof (response.id) != undefined) {
         return { message: 'Se edito el dato con éxito' };
     } else {
