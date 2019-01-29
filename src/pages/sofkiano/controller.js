@@ -9,7 +9,7 @@ export default function fillSofkiano() {
             var ul = document.getElementById("sofkianos-list");
             sofkianos.map(async (sofkiano) => {
                 let dataTech = await sofkiano.getTechnologies();
-                let dataSkills = await sofkiano.getTechnologies();
+                let dataSkills = await sofkiano.getFeatures();
                 let tecnologhies = fillTecno(dataTech);
                 let skills = fillSkills(dataSkills);
 

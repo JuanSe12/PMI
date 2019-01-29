@@ -4,17 +4,16 @@ import Config from "../../config/config.js"
 export default async function fillProjects() {
     DataService.getAllProjects()
         .then(async (projects) => {
-            console.log("Entró al promise");
             var ul = document.getElementById("business-list");
             let template = " ";
-
+            let idList=0;
             projects.map(async (project) => {
             let state= await project.getState();
             let clients= await project.getClient();
                            
-               
+               idList+=1;
                 let li =
-                `<li class="collection-item avatar">
+                `<li class="collection-item avatar>
                 <div class="collapsible-header">
                     <div class="row size-row">
                         <div class=" col s10">
@@ -34,16 +33,36 @@ export default async function fillProjects() {
                             </div>
                         </div>
                         <div class="col s2">
-                           <p> <a class="edit-buttom">  <i class="material-icons">more_horiz</i></a></p>
+                           <p><a class="edit-buttom" id="edit-buttom${idList}"> <i class="material-icons">add_circle</i><p class="btn-see-more">Ver mas</p></a></p>
                       </div>
                     </div>
                 </div>
+                <div class="collapsible-body ">               
+                                   
+                    </div>
             </li>`;
                 template += li;
                
             })
             setTimeout(function(){
-                ul.innerHTML = template;},150);         
+                ul.innerHTML = template;
+            },150);
+
+            setTimeout(function(){
+                addEvents(idList);
+            },250);     
+                      
             
         })
+        
 }
+
+function addEvents(numberElementsInList){
+    for(var i=1;i<=numberElementsInList;i++){
+        document.getElementById(`edit-buttom${i}`).addEventListener('click',function(){
+            alert("Show more")
+        })
+    }
+}
+
+
