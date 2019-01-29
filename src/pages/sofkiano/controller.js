@@ -26,7 +26,11 @@ export default function fillSofkiano() {
                                          <p class="title-sofkiano">${sofkiano.firtsName} ${sofkiano.lastName}</p>
                                     </div>
                                 </div>
+                               
                             </div>
+                            <div class="col s2">
+                            <a class="edit-buttom" id="editButtom"><i class="material-icons">edit</i></i></a>
+                            </div>    
                         </div>
                    </div>
 

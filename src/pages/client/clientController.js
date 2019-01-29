@@ -120,10 +120,5 @@ function disabledInput(num) {
   document.getElementById(`type${num}`).disabled = true;
   document.getElementById(`size${num}`).disabled = true;
   document.getElementById(`sector${num}`).disabled = true;
-<<<<<<< HEAD
-  document.getElementById(`btnSave${num}`).style.display = "none";
-}
-=======
 }
 
->>>>>>> 0663cd1e5a0609898091b347d4a8654176796f66
