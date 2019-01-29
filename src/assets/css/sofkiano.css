@@ -12,6 +12,10 @@ body {
     margin: auto;
     padding-left: 2rem;
 }
+.size-row {
+    margin-bottom: 0px !important;
+    width: 100% !important;
+}
 
 h1.title {
 
@@ -51,6 +55,11 @@ background: #FAFAFA;
 img.project-resize {
 
     width:50%; 
+}
+
+.title-sofkiano{
+    font-size: 16px;
+    font-weight: bold;
 }
 
 div.collapsible-header.active{
