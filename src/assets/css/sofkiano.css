@@ -12,6 +12,10 @@ body {
     margin: auto;
     padding-left: 2rem;
 }
+.size-row {
+    margin-bottom: 0px !important;
+    width: 100% !important;
+}
 
 h1.title {
 
@@ -48,9 +52,8 @@ background: #FAFAFA;
 
 }
 
-.resize{
-    width:10%; 
-    height:10%;
+.img-size {
+    width: 30% !important;
 }
 
 div.collapsible-header.active{

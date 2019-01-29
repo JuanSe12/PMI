@@ -8,7 +8,7 @@
        "dateInit": [2018, 11, 24, 10, 33, 30, 0],
        "dateFinish": [2019, 11, 24, 10, 33, 30, 0],
        "technologies":[ 1, 2, 3, 4 ],
-       "img":"./src/assets/images/angular.png",
+       "img":"/src/assets/images/angular.png",
        "sofkianos": [ 1 , 2]
     },
     {
@@ -20,7 +20,7 @@
         "dateInit": [2019, 1, 24, 8, 33, 30, 0],
        "dateFinish": [2019, 6, 24, 10, 33, 30, 0],
         "technologies":[ 2, 3, 4 ],
-        "img": "./src/assets/images/default.png",
+        "img": "/src/assets/images/default.png",
         "sofkianos": []
      },
      {
@@ -32,7 +32,7 @@
          "dateInit": [2019, 1, 24, 8, 33, 30, 0],
         "dateFinish": [2019, 6, 24, 10, 33, 30, 0],
          "technologies":[ 2, 3, 4 ],
-         "img": "./src/assets/images/default.png",
+         "img": "/src/assets/images/default.png",
          "sofkianos": []
       },
       {
@@ -44,7 +44,7 @@
           "dateInit": [2019, 1, 24, 8, 33, 30, 0],
          "dateFinish": [2019, 6, 24, 10, 33, 30, 0],
           "technologies":[ 2, 3, 4 ],
-          "img": "./src/assets/images/default.png",
+          "img": "/src/assets/images/default.png",
           "sofkianos": []
        }
 ]

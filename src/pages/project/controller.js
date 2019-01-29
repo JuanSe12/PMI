@@ -9,6 +9,8 @@ export default function fillProjects() {
             let template = "";
 
             projects.map(project => {
+                console.log(project.img);
+                
                 let li =
                 `<li class="collection-item avatar">
                 <div class="collapsible-header">

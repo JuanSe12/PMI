@@ -25,9 +25,22 @@ export default function fillSofkiano() {
                         .then(data => {
                             let li =
                                 `<li class="collection-item avatar">
-                    <div class="collapsible-header "><img src="${Config.baseUrl()}/src/assets/images/person.png" 
-                    alt="" class="resize circle "> ${sofkiano.firtsName} ${sofkiano.lastName}</div>
-                   
+                                                      
+                    <div class="collapsible-header ">
+                        <div class="row size-row">
+                            <div class="col s10">
+                                <div class="row">
+                                    <div class="col s5">
+                                        <img src="${Config.baseUrl()}/src/assets/images/person.png" alt="" class="img-size circle"> 
+                                    </div>
+                                    <div class="col s6">
+                                         <p>${sofkiano.firtsName} ${sofkiano.lastName}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   </div>
+
                     <div class="collapsible-body ">               
                     <form class="col s12">
                       <div class="row">

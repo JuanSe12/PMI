@@ -8,8 +8,8 @@
 }
 
 .resize{
-    width: 25%;
-    height: 25%;
+    width: 25% !important;
+    height: 25% !important;
 }
 .list-sofkianos{
     display: inline-block;
