@@ -46,7 +46,11 @@ export default async function fillProjects() {
                 ul.innerHTML = template;},150);         
             
         })
+<<<<<<< HEAD
+}
+=======
 }
 
 
 
+>>>>>>> c5eefc283d6e10b8f934b46fc8196ebd11da9f20
