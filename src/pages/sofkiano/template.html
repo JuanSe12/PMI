@@ -1,35 +1,80 @@
 
-<div style="position: relative;">
-  
+<div id="div_content_pages_render">
    <div class="tab">
       <h1 class="title" id="sofkianos_titulo">Sofkianos</h1>
+      <br>
+      <br>
       <ul class="collapsible" id="sofkianos-list">
-
       </ul>
    </div>
 </div>
 
-
-
 <div class="fixed-action-btn">
    <a class="btn-floating btn-large grey darken-4 waves-effect">
-       <i class="large material-icons">menu</i>
+      <i class="large material-icons">menu</i>
    </a>
    <ul>
-       <li><a class="btn-floating  amber darken-2 tooltipped" data-position="top" 
-           data-tooltip="¡Agrega un nuevo sofkiano!""><i class="material-icons">add</i></a></li>
+      <!-- Modal Trigger -->
+      <li><a class="btn-floating  amber darken-2 waves-effect waves-light btn modal-trigger" href="#modal1"><i class="material-icons">add</i></a></li>
    </ul>
 </div>
 
+<!-- Modal Structure -->
+<div id="modal1" class="modal modal-fixed-footer">
+   <div class="modal-content">
+
+      <!--contenido de modal inicio de formulario-->
+      <div style="height: 200px;">
+         <div class="col m12" style="margin-top: -2%;">
+            <div class="card">
+               <div class="card-content black-text" style="height: 48px;">
+                  <h4 class="card-title" style="margin-top: -17px;">Crear Sofkiano</h4>
+               </div>
+               <div class="card-action" style="height: 320px;">
+                  <form class="col s12">
+                     <div class="row">
+                        <div class="input-field col s6">
+                           <input id="first_name" type="text" class="validate">
+                           <label for="first_name" class="active">Tipo de documento</label>
+                        </div>
+                        <div class="input-field col s6">
+                             <input id="" type="text" class="validate">
+                             <label for="first_name" class="active">Número de documento</label>
+                        </div>      
+                     </div>
+
+                     <div class="row">
+                        <div class="input-field col s6">
+                           <input id="" type="text" class="validate">
+                           <label for="first_name" class="active">Tiempo de experiencia en Sofka</label>
+                        </div>
+                        <div class="input-field col s6">
+                           <input id="" type="text" class="validate">
+                           <label for="first_name" class="active">Tiempo de experiencia externa</label>
+                        </div>      
+                     </div>
+                     <p>Características personales</p>
+                     <p>Tecnologías</p>  
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!--contenido de modal cierre de formulario-->
+
+   </div>
+   <div class="modal-footer">
+      <a href="#!" class="modal-close btn btn-primary">Guardar</a>
+      <a href="#!" class="modal-close btn btn-primary">Cancelar</a>
+   </div>
+</div>
 <script>
-      document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('.fixed-action-btn');
-            var instances = M.FloatingActionButton.init(elems, options);
-        });
-        M.AutoInit();
-     
-     
-        $(document).ready(function () {
-           $('.collapsible').collapsible();
-        });
-     </script>
+   document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.fixed-action-btn');
+        var instances = M.FloatingActionButton.init(elems, options);
+   });
+   M.AutoInit();
+   $(document).ready(function () {
+      $('.collapsible').collapsible();
+   });
+</script>
