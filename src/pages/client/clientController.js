@@ -82,7 +82,6 @@ export default async function fillClient() {
       let position = idBtnSave.substring(7, idBtnSave.length);
       let num = 1;
       crudService(position, arrayObject, num).then(response => {
-        debugger;
         if(response.message == "Se edito el dato con éxito"){
           disabledInput(position);
           alert(response.message);
@@ -121,5 +120,10 @@ function disabledInput(num) {
   document.getElementById(`type${num}`).disabled = true;
   document.getElementById(`size${num}`).disabled = true;
   document.getElementById(`sector${num}`).disabled = true;
+<<<<<<< HEAD
+  document.getElementById(`btnSave${num}`).style.display = "none";
+}
+=======
 }
 
+>>>>>>> 0663cd1e5a0609898091b347d4a8654176796f66
