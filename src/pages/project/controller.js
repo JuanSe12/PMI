@@ -4,17 +4,15 @@ import Config from "../../config/config.js"
 export default async function fillProjects() {
     DataService.getAllProjects()
         .then(async (projects) => {
-            console.log("Entró al promise");
             var ul = document.getElementById("business-list");
             let template = " ";
-
+            let idList=0;
             projects.map(async (project) => {
             let state= await project.getState();
             let clients= await project.getClient();
-                           
-               
+              idList+=1;             
                 let li =
-                `<li class="collection-item avatar">
+                `<li class="collection-item avatar" id=list${idList}>
                 <div class="collapsible-header">
                     <div class="row size-row">
                         <div class=" col s10">
@@ -46,11 +44,4 @@ export default async function fillProjects() {
                 ul.innerHTML = template;},150);         
             
         })
-<<<<<<< HEAD
 }
-=======
-}
-
-
-
->>>>>>> c5eefc283d6e10b8f934b46fc8196ebd11da9f20
