@@ -8,8 +8,8 @@
 }
 
 .resize{
-    width: 25%;
-    height: 25%;
+    width: 25% !important;
+    height: 25% !important;
 }
 .list-sofkianos{
     display: inline-block;
@@ -28,8 +28,4 @@ li{
 .icons{
     text-align: right;
     margin-right: 30px;    
-}
-
-textarea.materialize-textarea{
-    padding: 0%;
 }

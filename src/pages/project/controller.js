@@ -1,14 +1,18 @@
 import DataService from "../../services/data_service.js";
+import Config from "../../config/config.js"
 
-
-export default function fillProjects() {
+export default async function fillProjects() {
     DataService.getAllProjects()
-        .then(projects => {
+        .then(async (projects) => {
             console.log("Entró al promise");
             var ul = document.getElementById("business-list");
-            let template = "";
+            let template = " ";
 
-            projects.map(project => {
+            projects.map(async (project) => {
+            let state= await project.getState();
+            let clients= await project.getClient();
+                           
+               
                 let li =
                 `<li class="collection-item avatar">
                 <div class="collapsible-header">
@@ -16,14 +20,16 @@ export default function fillProjects() {
                         <div class=" col s10">
                             <div class="row ">
                                 <div class=" col s4">
-                                    <img src="${project.img}" alt="NO">
+                                    <img class="img-size circle" src="${Config.baseUrl()+project.img}" alt="NO">
                                 </div>
                                 <div class=" col s4 ">
-                                    <div> <p class="title-client"> ${project.name}<p></div>
-                                    <p> Cliente: ${project.client}</p>
+                                    <div> <p class="title-client">${project.name} <p></div>
+                                    <p> Cliente:                  
+                                    ${clients[0].name}
+                                    </p>
                                 </div>
                                 <div class="col s4 ">
-                                    <p>Estado: ${project.state} </p>
+                                    <p>Estado: ${state[0].name} </p>
                                 </div>
                             </div>
                         </div>
@@ -34,7 +40,10 @@ export default function fillProjects() {
                 </div>
             </li>`;
                 template += li;
+               
             })
-            ul.innerHTML = template;
+            setTimeout(function(){
+                ul.innerHTML = template;},150);         
+            
         })
 }

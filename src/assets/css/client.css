@@ -1,6 +1,4 @@
-.img-size {
-    width: 30% !important;
-}
+
 .title-client{
     font-size: 16px;
     font-weight: bold;
@@ -24,9 +22,44 @@
 .title-input{
     color: #333 !important;
     font-size: 15px !important;
-}.img-size {
-    width: 30% !important;
 }
+
+.img-size {
+    width: 65% !important;
+}
+
+.title-client{
+    font-size: 16px;
+}
+
+.modify-header {
+    padding-top: 1rem !important;
+}
+.size-row {
+    margin-bottom: 0px !important;
+    width: 100% !important;
+}
+.edit-buttom{
+    color: #333 !important;
+}
+.edit-buttom:hover{
+    color: orange !important;
+}
+.collapsible-modify{
+    padding: 10px !important; 
+}
+.form-input {
+    margin-top: 10px;
+}
+.title-input{
+    color: #333 !important;
+    font-size: 15px !important;
+}
+.input.validate.valid{
+    border-bottom: 1px solid #ffab40;
+    box-shadow: orange;
+}
+
 .title-client{
     font-size: 16px;
 }
@@ -49,29 +82,7 @@
 .title-input{
     color: #333 !important;
     font-size: 15px !important;
-}.img-size {
-    width: 30% !important;
 }
-.title-client{
-    font-size: 16px;
-}
-.modify-header {
-    padding-top: 1rem !important;
-}
-.size-row {
-    margin-bottom: 0px !important;
-    width: 100% !important;
-}
-.edit-buttom{
-    color: #333 !important;
-}
-.collapsible-modify{
-    padding: 10px !important; 
-}
-.form-input {
-    margin-top: 10px;
-}
-.title-input{
-    color: #333 !important;
-    font-size: 15px !important;
+.selectEdit{
+    display: none;
 }

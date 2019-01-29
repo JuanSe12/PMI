@@ -28,7 +28,7 @@
   
 .main-menu {
   background: #333;
-  position:absolute;
+  position:fixed;
   top:0;
   bottom:0;
   height:100%;
@@ -131,7 +131,7 @@
   margin-left: 3%;
   position: absolute;
   transition: all 0.5s;
-  overflow: auto;
+  overflow: none;
   margin-top: 4.6%;
 }
 

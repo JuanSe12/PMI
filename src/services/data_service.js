@@ -83,6 +83,7 @@ export default class DataService {
                 },50)
             }
             else{
+                
                 $.getJSON(`${Config.baseUrl()}/src/data/${filename}`, function(json) {
                     DataService.saveLocalStorage(filename,json);
                     resolve(json)
