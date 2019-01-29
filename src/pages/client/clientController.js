@@ -2,8 +2,10 @@
 
 import dataService from '../../services/data_service.js';
 import crudService from '../../services/crudService.js';
+import Config from "../../config/config.js";
 
 export default async function fillClient() {
+
   let arrayObject = [];
   try {
     arrayObject = await dataService.getAllClients();
@@ -19,9 +21,9 @@ export default async function fillClient() {
                   <div class="row size-row">
                     <div class="col s10">
                       <div class="row">
-                        <div class="col s5">
-                          <img src="./src/assets/images/person.png"
-                        alt="" class="img-size circle">
+                        <div class="col s4">
+                          <img src="${Config.baseUrl() + arrayObject[indexClient].img}"
+                        alt="" class="img-size ">
                         </div>
                         <div class="col s7">
                           <p class="title-client">${arrayObject[indexClient].name}</p>
@@ -50,7 +52,7 @@ export default async function fillClient() {
                       <div class="row form-input">
                         <div class="input-field col s6">
                           <input disabled value="${arrayObject[indexClient].size}" id="size${indexClient}" type="text" class="validate">
-                          <label class="active title-input">Size</label>
+                          <label class="active title-input">Tamaño de la empresa</label>
                         </div>
                         <div class="selectViewInformation input-field col s6">
                           <select disabled id="sector${indexClient}">
@@ -149,7 +151,6 @@ function disabledInput(num) {
   document.getElementById(`nit${num}`).disabled = true;
   document.getElementById(`type${num}`).disabled = true;
   document.getElementById(`size${num}`).disabled = true;
-  document.getElementById(`sector${num}`).disabled = true;
   document.getElementById(`btnSave${num}`).style.display = "none";
   $(".selectViewInformation").css("display", "block");
   $(".selectEdit").css("display", "none");
