@@ -1,13 +1,14 @@
 import DataService from "../services/data_service.js";
 
 export default class Client{
-    constructor(id, name, nit, size, sector, clientType){
+    constructor(id, name, nit, size, sector, clientType, img){
         this.id = id;
         this.name = name;
         this.nit = nit;
         this.size = size;
         this.sector = sector;
         this.clientType = clientType;
+        this.img = img
     }
 
     static getSectors(){
