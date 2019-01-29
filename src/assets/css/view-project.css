@@ -1,0 +1,31 @@
+.vertical{
+    margin-top: 50px;
+}
+
+.content-project{
+    padding: 10px;
+
+}
+
+.resize{
+    width: 25% !important;
+    height: 25% !important;
+}
+.list-sofkianos{
+    display: inline-block;
+}
+
+li{
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+    display: inline-block;
+}
+
+.btn-floating{
+    vertical-align: super;
+}
+
+.icons{
+    text-align: right;
+    margin-right: 30px;    
+}

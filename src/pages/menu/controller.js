@@ -1,5 +1,12 @@
-const path = './src/pages/menu/template.html';
+import Route from "../../services/route.js";
 
-function initialRender(){
-    $('#menu').load(path);
-};
+$("#sofkianoss").on('click',function(){
+    Route.routeTo("sofkiano");
+})
+$("#projects").on('click',function(){
+    Route.routeTo("project");
+})
+$("#clients").on('click',function(){
+    Route.routeTo("client");
+})
+

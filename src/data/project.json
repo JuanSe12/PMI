@@ -1,0 +1,62 @@
+[
+    {
+       "id": 1,
+       "name": "Genesis Sofka",
+       "description": "Proyecto Genesis",
+       "state": 1,
+       "client": 1,
+       "dateInit": [2018, 11, 24, 10, 33, 30, 0],
+       "dateFinish": [2019, 11, 24, 10, 33, 30, 0],
+       "technologies":[ 1, 2, 3, 4 ],
+       "img":"/src/assets/images/projects/project1.jpg",
+       "sofkianos": [ 1 , 2]
+    },
+    {
+        "id": 2,
+        "name": "Atlantico",
+        "description": "Proyecto Genesis",
+        "state": 1,
+        "client": 2,
+        "dateInit": [2019, 1, 24, 8, 33, 30, 0],
+       "dateFinish": [2019, 6, 24, 10, 33, 30, 0],
+        "technologies":[ 2, 3, 4 ],
+        "img": "/src/assets/images/projects/project2.jpg",
+        "sofkianos": []
+     },
+     {
+         "id": 3,
+         "name": "Sea project",
+         "description": "",
+         "state": 1,
+         "client": 2,
+         "dateInit": [2019, 1, 24, 8, 33, 30, 0],
+        "dateFinish": [2019, 6, 24, 10, 33, 30, 0],
+         "technologies":[ 2, 3, 4 ],
+         "img": "/src/assets/images/projects/project3.jpg",
+         "sofkianos": []
+      },
+      {
+          "id": 4,
+          "name": "Creating code project",
+          "description": "Lorem asd",
+          "state": 1,
+          "client": 2,
+          "dateInit": [2019, 1, 24, 8, 33, 30, 0],
+         "dateFinish": [2019, 6, 24, 10, 33, 30, 0],
+          "technologies":[ 2, 3, 4 ],
+          "img": "/src/assets/images/projects/project4.jpg",
+          "sofkianos": []
+       },
+       {
+         "id": 5,
+         "name": "Reality Project",
+         "description": "Lorem asd",
+         "state": 1,
+         "client": 2,
+         "dateInit": [2019, 1, 24, 8, 33, 30, 0],
+        "dateFinish": [2019, 6, 24, 10, 33, 30, 0],
+         "technologies":[ 2, 3, 4 ],
+         "img": "/src/assets/images/projects/project5.jpg",
+         "sofkianos": []
+      }
+]

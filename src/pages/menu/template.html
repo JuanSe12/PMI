@@ -1,36 +1,35 @@
+<script type="module" src="./src/pages/menu/controller.js"></script>
+
 <nav class="main-menu">
-  <div>
-      <a class="logo" href="http://startific.com">
-      </a> 
-  </div>
-  <div class="scrollbar" id="style-1">  
-      <ul class="collection">
-          <li class="collection-item avatar">
-              <img src="images/yuna.jpg" alt="" class="circle">
-              <span class="title">Title</span>
-              <p>First Line <br>
-                 Second Line
-              </p>
-              <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    <div>
+        <a class="logo" href="#">
+        </a>
+    </div>
+    <div class="scrollbar scrollspy" id="style-1">
+        <ul>
+            <li class="hover-li-logo" style="background-color: #ffa836;height: 64px;">
+                <a href="#" onclick="take_url('localhost')">
+                    <img width="90%" src="/src/assets/images/logoPremium.png">
+                </a>
             </li>
-          <li>                                   
-              <a href="http://startific.com">
-                  <i class="fa fa-home fa-lg"></i>
-                  <span class="nav-text">Home</span>
-              </a>
-          </li>   
-          <li>                                 
-              <a href="http://startific.com">
-                  <i class="fa fa-user fa-lg"></i>
-                  <span class="nav-text">Login</span>
-              </a>
-          </li>   
-          <li>                                 
-              <a href="http://startific.com">
-                  <i class="fa fa-envelope-o fa-lg"></i>
-                  <span class="nav-text">Contact</span>
-              </a>
-          </li>
-      </ul>
-  </div>
+            <li class="hover-li-menu">
+                <a href="#" id="projects" onclick="take_url('proyectos')">
+                    <i class="fa fa-folder-o class-icon-size" aria-hidden="true"></i>
+                    <span>Proyectos</span>
+                </a>
+            </li>
+            <li class="hover-li-menu">
+                <a href="#" id="clients" onclick="take_url('clientes')">
+                    <i class="fa fa-users class-icon-size"></i>
+                    <span>Clientes</span>
+                </a>
+            </li>
+            <li class="hover-li-menu">
+                <a href="#" id="sofkianoss" onclick="take_url('sofkianos')">
+                    <i class="fa fa-user class-icon-size"></i>
+                    <span>Sofkianos</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </nav>

@@ -1,0 +1,50 @@
+[
+   {
+      "id": 1,
+      "name": "Angular",
+      "description": "",
+      "icon": "./src/assets/images/tecnologhies/angular.png"
+   },
+   {
+      "id": 2,
+      "name": "React",
+      "description": "",
+      "icon": ""
+   },
+   {
+      "id": 3,
+      "name": "Java",
+      "description": "",
+      "icon": "./src/assets/images/tecnologhies/java.png"
+   },
+   {
+      "id": 4,
+      "name": "Android",
+      "description": "",
+      "icon": ""
+   },
+   {
+      "id": 5,
+      "name": ".Net",
+      "description": "",
+      "icon": ""
+   },
+   {
+      "id": 6,
+      "name":"CSS",
+      "description": "",
+      "icon":"./src/assets/images/tecnologhies/css.png"
+   },
+   {
+      "id": 7,
+      "name":"Python",
+      "description": "",
+      "icon":"./src/assets/images/tecnologhies/python.png"
+   },
+   {
+      "id": 8,
+      "name":"Node",
+      "description": "",
+      "icon":"./src/assets/images/tecnologhies/node.png"
+   }
+]

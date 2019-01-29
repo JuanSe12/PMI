@@ -2,32 +2,56 @@
 <html lang="en">
 
 <head>
-  <!-- Title -->
-  <title>PMI</title>
+    <!-- Title -->
+    <title>PMI</title>
 
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!--Import materialize.css-->
-  <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="src/assets/css/style.css">
-  <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="./dist/bundle.js"></script>
-  <script src="./src/pages/menu/controller.js"></script>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/x-icon" href="src/assets/images/logoSmall.png"/>
+    <link rel="stylesheet" href="src/assets/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <link rel="stylesheet" href="./src/assets/css/sofkiano.css">
+    <link rel="stylesheet" href="./src/assets/css/client.css">
+   
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+    <script type="module" src="./src/init.js"></script>
+
+    <script type="module" src="./src/index.js"></script>
+    <script type="module" src="./src/pages/head-bar/controller.js"></script>
+
 </head>
-<body onload="initialRender()">
-    <div id="menu">
-      
-    </div>
-    <div id="container">
 
+<body onload="take_url('localhost')">
+    <div id="contenedor_super">
+        <div id="header">
+            <input type="text" id="search" maxlength= "20" placeholder="Search..." class="searchbar">
+            <a id="open_search">
+                <img src="https://images-na.ssl-images-amazon.com/images/I/41gYkruZM2L.png" alt="Magnifying Glass" class="button">
+            </a>
+            <a id="close_search">
+                <img src="https://www.freeiconspng.com/uploads/close-icon-48.png" alt="Magnifying Glass" class="button2">
+            </a>
+        </div>
+        <div id="menu">
+        </div>
+        <div id="container" class="scrollbar">
+        </div>       
     </div>
-<!-- Compiled and minified JavaScript -->
-    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="src/assets/js/script.js"></script>
     <script type="text/javascript" src="src/assets/js/materialize.min.js"></script>
     <script type="text/javascript" src="src/assets/js/index.js"></script>
-    
+
 </body>
 
 </html>
