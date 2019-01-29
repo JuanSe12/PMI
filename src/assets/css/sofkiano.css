@@ -20,10 +20,11 @@ body {
 h1.title {
 
     font-size: 290%;     
-    color: #ffab40;
+    color: transparent;
      font-weight:350;  
     /* text-align: center;  */
     margin-left: 10%;
+    position: absolute!important;
     
 }
 
@@ -99,4 +100,13 @@ div.chips {
 div.row-left {
     margin: 0rem;
 }
+.grow {
+     transition: all .2s ease-in-out;
+    }
 
+.grow:hover {
+     transform: scale(1.05);
+     -webkit-box-shadow: 10px 10px 21px -9px rgba(0,0,0,0.54);
+-moz-box-shadow: 10px 10px 21px -9px rgba(0,0,0,0.54);
+box-shadow: 10px 10px 21px -9px rgba(0,0,0,0.54);
+    }
