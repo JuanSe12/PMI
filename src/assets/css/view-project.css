@@ -13,13 +13,20 @@
 }
 .list-sofkianos{
     display: inline-block;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
 }
 
-li{
+.list-sofkianos > img {
+    height: 60px !important;
+    width: 60px !important;
+}
+
+/* li{
     padding-left: 1rem;
     padding-bottom: 1rem;
     display: inline-block;
-}
+} */
 
 .btn-floating{
     vertical-align: super;
