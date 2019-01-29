@@ -24,12 +24,13 @@ export default async function fillClient() {
                         alt="" class="img-size circle">
                         </div>
                         <div class="col s7">
+                        
                           <p class="title-client">${arrayObject[indexClient].name}</p>
                         </div>
                       </div>
                     </div>
                     <div class="col s2">
-                      <a class="edit-buttom" id="editButtom${indexClient}"><i class="fas fa-edit"></i></a>
+                      <a class="edit-buttom" id="editButtom${indexClient}"><i class="material-icons">edit</i></i></a>
                     </div>
                   </div>
                 </div>
@@ -112,10 +113,17 @@ function toggle(num) {
   }
 }
 
+
+
 function disabledInput(num) {
   document.getElementById(`nit${num}`).disabled = true;
   document.getElementById(`type${num}`).disabled = true;
   document.getElementById(`size${num}`).disabled = true;
   document.getElementById(`sector${num}`).disabled = true;
+<<<<<<< HEAD
   document.getElementById(`btnSave${num}`).style.display = "none";
 }
+=======
+}
+
+>>>>>>> 0663cd1e5a0609898091b347d4a8654176796f66

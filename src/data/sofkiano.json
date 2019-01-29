@@ -19,7 +19,7 @@
     },
     {
         "id": 2,
-        "firtsName": "Melisa",
+        "firtsName": "Melissa",
         "lastName": "Barba",
         "documentType": "CC",
         "documentNumber": 94687049,
@@ -38,7 +38,7 @@
     {
         "id": 3,
         "firtsName": "Alexander",
-        "lastName": "XXX",
+        "lastName": "Velez",
         "documentType": "CC",
         "documentNumber": 92873982,
         "externalExperience": "12",
@@ -46,6 +46,24 @@
         "feactures": [
             1,
             4
+        ],
+        "technologies": [
+            1,
+            8,
+            3
+        ]
+    },
+    {
+        "id": 4,
+        "firtsName": "Andrea",
+        "lastName": "Restrepo Mejía",
+        "documentType": "CC",
+        "documentNumber": 92873982,
+        "externalExperience": "12",
+        "internalExperience": "1",
+        "feactures": [
+            1,
+            2
         ],
         "technologies": [
             1,

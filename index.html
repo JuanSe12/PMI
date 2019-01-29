@@ -22,7 +22,6 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
-    <!--<script src="./dist/bundle.js"></script>-->
 
     <script type="module" src="./src/init.js"></script>
 
@@ -30,18 +29,61 @@
 
 </head>
 
-<body>
+<body onload="take_url('localhost')">
     <div id="contenedor_super">
         <div id="header">
-            <input type="text" maxlength= "20" placeholder="Search..." class="searchbar">
-            <img src="https://images-na.ssl-images-amazon.com/images/I/41gYkruZM2L.png" alt="Magnifying Glass" class="button">
+            <input type="text" id="search" maxlength= "20" placeholder="Search..." class="searchbar">
+            <a id="open_search">
+                <img src="https://images-na.ssl-images-amazon.com/images/I/41gYkruZM2L.png" alt="Magnifying Glass" class="button">
+            </a>
+            <a id="close_search">
+                <img src="https://www.freeiconspng.com/uploads/close-icon-48.png" alt="Magnifying Glass" class="button2">
+            </a>
         </div>
+        <script>
+            document.getElementById('search').style.display='none';
+            document.getElementById('close_search').style.display='none';
+            let open_search_button = document.getElementById('open_search');
+            open_search_button.addEventListener('click', function(){
+                document.getElementById('open_search').style.display='none';
+                document.getElementById('search').style.display='block';
+                document.getElementById('close_search').style.display='block';
+            });
+            
+            let close_search_button = document.getElementById('close_search');
+            close_search_button.addEventListener('click', function(){
+                document.getElementById('close_search').style.display='none';
+                document.getElementById('search').style.display='none';
+                document.getElementById('open_search').style.display='block';
+            });
+            function take_url(){
+                let url_actual = window.location.href;
+                console.log(url_actual);
+            }
+        </script>
         <div id="menu">
 
         </div>
         <div id="container" class="scrollbar">
             
-        </div>          
+        </div>
+        <script>
+            function take_url(url){
+                console.log(url);
+                if(url === "localhost"){
+
+                }
+                if(url === "proyectos"){
+                    $("#proyectos_titulo").remove();
+                }
+                if(url === "clientes"){
+                    $("#clientes_titulo").remove();
+                }
+                if(url === "sofkianos"){
+                    $("#sofkianos_titulo").remove();
+                }
+            }
+        </script>        
     </div>
     <script type="text/javascript" src="src/assets/js/materialize.min.js"></script>
     <script type="text/javascript" src="src/assets/js/index.js"></script>
