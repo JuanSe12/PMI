@@ -56,6 +56,11 @@ background: #FAFAFA;
     width: 30% !important;
 }
 
+.title-sofkiano{
+    font-size: 16px;
+    font-weight: bold;
+}
+
 div.collapsible-header.active{
      border-bottom: 0rem;
      padding-bottom: 1.4rem;
