@@ -43,10 +43,7 @@ export default async function fillProjects() {
                
             })
             setTimeout(function(){
-                ul.innerHTML = template;},200);
-
-           
-           
+                ul.innerHTML = template;},150);         
             
         })
 }

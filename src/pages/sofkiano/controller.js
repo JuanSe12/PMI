@@ -4,27 +4,16 @@ import Config from "../../config/config.js"
 
 export default function fillSofkiano() {
     DataService.getAllSofkianos()
-    .then(sofkianos => {
-        let template = "";
-        var ul = document.getElementById("sofkianos-list");
-        sofkianos.map(sofkiano => {
+        .then(sofkianos => {
+            let template = "";
+            var ul = document.getElementById("sofkianos-list");
+            sofkianos.map(async (sofkiano) => {
+                let dataTech = await sofkiano.getTechnologies();
+                let dataSkills = await sofkiano.getTechnologies();
+                let tecnologhies = fillTecno(dataTech);
+                let skills = fillSkills(dataSkills);
 
-            let tecnologhies = "";
-            let skills = "";
-
-            sofkiano.getTechnologies()
-                .then(
-                    data => {
-                        tecnologhies = fillTecno(data);
-                    })
-                .then(data => {
-                    sofkiano.getFeatures().then(data => {
-                        console.log(sofkiano);
-                        skills = fillSkills(data);
-                    })
-                        .then(data => {
-                            let li =
-                                `<li class="collection-item avatar">
+                let li = `<li class="collection-item avatar">
                                                       
                     <div class="collapsible-header ">
                         <div class="row size-row">
@@ -71,26 +60,13 @@ export default function fillSofkiano() {
                     </form>                
                     </div>
                 </li>`;
-                                template += li;
-
-                            })
-                            .then(data => {
-
-                                ul.innerHTML = template;
-                            })
-                    })
-                    .catch(() => {
-                        throw new Error('Somenthing Wrong');
-                    })
-
-
-
+                template += li;
             })
-
-        })
+            setTimeout(function () {
+                ul.innerHTML = template;
+            }, 150);
+        });
 }
-
-
 
 
 
