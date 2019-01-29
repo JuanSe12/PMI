@@ -1,6 +1,7 @@
 import DataService from "../../services/data_service.js";
 
-export default function fillProjects() {
+export default function fillProject(project) {
+    console.log(project);
     DataService.getProjectByIds([1]).then(
         projects => {
             var TechnologiesContent = document.getElementById("container-tech");            
