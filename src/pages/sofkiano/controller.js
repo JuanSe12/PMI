@@ -4,78 +4,72 @@ import Config from "../../config/config.js"
 
 export default function fillSofkiano() {
     DataService.getAllSofkianos()
-    .then(sofkianos => {
-        let template = "";
-        var ul = document.getElementById("sofkianos-list");
-        sofkianos.map(sofkiano => {
+        .then(sofkianos => {
+            let template = "";
+            var ul = document.getElementById("sofkianos-list");
+            sofkianos.map(async (sofkiano) => {
+                let dataTech = await sofkiano.getTechnologies();
+                let dataSkills = await sofkiano.getTechnologies();
+                let tecnologhies = fillTecno(dataTech);
+                let skills = fillSkills(dataSkills);
 
-            let tecnologhies = "";
-            let skills = "";
-
-            sofkiano.getTechnologies()
-                .then(
-                    data => {
-                        tecnologhies = fillTecno(data);
-                    })
-                .then(data => {
-                    sofkiano.getFeatures().then(data => {
-                        console.log(sofkiano);
-                        skills = fillSkills(data);
-                    })
-                        .then(data => {
-                            let li =
-                                `<li class="collection-item avatar">
-                    <div class="collapsible-header "><img src="${Config.baseUrl()}/src/assets/images/person.png" 
-                    alt="" class="resize circle "> ${sofkiano.firtsName} ${sofkiano.lastName}</div>
-                   
+                let li = `<li class="collection-item avatar">
+                                                      
+                    <div class="collapsible-header ">
+                        <div class="row size-row">
+                            <div class="col s10">
+                                <div class="row">
+                                    <div class="col s4">
+                                        <img src="${Config.baseUrl()+sofkiano.img}" alt="" class="img-size circle"> 
+                                    </div>
+                                    <div class="col s6">
+                                         <p class="title-sofkiano">${sofkiano.firtsName} ${sofkiano.lastName}</p>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="col s2">
+                            <a class="edit-buttom" id="editButtom"><i class="material-icons">edit</i></i></a>
+                            </div>    
+                        </div>
+                   </div>
                     <div class="collapsible-body ">               
                     <form class="col s12">
                       <div class="row">
                         <div class="input-field col s6">
                           <input disabled placeholder=${sofkiano.documentType} id="first_name" type="text" class="validate">
-                          <label for="first_name" class="active">Document type</label>
+                          <label for="first_name" class="active">Tipo de documento</label>
                         </div>
                         <div class="input-field col s6">
                         <input disabled placeholder=" ${sofkiano.documentNumber}" id="" type="text" class="validate">
-                        <label for="first_name" class="active">Document number</label>
+                        <label for="first_name" class="active">Número de documento</label>
                         </div>      
                       </div>           
-                      <p>Personal characteristics</p>
-                      `+ skills + `
-                      <p>Technologies</p>
-                        `+ tecnologhies + `
+                     
                       <div class="row">
                         <div class="input-field col s6">
                           <input disabled placeholder=${sofkiano.internalExperience} id="" type="text" class="validate">
-                          <label for="first_name" class="active">Time experience in Sofka</label>
+                          <label for="first_name" class="active">Tiempo de experiencia en Sofka</label>
                         </div>
                         <div class="input-field col s6">
                         <input disabled placeholder=" ${sofkiano.externalExperience}" id="" type="text" class="validate">
-                        <label for="first_name" class="active">External time experience </label>
+                        <label for="first_name" class="active">Tiempo de experiencia externa</label>
                         </div>      
-                      </div>  
+                      </div>
+                      <p>Características personales</p>
+                      `+ skills + `
+                      <p>Tecnologías</p>
+                        `+ tecnologhies + `  
                     </form>                
                     </div>
                 </li>`;
-                            template += li;
-
-                        })
-                        .then(data => {
-
-                            ul.innerHTML = template;
-                        })
-                })
-                .catch(() => {
-                    throw new Error('Somenthing Wrong');
-                })
-
-
-
-        })
-
-    })
+                template += li;
+            })
+            setTimeout(function () {
+                ul.innerHTML = template;
+            }, 150);
+        });
 }
-
 
 
 
@@ -113,7 +107,3 @@ function fillSkills(sofkiano) {
 
     return skillTemplate;
 }
-
-
-
-

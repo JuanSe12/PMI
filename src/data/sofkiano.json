@@ -3,6 +3,7 @@
         "id": 1,
         "firtsName": "Juan Esteban",
         "lastName": "Rios Arango",
+        "img":"/src/assets/images/sofkianos/sofkiano2.jpg",
         "documentType": "CC",
         "documentNumber": 1040749576,
         "externalExperience": "36",
@@ -19,8 +20,9 @@
     },
     {
         "id": 2,
-        "firtsName": "Melisa",
+        "firtsName": "Melissa",
         "lastName": "Barba",
+        "img":"/src/assets/images/sofkianos/sofkiano1.jpg",
         "documentType": "CC",
         "documentNumber": 94687049,
         "externalExperience": "12",
@@ -38,7 +40,8 @@
     {
         "id": 3,
         "firtsName": "Alexander",
-        "lastName": "XXX",
+        "lastName": "Velez",
+        "img":"/src/assets/images/sofkianos/sofkiano4.jpg",
         "documentType": "CC",
         "documentNumber": 92873982,
         "externalExperience": "12",
@@ -46,6 +49,25 @@
         "feactures": [
             1,
             4
+        ],
+        "technologies": [
+            1,
+            8,
+            3
+        ]
+    },
+    {
+        "id": 4,
+        "firtsName": "Andrea",
+        "lastName": "Restrepo Mejía",
+        "img":"/src/assets/images/sofkianos/sofkiano3.jpg",
+        "documentType": "CC",
+        "documentNumber": 92873982,
+        "externalExperience": "12",
+        "internalExperience": "1",
+        "feactures": [
+            1,
+            2
         ],
         "technologies": [
             1,

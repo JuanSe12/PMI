@@ -166,7 +166,7 @@
   background-position:  center center;
   background-repeat: no-repeat;
   background-image: url(direccion);
-  height: 44px;
+  height: 64px;
   background-color:#ffa836;
 }
 
@@ -205,20 +205,20 @@
     transition: all .2s !important;
     transition-delay: .1s !important;
     left: 80%;
-    top: 8%;
+    top: 22%;
 }
 
 .button {
   height: 2rem;
   position: absolute;
-  top: 0.3rem;
+  top: 1.2rem;
   right: 2rem;
   transition: all .2s;
   transition-delay: .1s;
 }
 
 .button:hover {
-  top: 0.4rem;
+  top: 1rem;
   width: 2.2rem;
   height: 2.2rem;
   right: 2%;
@@ -228,7 +228,29 @@
   -webkit-filter: grayscale(100%);
 }
 
+.button2{
+  height: 1rem;
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  transition: all .2s;
+  transition-delay: .1s;
+  color: black;
+}
+.button2:hover {
+  top: 1.4rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  right: 2%;
+  cursor: pointer;
+}
+.button2:active{
+  -webkit-filter: grayscale(100%);
+}
+
 
 .searchbar::placeholder {
   opacity: .5;
 }
+
+
