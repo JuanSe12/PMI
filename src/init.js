@@ -18,7 +18,7 @@ Object.setPrototypeOf(init, {
     "initclient": function () {
         fillClient();
     },
-    "initview-proyect": function (value) {
+    "initview-project": function (value) {
         fillProject(value);
     }
 });

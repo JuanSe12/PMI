@@ -59,9 +59,6 @@ export default async function fillProjects() {
 
 function addEvents(elementAt,project){
       document.getElementById(`showMore${elementAt}`).addEventListener('click',function(){
-       alert("juacho");
-      Route.routeTo("view-project",project);
-            
-       
+      Route.routeTo("view-project",project);    
     })
 }

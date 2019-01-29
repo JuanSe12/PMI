@@ -1,13 +1,11 @@
 import DataService from "../../services/data_service.js";
 
 export default function fillProject(project) {
-    console.log(project);
-    DataService.getProjectByIds([1]).then(
-        projects => {
+           
             var TechnologiesContent = document.getElementById("container-tech");            
             let sofkianosContent = document.getElementById("project-sofkianos-list");
             let template = "";
-            let project = projects[0];
+
             let startDate = project.getDateInit();
             let finishDate = project.getDateFinish();
             let technologies = "";
@@ -17,7 +15,7 @@ export default function fillProject(project) {
 
             project.getClient().then(
                 client => {
-                    //console.log(client[0].name);
+                    console.log(client);
                     document.getElementById('business-name').innerText = client[0].name;
                 }
             )
@@ -43,7 +41,7 @@ export default function fillProject(project) {
                 TechnologiesContent.innerHTML = technologies;
             })
 
-        })
+       
         
 }
 

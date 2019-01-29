@@ -7,12 +7,11 @@ const ID_MENU_CONTAINER = 'menu';
 
 export default class Route{
     static routeTo(path,some){
-        console.log(some);
-        getElementAndRender(path,some);
+        getElementAndRender(path,ID_CONTAINER, some);
     }
 
     static renderMenu(){
-        getElementAndRender('menu',ID_MENU_CONTAINER,"");
+        getElementAndRender('menu',ID_MENU_CONTAINER);
     }
 }
 
@@ -22,7 +21,6 @@ function getElementAndRender(path, idElement=ID_CONTAINER,some){
     
     try {
         if(path==='view-project'){
-            
             init[`init${path}`](some);
         }
         else
