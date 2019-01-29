@@ -15,8 +15,8 @@ export default async function (num, arrayObject, defineModel) {
                 arrayValue[1],
                 document.getElementById(`nit${num}`).value,
                 document.getElementById(`size${num}`).value,
-                document.getElementById(`sector${num}`).value,
-                parseInt(document.getElementById(`type${num}`).value)
+                document.getElementById(`sectorEdit${num}`).value,
+                document.getElementById(`type${num}`).value
             )
             break;
         case 2:

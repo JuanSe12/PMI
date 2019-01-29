@@ -47,6 +47,3 @@ export default async function fillProjects() {
             
         })
 }
-
-
-
