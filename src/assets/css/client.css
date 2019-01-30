@@ -86,3 +86,7 @@
 .input-field-edit {
     margin-top: 0%;
 }
+#editModal{
+    display: none;
+    padding: 8.09px;
+}

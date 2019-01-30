@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 [
     {
         "id": 1,
@@ -54,61 +53,4 @@
         "clientType": 1,
         "img": "/src/assets/images/clients/alfa.png"
     }
-=======
-[
-    {
-        "id": 1,
-        "name": "Coordinadora",
-        "nit": 8192398,
-        "size": 200,
-        "sector": "Privado",
-        "clientType": 1,
-        "img": "/src/assets/images/clients/coordinadora.png"
-    },
-    {
-        "id": 2,
-        "name": "Proteccion",
-        "nit": 81923398,
-        "size": 200,
-        "sector": "Privado",
-        "clientType": 1,
-        "img": "/src/assets/images/clients/proteccion.png"
-    },
-    {
-        "id": 3,
-        "name": "Alpina",
-        "nit": 8192398,
-        "size": 200,
-        "sector": "Privado",
-        "clientType": 1,
-        "img": "/src/assets/images/clients/alpina.png"
-    },
-    {
-        "id": 4,
-        "name": "Metro",
-        "nit": 45674,
-        "size": 5000,
-        "sector": "Privado",
-        "clientType": 1,
-        "img": "/src/assets/images/clients/metro.png"
-    },
-    {
-        "id": 5,
-        "name": "Exito",
-        "nit": 23425,
-        "size": 200,
-        "sector": "Privado",
-        "clientType": 1,
-        "img": "/src/assets/images/clients/exito.png"
-    },
-    {
-        "id": 6,
-        "name": "Alfa People",
-        "nit": 23425,
-        "size": 200,
-        "sector": "Privado",
-        "clientType": 1,
-        "img": "/src/assets/images/clients/alfa.png"
-    }
->>>>>>> 770115dcc80bbaa3543a3c1481a9ee0da2b7ead0
 ]

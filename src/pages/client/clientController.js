@@ -23,7 +23,7 @@ export default async function fillClient() {
                     <div class="col s10">
                       <div class="row">
                         <div class="col s4">
-                          <img src="${Config.baseUrl()+arrayObject[indexClient].img}"
+                          <img src="${Config.baseUrl() + arrayObject[indexClient].img}"
                         alt="" class="img-size ">
                         </div>
                         <div class="col s7">                        
@@ -32,7 +32,7 @@ export default async function fillClient() {
                       </div>
                     </div>
                     <div class="col s2">
-                      <a style="display:none;" class="edit-buttom" id="editButtom${indexClient}"><i class="material-icons">edit</i></a>
+                      <a style="display:none;" href="#modal1" class="edit-buttom" id="editButtom${indexClient}"><i class="material-icons">edit</i></a>
                     </div>
                   </div>
                 </div>
@@ -46,7 +46,7 @@ export default async function fillClient() {
                           <label class="active title-input">Nit</label>
                         </div>
                         <div class="input-field col s6">
-                          <input disabled value="${arrayTypeClient[arrayObject[indexClient].clientType-1].name}" id="type${indexClient}"  type="text" class="validate">
+                          <input disabled value="${arrayTypeClient[arrayObject[indexClient].clientType - 1].name}" id="type${indexClient}"  type="text" class="validate">
                           <label class="active title-input">Tipo de cliente</label>
                         </div>
                       </div>
@@ -72,11 +72,6 @@ export default async function fillClient() {
                       </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col s12">
-                      <button style="display:none;" class="testclient waves-effect waves-light btn" id="btnSave${indexClient}">Guardar</button>
-                    </div>
-                  </div>
                 </div>
             </li>`;
     template += li;
@@ -90,27 +85,36 @@ export default async function fillClient() {
 
 function addEvent(arrayObject) {
   for (var i = 0; i < arrayObject.length; i++) {
-    $(`#sector${i}`).val(arrayObject[i].sector);
-    $(`#sectorEdit${i}`).val(arrayObject[i].sector);
     $(`#editButtom${i}`).click(function (event) {
       let num = event.delegateTarget.id;
       let res = num.substring(10, num.length);
-      toggle(res);
-    })
-    $(`#btnSave${i}`).click(function (event) {
-      let idBtnSave = event.delegateTarget.id;
-      let position = idBtnSave.substring(7, idBtnSave.length);
-      let num = 1;
-      crudService(position, arrayObject, num).then(response => {
-        if (response.message == "Se edito el dato con éxito") {
-          disabledInput(position);
-          alert(response.message);
-        } else {
-          alert(response.message);
-        }
-      });
+      sessionStorage.referenceId = (parseInt(res) + 1);
+      addValAndOpenModal();
     })
   }
+}
+
+function addValAndOpenModal() {
+  dataService.getAllClients().then(arrayObjectEdit => {
+    let objectFilter = arrayObjectEdit[JSON.parse(sessionStorage.referenceId) - 1]
+    $('#name').val(objectFilter.name);
+    $('#typeClient').find("option[value=" + objectFilter.clientType + "]").prop("selected", true);
+    $("#typeClient").formSelect();
+    $('#sector').find("option[value=" + objectFilter.sector + "]").prop("selected", true);
+    $("#sector").formSelect();
+    $('#size').val(objectFilter.size);
+    $('#nit').val(objectFilter.nit);
+    toggleAndEditTitle();
+    $('#modal1').modal('open');
+    debugger;
+  })
+}
+
+function toggleAndEditTitle() {
+  $('#saveModal').hide();
+  $('#editModal').show();
+  $('#cardTitle').empty();
+  $('#cardTitle').text('Editar un cliente');
 }
 
 function effectView() {
@@ -123,35 +127,9 @@ function effectView() {
       $(".edit-buttom").css("display", "none");
     });
 
-
+    $('.edit-buttom').on("click", function (e) {
+      e.stopPropagation();
+    })
   });
 }
 
-function toggle(num) {
-  document.getElementById(`btnSave${num}`).style.display = "block";
-  let id = {
-    nit: "nit" + num,
-    type: "type" + num,
-    size: "size" + num,
-    sector: "sector" + num
-  }
-  if (document.getElementById(id.nit).disabled) {
-    document.getElementById(id.nit).disabled = false;
-    document.getElementById(id.type).disabled = false;
-    document.getElementById(id.size).disabled = false;
-    $(".selectViewInformation").css("display", "none");
-    $(".selectEdit").css("display", "block");
-  } else {
-    document.getElementById(`btnSave${num}`).style.display = "none";
-    disabledInput(num);
-  }
-}
-
-function disabledInput(num) {
-  document.getElementById(`nit${num}`).disabled = true;
-  document.getElementById(`type${num}`).disabled = true;
-  document.getElementById(`size${num}`).disabled = true;
-  document.getElementById(`btnSave${num}`).style.display = "none";
-  $(".selectViewInformation").css("display", "block");
-  $(".selectEdit").css("display", "none");
-}
