@@ -1,87 +1,87 @@
-'use strict';
-
 import dataService from '../../services/data_service.js';
 import crudService from '../../services/crudService.js';
 import Config from "../../config/config.js";
 
-export default async function fillClient() {
-  let arrayObject = [];
-  let arrayTypeClient = [];
-  try {
-    arrayObject = await dataService.getAllClients();
-    arrayTypeClient = await dataService.getAllClientTypes();
-  } catch (error) {
-    console.log(error)
-  }
-  var ul = document.getElementById("client-list");
-  let template = "";
-  for (let indexClient = 0; indexClient < arrayObject.length; indexClient++) {
-    let li =
-      `<li class="collection-item avatar">
-                <div class="grow collapsible-header  ">
-                  <div class="row size-row">
-                    <div class="col s10">
-                      <div class="row">
-                        <div class="col s4">
-                          <img src="${Config.baseUrl() + arrayObject[indexClient].img}"
-                        alt="" class="img-size ">
-                        </div>
-                        <div class="col s7">                        
-                          <p class="title-client">${arrayObject[indexClient].name}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col s2">
-                      <a style="display:none;" href="#modal1" class="edit-buttom" id="editButtom${indexClient}"><i class="material-icons">edit</i></a>
-                    </div>
-                  </div>
-                </div>
 
-                <div class="collapsible-body ">
-                  <div class="row">
-                    <div class="col s12">
-                      <div class="row form-input">
-                        <div class="input-field col s6">
-                          <input disabled value="${arrayObject[indexClient].nit}" id="nit${indexClient}" type="text" class="validate">
-                          <label class="active title-input">Nit</label>
-                        </div>
-                        <div class="input-field col s6">
-                          <input disabled value="${arrayTypeClient[arrayObject[indexClient].clientType - 1].name}" id="type${indexClient}"  type="text" class="validate">
-                          <label class="active title-input">Tipo de cliente</label>
+let controller;
+
+
+export default controller = {
+  async fillClient() {
+    let arrayObject = [];
+    try {
+      arrayObject = await dataService.getAllClients();
+    } catch (error) {
+      console.log(error)
+    }
+    this.renderClients(arrayObject)
+  },
+
+
+  renderClients(arrayObject) {
+    var ul = document.getElementById("client-list");
+    let template = "";
+    for (let indexClient = 0; indexClient < arrayObject.length; indexClient++) {
+      let li =
+        `<li class="collection-item avatar">
+                  <div class="collapsible-header modify-header grow">
+                    <div class="row size-row">
+                      <div class="col s10">
+                        <div class="row">
+                          <div class="col s4">
+                            <img src="${Config.baseUrl() + arrayObject[indexClient].img}"
+                          alt="" class="img-size ">
+                          </div>
+                          <div class="col s7">                        
+                            <p class="title-client">${arrayObject[indexClient].name}</p>
+                          </div>
                         </div>
                       </div>
-                      <div class="row form-input">
-                        <div class="input-field col s6">
-                          <input disabled value="${arrayObject[indexClient].size}" id="size${indexClient}" type="text" class="validate">
-                          <label class="active title-input">Tamaño de la empresa</label>
-                        </div>
-                        <div class="selectViewInformation input-field col s6">
-                          <select disabled id="sector${indexClient}">
-                            <option value="Publico" selected>Público</option>
-                            <option value="Privado">Privado</option>
-                          </select>
-                          <label class="title-input">Sector</label>
-                        </div>
-                        <div class="selectEdit input-field col s6">
-                          <select id="sectorEdit${indexClient}">
-                            <option value="Publico">Público</option>
-                            <option value="Privado">Privado</option>
-                          </select>
-                          <label class="title-input">Sector</label>
-                        </div>
+                      <div class="col s2">
+                        <a style="display:none;" class="edit-buttom" id="editButtom${indexClient}"><i class="material-icons">edit</i></a>
                       </div>
                     </div>
                   </div>
-                </div>
-            </li>`;
-    template += li;
+
+                  <div class="collapsible-body ">
+                    <div class="row">
+                      <div class="col s12">
+                        <div class="row form-input">
+                          <div class="input-field col s6">
+                            <input disabled value="${arrayObject[indexClient].nit}" id="nit${indexClient}" type="text" class="validate">
+                            <label class="active title-input">Nit</label>
+                          </div>
+                          <div class="input-field col s6">
+                            <input disabled value="${arrayObject[indexClient].clientType}" id="type${indexClient}"  type="text" class="validate">
+                            <label class="active title-input">Type</label>
+                          </div>
+                        </div>
+                        <div class="row form-input">
+                          <div class="input-field col s6">
+                            <input disabled value="${arrayObject[indexClient].size}" id="size${indexClient}" type="text" class="validate">
+                            <label class="active title-input">Tamaño de la empresa</label>
+                          </div>
+                          <div class="selectViewInformation input-field col s6">
+                            <select disabled id="sector${indexClient}">
+                              <option value="publico">Público</option>
+                              <option value="privado">Privado</option>
+                            </select>
+                            <label>Sector</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </li>`;
+      template += li;
+    }
+
+    ul.innerHTML = template;
+    effectView();
+    addEvent(arrayObject);
   }
-
-  ul.innerHTML = template;
-  effectView();
-  addEvent(arrayObject);
-
 }
+
 
 function addEvent(arrayObject) {
   for (var i = 0; i < arrayObject.length; i++) {
@@ -91,6 +91,15 @@ function addEvent(arrayObject) {
       sessionStorage.referenceId = (parseInt(res) + 1);
       addValAndOpenModal();
     })
+    addValSelectViewInformation(i, arrayObject);
+  }
+}
+
+function addValSelectViewInformation(position, arrayObject) {
+  debugger;
+  for (var index = 0; index < arrayObject.length; index++) {
+    $(`#sector${position}`).find("option[value=" + arrayObject[index].sector + "]").prop("selected", true);
+    $(`#sector${position}`).formSelect();
   }
 }
 
@@ -106,7 +115,6 @@ function addValAndOpenModal() {
     $('#nit').val(objectFilter.nit);
     toggleAndEditTitle();
     $('#modal1').modal('open');
-    debugger;
   })
 }
 

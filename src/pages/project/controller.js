@@ -1,49 +1,62 @@
 import DataService from "../../services/data_service.js";
 import Config from "../../config/config.js"
 
-export default async function fillProjects() {
-    DataService.getAllProjects()
-        .then(async (projects) => {
-            console.log("Entró al promise");
-            var ul = document.getElementById("business-list");
-            let template = " ";
 
-            projects.map(async (project) => {
-            let state= await project.getState();
-            let clients= await project.getClient();
-                           
-               
-                let li =
-                `<li class="collection-item avatar">
-                <div class="grow collapsible-header">
-                    <div class=" row size-row">
-                        <div class=" col s10">
-                            <div class="row ">
-                                <div class=" col s4">
-                                    <img class="img-size circle" src="${Config.baseUrl()+project.img}" alt="NO">
-                                </div>
-                                <div class=" col s4 ">
-                                    <div> <p class="title-client">${project.name} <p></div>
-                                    <p> Cliente:                  
-                                    ${clients[0].name}
-                                    </p>
-                                </div>
-                                <div class="col s4 ">
-                                    <p>Estado: ${state[0].name} </p>
-                                </div>
+let controller;
+
+
+export default controller = {
+    fillProjects() {
+        DataService.getAllProjects()
+            .then(
+                projects => {
+                    this.renderProject(projects)
+                })
+    },
+
+
+    renderProject(projects){
+        var ul = document.getElementById("business-list");
+        let template = " ";
+
+        projects.map(async (project) => {
+        let state= await project.getState();
+        let clients= await project.getClient();
+                       
+           
+            let li =
+            `<li class="collection-item avatar">
+            <div class="collapsible-header grow">
+                <div class="row size-row">
+                    <div class=" col s10">
+                        <div class="row ">
+                            <div class=" col s4">
+                                <img class="img-size circle" src="${Config.baseUrl()+project.img}" alt="NO">
+                            </div>
+                            <div class=" col s4 ">
+                                <div> <p class="title-client">${project.name} <p></div>
+                                <p> Cliente:                  
+                                ${clients[0].name}
+                                </p>
+                            </div>
+                            <div class="col s4 ">
+                                <p>Estado: ${state[0].name} </p>
                             </div>
                         </div>
-                        <div class="col s2">
-                           <p> <a class="edit-buttom">  <i class="material-icons">more_horiz</i></a></p>
-                      </div>
                     </div>
+                    <div class="col s2">
+                       <p> <a class="edit-buttom">  <i class="material-icons">more_horiz</i></a></p>
+                  </div>
                 </div>
-            </li>`;
-                template += li;
-               
-            })
-            setTimeout(function(){
-                ul.innerHTML = template;},150);         
-            
+            </div>
+        </li>`;
+            template += li;
+           
         })
-}
+        setTimeout(function(){
+            ul.innerHTML = template;
+        },150);     
+    }
+} 
+
+
