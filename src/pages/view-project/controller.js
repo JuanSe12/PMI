@@ -1,4 +1,5 @@
 import DataService from "../../services/data_service.js";
+import Route from "../../services/route.js";
 
 export default function fillProject(project) {
            
@@ -41,8 +42,13 @@ export default function fillProject(project) {
                 TechnologiesContent.innerHTML = technologies;
             })
 
+            setTimeout(() => {
+                document.getElementById('back').addEventListener('click',()=>{
+                    Route.routeTo('project');})
+            }, 300);
+
        
-        
+           
 }
 
 function fillTecno(projects) {
@@ -74,3 +80,4 @@ function fillSofkianos(sofkiano) {
     }
     return sofkianoTemplate;
 }
+

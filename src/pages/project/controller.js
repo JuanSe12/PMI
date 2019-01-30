@@ -56,11 +56,11 @@ export default controller = {
             template += li;
 
         })
-        setTimeout(function () {
+        setTimeout( ()=> {
             ul.innerHTML = template;
             let elementAt = 0;
 
-            setTimeout(function () {
+            setTimeout(()=> {
                 projects.map(project => {
                     elementAt += 1;
                     addEvents(elementAt, project);
@@ -84,3 +84,4 @@ function addEvents(elementAt, project) {
         Route.routeTo("view-project", project);
     });
 }
+

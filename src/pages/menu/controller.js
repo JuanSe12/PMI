@@ -1,12 +1,12 @@
 import Route from "../../services/route.js";
 
-$("#sofkianoss").on('click',function(){
+$("#sofkianoss").on('click',()=>{
     Route.routeTo("sofkiano","");
 })
-$("#projects").on('click',function(){
+$("#projects").on('click',()=>{
     Route.routeTo("project","");
 })
-$("#clients").on('click',function(){
+$("#clients").on('click',()=>{
     Route.routeTo("client","");
 })
 
