@@ -24,6 +24,7 @@
 
 .img-size {
     width: 65% !important;
+    height: 30% !important;
 }
 
 .title-client{
@@ -79,9 +80,10 @@
     color: #333 !important;
     font-size: 15px !important;
 }
-.selectEdit{
-    display: none;
-}
 .input-field-edit {
     margin-top: 0%;
+}
+#editModal{
+    display: none;
+    padding: 8.09px;
 }
