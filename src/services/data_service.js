@@ -23,81 +23,37 @@ let localStorage = window.localStorage
 export default class DataService {
 
     static getAllClientTypes(){
-        return this.load(CLIENT_TYPE_FILENAME,ClientType);
+        return load(CLIENT_TYPE_FILENAME,ClientType);
     }
 
 
     static getAllClients(){
-        return this.load(CLIENT_FILENAME, Client);
+        return load(CLIENT_FILENAME, Client);
     }
 
 
     static getAllFeatures(){
-        return this.load(FEATURES_FILENAME, Feature);
+        return load(FEATURES_FILENAME, Feature);
     }
 
 
     static getAllProjectStates(){
-        return this.load(PROJECT_STATE_FILENAME, ProjectState);
+        return load(PROJECT_STATE_FILENAME, ProjectState);
     }
 
 
     static getAllProjects(){
-        return this.load(PROJECT_FILENAME, Project);
+        return load(PROJECT_FILENAME, Project);
     }
 
 
     static getAllSofkianos(){
-        return this.load(SOFKIANO_FILENAME, Sofkiano);
+        return load(SOFKIANO_FILENAME, Sofkiano);
     }
 
 
     static getAllTechnologies(){
-        return this.load(TECHNOLOGY_FILENAME, Technology);
-    }
-   
-
-    static load(filename, constructor){
-        let variables =[];
-        return new Promise((resolve, reject) =>{
-            DataService.loadJsonFromFileOrLocalStorage(filename)
-            .then(jsonArray=>{ 
-                jsonArray.forEach(item => {
-                    variables.push(Object.cast(item, constructor));
-                });
-                resolve(variables)
-            })
-            .catch(err =>{
-                reject(err)
-            });
-        });
-    }
-
-    
-    static loadJsonFromFileOrLocalStorage(filename){
-        return new Promise((resolve, reject) =>{
-            if(this.dataIsLocalStorage(filename)){
-                let json = JSON.parse(localStorage.getItem(filename))
-                setTimeout(()=>{
-                    resolve(json)
-                },50)
-            }
-            else{
-                
-                $.getJSON(`${Config.baseUrl()}/src/data/${filename}`, function(json) {
-                    DataService.saveLocalStorage(filename,json);
-                    resolve(json)
-                })
-                .fail(function(){
-                    reject('error')
-                })
-            }
-        });
-    }
-
-
-    static dataIsLocalStorage(filename){
-        return localStorage.getItem(filename) ? true : false;
+        return load(TECHNOLOGY_FILENAME, Technology);
     }
 
 
@@ -107,149 +63,187 @@ export default class DataService {
 
 
     static getClientTypeByIds(ids){
-        return this.loadByIds(CLIENT_TYPE_FILENAME, ClientType, ids)
+        return loadByIds(CLIENT_TYPE_FILENAME, ClientType, ids)
     }
 
 
     static getClientByIds(ids){
-        return this.loadByIds(CLIENT_FILENAME, Client, ids)
+        return loadByIds(CLIENT_FILENAME, Client, ids)
     }
 
 
     static getFeaturesByIds(ids){
-        return this.loadByIds(FEATURES_FILENAME, Feature, ids)
+        return loadByIds(FEATURES_FILENAME, Feature, ids)
     }
 
 
     static getProjectStateByIds(ids){
-        return this.loadByIds(PROJECT_STATE_FILENAME, ProjectState, ids)
+        return loadByIds(PROJECT_STATE_FILENAME, ProjectState, ids)
     }
 
 
     static getProjectByIds(ids){
-        return this.loadByIds(PROJECT_FILENAME, Project, ids)
+        return loadByIds(PROJECT_FILENAME, Project, ids)
     }
 
 
     static getSofkianoByIds(ids){
-        return this.loadByIds(SOFKIANO_FILENAME, Sofkiano, ids)
+        return loadByIds(SOFKIANO_FILENAME, Sofkiano, ids)
     }
 
 
     static getTechnologiesByIds(ids){
-        return this.loadByIds(TECHNOLOGY_FILENAME, Technology, ids)
-    }
-
-
-    static loadByIds(filename, constructor, ids){
-        ids.sort((a,b) =>{ 
-            return a-b
-        });
-        let variables =[];
-        return new Promise((resolve, reject) =>{
-            DataService.loadJsonFromFileOrLocalStorage(filename)
-            .then(jsonArray=>{
-                let index = 0
-                jsonArray.forEach(item => {
-                    if( ids[index] === item.id ){
-                        variables.push(Object.cast(item, constructor));
-                        index++;
-                    }
-                });
-                resolve(variables)
-            })
-            .catch(err =>{
-                reject(err)
-            });
-        });
+        return loadByIds(TECHNOLOGY_FILENAME, Technology, ids)
     }
 
 
     static save(model){
         if(model instanceof ClientType){
-            return this.saveNewOrEditModel(CLIENT_TYPE_FILENAME, ClientType, model)
+            return saveNewOrEditModel(CLIENT_TYPE_FILENAME, ClientType, model)
         }
         else if(model instanceof Client){
-            return this.saveNewOrEditModel(CLIENT_FILENAME, Client, model)
+            return saveNewOrEditModel(CLIENT_FILENAME, Client, model)
         }
         else if(model instanceof Feature){
-            return this.saveNewOrEditModel(FEATURES_FILENAME, Feature, model)
+            return saveNewOrEditModel(FEATURES_FILENAME, Feature, model)
         }
         else if(model instanceof ProjectState){
-            return this.saveNewOrEditModel(PROJECT_STATE_FILENAME, ProjectState, model)
+            return saveNewOrEditModel(PROJECT_STATE_FILENAME, ProjectState, model)
         }
         else if(model instanceof Project){
-            return this.saveNewOrEditModel(PROJECT_FILENAME, Project, model)
+            return saveNewOrEditModel(PROJECT_FILENAME, Project, model)
         }
         else if(model instanceof Sofkiano){
-            return this.saveNewOrEditModel(SOFKIANO_FILENAME, Sofkiano, model)
+            return saveNewOrEditModel(SOFKIANO_FILENAME, Sofkiano, model)
         }
         else if(model instanceof Technology){
-            return this.saveNewOrEditModel(TECHNOLOGY_FILENAME, Technology, model)
+            return saveNewOrEditModel(TECHNOLOGY_FILENAME, Technology, model)
         }
     }
-
-
-    static saveNewOrEditModel(filename,constructor, instance){
-        return new Promise((resolve, reject) =>{
-            this.load(filename, constructor).then(
-                models =>{
-                    let client = models.find(o => o.id === instance.id)
-    
-                    if(client){
-                        let index = this.getIndex(client.id, models);
-                        instance.id = client.id;
-                        try {
-                            models.splice(index,1,instance)
-                            DataService.saveLocalStorage(filename,models)
-                            resolve(instance)                            
-                        } catch (error) {
-                            reject(error)
-                        }
-                    }
-                    else{
-                        let id = DataService.getLastId(models)
-                        instance.id = id + 1;
-                        try {
-                            models.push(instance)
-                            DataService.saveLocalStorage(filename,models)
-                            resolve(instance)                  
-                        } catch (error) {
-                            reject(error)
-                        }  
-                    }
-                    
-                    
-                }
-            )
-            .catch(err=>{
-                reject(err)
-            })
-        });
-        
-        
-    }
-
-
-    static getLastId(models){
-        let id = 0;
-        models.forEach(model => {
-            id < model.id ? id = model.id : id = id;
-        });
-        return id;
-    }
-
-
-    static getIndex(id,models){
-        let i = 0
-        models.forEach((model,index) => {
-            model.id === id ? i = index : i = i;
-        });
-        return i;
-    }
-    
-    
+ 
 }
+function load(filename, constructor){
+    let variables =[];
+    return new Promise((resolve, reject) =>{
+        loadJsonFromFileOrLocalStorage(filename)
+        .then(jsonArray=>{ 
+            jsonArray.forEach(item => {
+                variables.push(Object.cast(item, constructor));
+            });
+            resolve(variables)
+        })
+        .catch(err =>{
+            reject(err)
+        });
+    });
+}
+
+
+function loadJsonFromFileOrLocalStorage(filename){
+    return new Promise((resolve, reject) =>{
+        if(dataIsLocalStorage(filename)){
+            let json = JSON.parse(localStorage.getItem(filename))
+            setTimeout(()=>{
+                resolve(json)
+            },50)
+        }
+        else{
+            
+            $.getJSON(`${Config.baseUrl()}/src/data/${filename}`, function(json) {
+                DataService.saveLocalStorage(filename,json);
+                resolve(json)
+            })
+            .fail(function(){
+                reject('error')
+            })
+        }
+    });
+}
+
+
+function dataIsLocalStorage(filename){
+    return localStorage.getItem(filename) ? true : false;
+}
+
+
+function loadByIds(filename, constructor, ids){
+    ids.sort((a,b) =>{ 
+        return a-b
+    });
+    let variables =[];
+    return new Promise((resolve, reject) =>{
+        loadJsonFromFileOrLocalStorage(filename)
+        .then(jsonArray=>{
+            let index = 0
+            jsonArray.forEach(item => {
+                if( ids[index] === item.id ){
+                    variables.push(Object.cast(item, constructor));
+                    index++;
+                }
+            });
+            resolve(variables)
+        })
+        .catch(err =>{
+            reject(err)
+        });
+    });
+}
+
+
+function saveNewOrEditModel(filename,constructor, instance){
+    return new Promise((resolve, reject) =>{
+        load(filename, constructor).then(
+            models =>{
+                let client = models.find(o => o.id === instance.id)
+
+                if(client){
+                    let index = getIndex(client.id, models);
+                    instance.id = client.id;
+                    try {
+                        models.splice(index,1,instance)
+                        DataService.saveLocalStorage(filename,models)
+                        resolve(instance)                            
+                    } catch (error) {
+                        reject(error)
+                    }
+                }
+                else{
+                    let id = getLastId(models)
+                    instance.id = id + 1;
+                    try {
+                        models.push(instance)
+                        saveLocalStorage(filename,models)
+                        resolve(instance)                  
+                    } catch (error) {
+                        reject(error)
+                    }  
+                }
+            }
+        )
+        .catch(err=>{
+            reject(err)
+        })
+    });
+}
+
+
+function getLastId(models){
+    let id = 0;
+    models.forEach(model => {
+        id < model.id ? id = model.id : id = id;
+    });
+    return id;
+}
+
+
+function getIndex(id,models){
+    let i = 0
+    models.forEach((model,index) => {
+        model.id === id ? i = index : i = i;
+    });
+    return i;
+}
+
 
 Object.cast = function cast(rawObj, constructor)
 {
