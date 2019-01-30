@@ -25,7 +25,7 @@ export default controller = {
             let skills = fillSkills(dataSkills);
 
             let li = `<li class="collection-item avatar">                        
-                            <div class="collapsible-header ">
+                            <div class="collapsible-header grow">
                                 <div class="row size-row">
                                     <div class="col s10">
                                         <div class="row">
@@ -36,7 +36,6 @@ export default controller = {
                                                 <p class="title-sofkiano">${sofkiano.firtsName} ${sofkiano.lastName}</p>
                                             </div>
                                         </div>
-                                    
                                     </div>
                                     <div class="col s2">
                                     <a class="edit-buttom" id="editButtom"><i class="material-icons">edit</i></i></a>
