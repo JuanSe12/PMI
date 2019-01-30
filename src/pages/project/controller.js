@@ -15,8 +15,8 @@ export default async function fillProjects() {
                
                 let li =
                 `<li class="collection-item avatar">
-                <div class="collapsible-header">
-                    <div class="row size-row">
+                <div class="grow collapsible-header">
+                    <div class=" row size-row">
                         <div class=" col s10">
                             <div class="row ">
                                 <div class=" col s4">
