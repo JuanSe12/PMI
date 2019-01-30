@@ -10,3 +10,7 @@ $("#clients").on('click',()=>{
     Route.routeTo("client","");
 })
 
+$("#prueba").on('click',function(){
+    Route.routeTo("view-project");
+})
+

@@ -13,14 +13,14 @@
 }
 .list-sofkianos{
     display: inline-block;
-}
-
-li{
     padding-left: 1rem;
     padding-bottom: 1rem;
-    display: inline-block;
 }
 
+.list-sofkianos > img {
+    height: 60px !important;
+    width: 60px !important;
+}
 .btn-floating{
     vertical-align: super;
 }
@@ -32,4 +32,11 @@ li{
 
 .btn-see-more{
     cursor: pointer;
+}
+#title-project{
+    height: 50px;
+}
+
+.margin-display{
+    margin: 5%;
 }
