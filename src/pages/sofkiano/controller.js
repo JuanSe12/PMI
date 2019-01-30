@@ -111,7 +111,7 @@ function fillProjects(sofkiano) {
             `<div class="chips big-chips">                  
             <div class="chip big-chip">                  
                 <img src="${sofki.img}" alt="no disponible"> 
-                ${sofki.name}
+                ${sofki.name}  ${sofki.percent} %
             </div>
         </div> `;
         tecnoTemplate += tecnoChips;
