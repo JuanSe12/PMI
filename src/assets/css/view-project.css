@@ -21,13 +21,6 @@
     height: 60px !important;
     width: 60px !important;
 }
-
-/* li{
-    padding-left: 1rem;
-    padding-bottom: 1rem;
-    display: inline-block;
-} */
-
 .btn-floating{
     vertical-align: super;
 }
@@ -35,4 +28,8 @@
 .icons{
     text-align: right;
     margin-right: 30px;    
+}
+
+#title-project{
+    height: 50px;
 }
