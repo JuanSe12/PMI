@@ -5,14 +5,17 @@ import Config from "../../config/config.js"
 export default function fillSofkiano() {
     DataService.getAllSofkianos()
         .then(sofkianos => {
+            debugger;
             let template = "";
             var ul = document.getElementById("sofkianos-list");
+            let con = 0;
             sofkianos.map(async (sofkiano) => {
+                
                 let dataTech = await sofkiano.getTechnologies();
-                let dataSkills = await sofkiano.getTechnologies();
+                let dataSkills = await sofkiano.getFeatures();
                 let tecnologhies = fillTecno(dataTech);
                 let skills = fillSkills(dataSkills);
-
+                con++;
                 let li = `<li class="collection-item avatar">
                                                       
                     <div class="collapsible-header ">
@@ -20,7 +23,7 @@ export default function fillSofkiano() {
                             <div class="col s10">
                                 <div class="row">
                                     <div class="col s4">
-                                        <img src="${Config.baseUrl()+sofkiano.img}" alt="" class="img-size circle"> 
+                                        <img src="${Config.baseUrl() + sofkiano.img}" alt="" class="img-size circle"> 
                                     </div>
                                     <div class="col s6">
                                          <p class="title-sofkiano">${sofkiano.firtsName} ${sofkiano.lastName}</p>
@@ -37,41 +40,58 @@ export default function fillSofkiano() {
                     <form class="col s12">
                       <div class="row">
                         <div class="input-field col s6">
-                          <input disabled placeholder=${sofkiano.documentType} id="first_name" type="text" class="validate">
+                          <input disabled placeholder=${sofkiano.documentType} id="typeDocument${con}" type="text" class="validate">
                           <label for="first_name" class="active">Tipo de documento</label>
                         </div>
                         <div class="input-field col s6">
-                        <input disabled placeholder=" ${sofkiano.documentNumber}" id="" type="text" class="validate">
+                        <input disabled placeholder=" ${sofkiano.documentNumber}" id="numberDocument${con}" type="text" class="validate">
                         <label for="first_name" class="active">Número de documento</label>
                         </div>      
                       </div>           
                      
                       <div class="row">
                         <div class="input-field col s6">
-                          <input disabled placeholder=${sofkiano.internalExperience} id="" type="text" class="validate">
+                          <input disabled placeholder=${sofkiano.internalExperience} id="timeInternalExperience${con}" type="text" class="validate">
                           <label for="first_name" class="active">Tiempo de experiencia en Sofka</label>
                         </div>
                         <div class="input-field col s6">
-                        <input disabled placeholder=" ${sofkiano.externalExperience}" id="" type="text" class="validate">
+                        <input disabled placeholder=" ${sofkiano.externalExperience}" id="timeExternalExperience${con}" type="text" class="validate">
                         <label for="first_name" class="active">Tiempo de experiencia externa</label>
                         </div>      
                       </div>
                       <p>Características personales</p>
                       `+ skills + `
                       <p>Tecnologías</p>
-                        `+ tecnologhies + `  
+                        `+ tecnologhies + ` 
+                        <div class="row">
+                            <div class="col s12">
+                                <button style="" class="testclient waves-effect waves-light btn" id="btnSave0">Guardar</button>
+                            </div>
+                        </div> 
                     </form>                
                     </div>
                 </li>`;
                 template += li;
             })
+
             setTimeout(function () {
                 ul.innerHTML = template;
+                $(document).ready(function () {
+                    $('#btnSave0').click(function () {
+                        enableInput(1);
+                        console.log("test");
+                    })
+                });
             }, 150);
         });
 }
 
-
+function enableInput(num) {
+    document.getElementById(`typeDocument4`).disabled = false;
+    document.getElementById(`numberDocument4`).disabled = false;
+    document.getElementById(`timeInternalExperience4`).disabled = false;
+    document.getElementById(`timeExternalExperience4`).disabled = false;
+}
 
 function fillTecno(sofkiano) {
     let tecnoTemplate = "";

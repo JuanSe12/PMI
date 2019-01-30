@@ -5,10 +5,11 @@ import crudService from '../../services/crudService.js';
 import Config from "../../config/config.js";
 
 export default async function fillClient() {
-
   let arrayObject = [];
+  let arrayTypeClient = [];
   try {
     arrayObject = await dataService.getAllClients();
+    arrayTypeClient = await dataService.getAllClientTypes();
   } catch (error) {
     console.log(error)
   }
@@ -22,9 +23,7 @@ export default async function fillClient() {
                     <div class="col s10">
                       <div class="row">
                         <div class="col s4">
-                          <img src="${Config.baseUrl() + arrayObject[indexClient].img}"
-                        alt="" class="img-size ">
-                        </div>
+                        <img src="${Config.baseUrl() + arrayObject[indexClient].img}" alt="" class="img-size ">                        </div>
                         <div class="col s7">
                           <p class="title-client">${arrayObject[indexClient].name}</p>
                         </div>
@@ -45,8 +44,8 @@ export default async function fillClient() {
                           <label class="active title-input">Nit</label>
                         </div>
                         <div class="input-field col s6">
-                          <input disabled value="${arrayObject[indexClient].clientType}" id="type${indexClient}"  type="text" class="validate">
-                          <label class="active title-input">Type</label>
+                          <input disabled value="${arrayTypeClient[arrayObject[indexClient].clientType-1].name}" id="type${indexClient}"  type="text" class="validate">
+                          <label class="active title-input">Tipo de cliente</label>
                         </div>
                       </div>
                       <div class="row form-input">
@@ -56,17 +55,17 @@ export default async function fillClient() {
                         </div>
                         <div class="selectViewInformation input-field col s6">
                           <select disabled id="sector${indexClient}">
-                            <option value="publico">Público</option>
-                            <option value="privado">Privado</option>
+                            <option value="Publico" selected>Público</option>
+                            <option value="Privado">Privado</option>
                           </select>
-                          <label>Sector</label>
+                          <label class="title-input">Sector</label>
                         </div>
                         <div class="selectEdit input-field col s6">
                           <select id="sectorEdit${indexClient}">
-                            <option value="publico">Público</option>
-                            <option value="privado">Privado</option>
+                            <option value="Publico">Público</option>
+                            <option value="Privado">Privado</option>
                           </select>
-                          <label>Sector</label>
+                          <label class="title-input">Sector</label>
                         </div>
                       </div>
                     </div>
@@ -135,7 +134,6 @@ function toggle(num) {
     sector: "sector" + num
   }
   if (document.getElementById(id.nit).disabled) {
-
     document.getElementById(id.nit).disabled = false;
     document.getElementById(id.type).disabled = false;
     document.getElementById(id.size).disabled = false;
