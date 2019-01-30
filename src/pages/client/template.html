@@ -15,7 +15,7 @@
    <ul>
       <!-- Modal Trigger -->
       <li><a class="btn-floating  amber darken-2 tooltipped modal-trigger" data-position="top" data-tooltip="¡Registra un nuevo CLIENTE!"
-            href="#modal1">
+            href="#modal1" id="modal-open">
             <i class="material-icons">add</i></a></li>
    </ul>
 </div>
@@ -51,7 +51,7 @@
                         <div class="input-field col s6">
                               <div class="input-field col s12">
                                  <select id="sector">
-                                    <option value="" disabled selected>Sector</option>
+                                    <option id="sector-holder" value="" disabled selected>Sector</option>
                                     <option value="Publico">Público</option>
                                     <option value="Privado">Privado</option>
                                  </select>

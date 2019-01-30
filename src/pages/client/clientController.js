@@ -92,6 +92,9 @@ function addEvent(arrayObject) {
       addValAndOpenModal();
     })
   }
+  $('#modal-open').click(function (event) {
+    refresh();
+  })
 }
 
 function addValAndOpenModal() {
@@ -106,7 +109,6 @@ function addValAndOpenModal() {
     $('#nit').val(objectFilter.nit);
     toggleAndEditTitle();
     $('#modal1').modal('open');
-    debugger;
   })
 }
 
@@ -116,6 +118,20 @@ function toggleAndEditTitle() {
   $('#cardTitle').empty();
   $('#cardTitle').text('Editar un cliente');
 }
+
+function refresh(){
+  $('#cardTitle').text('Registrar un cliente');
+  $('#name').val("");
+  $('#sector-holder').text('Sector');
+  // $("#typeClient").formSelect();
+  // $('#sector').find("option[value=" + objectFilter.sector + "]").prop("selected", true);
+  // $("#sector").formSelect();
+  $('#size').val("");
+  $('#nit').val("");
+  $('#saveModal').show();
+  $('#editModal').hide();
+}
+
 
 function effectView() {
   $(document).ready(function () {
