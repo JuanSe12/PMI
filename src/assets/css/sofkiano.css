@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,900|Open+Sans');
-
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i');
 body {
     margin-left: 12pt;
     padding: 0%;  
-    font-family: 'Open Sans', sans-serif; 
+    font-family: 'Open Sans', sans-serif ; 
     
 }
 
@@ -67,6 +67,10 @@ img.project-resize {
     width:50%; 
 }
 
+.btn-see-more{
+    cursor: pointer;
+}
+
 .title-sofkiano{
     font-size: 16px;
     font-weight: bold;
@@ -93,10 +97,17 @@ label.active {
 }
 
 div.chips {
-  
     display: inline-block;
    border-bottom: none;
+   padding-left: 1%;
+}
+div.big-chips {
+    padding-left: 5% !important;
+}
 
+div.big-chip{
+    transform: scale(1.3);
+    left: 2rem;
 }
 
 div.row-left {
@@ -112,3 +123,19 @@ div.row-left {
     -moz-box-shadow: 1px 0px 15px -1px rgba(143,143,143,0.97);
     box-shadow: 1px 0px 15px -1px rgba(143,143,143,0.97);
     }
+
+div.card-edit{
+    margin: 0rem ;   
+   
+}
+div.card-content{
+    border: transparent;
+    border-bottom: orange;
+    border-style: solid;
+
+}
+.card-title{
+    font-family: 'Raleway', sans-serif ;
+    color: #3e3e3e;
+    font-weight: 700 !important;
+}
