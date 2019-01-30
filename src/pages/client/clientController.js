@@ -23,8 +23,10 @@ export default async function fillClient() {
                     <div class="col s10">
                       <div class="row">
                         <div class="col s4">
-                        <img src="${Config.baseUrl() + arrayObject[indexClient].img}" alt="" class="img-size ">                        </div>
-                        <div class="col s7">
+                          <img src="${Config.baseUrl()+arrayObject[indexClient].img}"
+                        alt="" class="img-size ">
+                        </div>
+                        <div class="col s7">                        
                           <p class="title-client">${arrayObject[indexClient].name}</p>
                         </div>
                       </div>

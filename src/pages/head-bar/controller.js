@@ -1,7 +1,7 @@
 import DataService from "../../services/data_service.js";
 import Search from "../../services/filter_service.js"
 
-let inputFilter = document.getElementById('input-filter');
+let inputFilter = document.getElementById('search');
 let interval;
 let oldValue = "";
 
