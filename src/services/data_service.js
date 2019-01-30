@@ -76,6 +76,10 @@ export default class DataService {
         return loadByIds(FEATURES_FILENAME, Feature, ids)
     }
 
+    static getProjectSofkianoByIds(ids){
+        return loadByIds(PROJECT_FILENAME, Project, ids)
+    }
+
 
     static getProjectStateByIds(ids){
         return loadByIds(PROJECT_STATE_FILENAME, ProjectState, ids)
@@ -126,7 +130,7 @@ function load(filename, constructor){
     let variables =[];
     return new Promise((resolve, reject) =>{
         loadJsonFromFileOrLocalStorage(filename)
-        .then(jsonArray=>{ 
+        .then(jsonArray=>{
             jsonArray.forEach(item => {
                 variables.push(Object.cast(item, constructor));
             });
