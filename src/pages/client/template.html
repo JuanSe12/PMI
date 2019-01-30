@@ -35,12 +35,12 @@
                   <form class="col s12">
                      <div class="row">
                         <div class="input-field col s12">
-                           <input id="name" type="text" class="validate">
+                           <input id="name" type="text" class="validate" required>
                            <label for="name" class="active">Nombre del cliente</label>
                         </div>
                         <div class="input-field col s6">
                            <div class="input-field col s11">
-                              <select id="typeClient">
+                              <select id="typeClient" required>
                                  <option value="0" disabled selected>Tipo de cliente</option>
                                  <option value="1">Persona</option>
                                  <option value="2">Empresa</option>
@@ -49,9 +49,9 @@
                         </div>
                         <div class="input-field col s6">
                               <div class="input-field col s12">
-                                 <select id="sector">
-                                    <option id="sector-holder" value="" disabled selected>Sector</option>
-                                    <option value="Publico">Público</option>
+                                 <select id="sector" required>
+                                    <option value="0" disabled selected>Sector</option>
+                                    <option value="Público">Público</option>
                                     <option value="Privado">Privado</option>
                                  </select>
                               </div>
@@ -59,11 +59,11 @@
                      </div>
                      <div class="row">
                         <div class="input-field col s6">
-                           <input id="size" type="text" class="validate">
+                           <input id="size" type="number" class="validate" required>
                            <label for="size" class="active">Tamaño de la empresa</label>
                         </div>
                         <div class="input-field col s6">
-                              <input id="nit" type="text" class="validate">
+                              <input id="nit" type="number" class="validate" required>
                               <label for="Nit" class="active">NIT</label>
                            </div>
                         
