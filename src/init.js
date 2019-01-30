@@ -1,21 +1,25 @@
 
-
-import fillSofkiano from "./pages/sofkiano/controller.js";
+import sofkianoController from "./pages/sofkiano/controller.js";
 import DOMsaveSofkiano from "./pages/sofkiano/create_sofkiano.js";
-import fillProjects from "./pages/project/controller.js";
-import fillClient from "./pages/client/clientController.js";
+import projectController from "./pages/project/controller.js";
+import clientController from "./pages/client/clientController.js";
+import searchContext from "./pages/head-bar/controller.js";
 
 let init = {}
 
 Object.setPrototypeOf(init, {
     "initsofkiano": function () {
-        fillSofkiano();
+        sofkianoController.fillSofkiano();
+        searchContext('sofkiano');
+        DOMsaveSofkiano();
     },
     "initproject": function () {
-        fillProjects();
+        projectController.fillProjects();
+        searchContext('project');
     },
     "initclient": function () {
-        fillClient();
+        clientController.fillClient();
+        searchContext('client');
     }
 });
 export default init;
