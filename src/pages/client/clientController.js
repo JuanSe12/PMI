@@ -101,6 +101,9 @@ function addValSelectViewInformation(position, arrayObject) {
     $(`#sector${position}`).find("option[value=" + arrayObject[index].sector + "]").prop("selected", true);
     $(`#sector${position}`).formSelect();
   }
+  $('#modal-open').click(function (event) {
+    refresh();
+  })
 }
 
 function addValAndOpenModal() {
@@ -124,6 +127,20 @@ function toggleAndEditTitle() {
   $('#cardTitle').empty();
   $('#cardTitle').text('Editar un cliente');
 }
+
+function refresh(){
+  $('#cardTitle').text('Registrar un cliente');
+  $('#name').val("");
+  $('#sector-holder').text('Sector');
+  // $("#typeClient").formSelect();
+  // $('#sector').find("option[value=" + objectFilter.sector + "]").prop("selected", true);
+  // $("#sector").formSelect();
+  $('#size').val("");
+  $('#nit').val("");
+  $('#saveModal').show();
+  $('#editModal').hide();
+}
+
 
 function effectView() {
   $(document).ready(function () {
