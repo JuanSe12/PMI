@@ -15,21 +15,23 @@ close_search_button.addEventListener('click', function () {
 });
 
 function take_url(url){
-    console.log(url);
     if(url == 'localhost'){
         let element = document.getElementById('proyectos_titulo');
         element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
-    }else if(url == 'proyectos'){
+    }
+    else if(url == 'proyectos'){
         setTimeout(function(){
             let element = document.getElementById('proyectos_titulo');
             element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
         }, 100);
-    }else if(url == 'clientes'){
+    }
+    else if(url == 'clientes'){
         setTimeout(function(){
             let element = document.getElementById('clientes_titulo');
             element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
         }, 100);
-    }else if(url == 'sofkianos'){
+    }
+    else if(url == 'sofkianos'){
         setTimeout(function(){
             let element = document.getElementById('sofkianos_titulo');
             element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
