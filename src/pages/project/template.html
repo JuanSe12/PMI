@@ -1,30 +1,36 @@
 
 
-    <div style="position: relative;">
-       <div class="tab">
-           <h1 class="title" id="proyectos_titulo">Proyectos</h1>
+<div id="div_content_pages_render">
+    <div class="tab">
+        <h1 class="title" id="proyectos_titulo">Proyectos</h1>
+        <br>
+        <br>
         <ul class="collapsible" id="business-list"></ul>
-
     </div>
 </div>
 
 
 <div class="fixed-action-btn">
     <a class="btn-floating btn-large grey darken-4 waves-effect">
-        <i class="large material-icons">add</i>
+        <i class="large material-icons">menu</i>
     </a>
     <ul>
+<<<<<<< HEAD
         
         <li><a class="btn-floating  amber darken-2"><i class="material-icons">edit</i></a></li>
+=======
+        <li><a class="btn-floating  amber darken-2 tooltipped" data-position="top" 
+            data-tooltip="¡Agrega un nuevo cliente!""><i class="material-icons">add</i></a></li>
+>>>>>>> sofkiano
     </ul>
 </div>
 
 
-<script>
+<script >   
     document.addEventListener('DOMContentLoaded', function () {
-        var elems = document.querySelectorAll('.fixed-action-btn');
-        var instances = M.FloatingActionButton.init(elems, options);
-    });
-    M.AutoInit();
+    var elems = document.querySelectorAll('.fixed-action-btn');
+    var instances = M.FloatingActionButton.init(elems, options);
+});
+M.AutoInit();
 
 </script>

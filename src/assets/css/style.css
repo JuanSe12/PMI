@@ -2,6 +2,8 @@
   min-height: 100%;
 }
 
+
+
 .class-icon-size {
   font-size: 1.6em !important;
   vertical-align: 20% !important;
@@ -26,7 +28,7 @@
   
 .main-menu {
   background: #333;
-  position:absolute;
+  position:fixed;
   top:0;
   bottom:0;
   height:100%;
@@ -121,19 +123,16 @@
 
 
 
-#menu:hover{
-  width: 20%;
-  transition: width 0.5s;
-}
 
 
 #container{
   width: 95.8%;
-  height: 574px;
+  height: 592px;
   margin-left: 3%;
   position: absolute;
   transition: all 0.5s;
-  overflow: auto;
+  overflow: none;
+  margin-top: 4.6%;
 }
 
 
@@ -157,17 +156,24 @@
 	background-color: #555;
 }
 
-#menu:hover + #container{
-  margin-left: 20%;
-  width: 80%;
-  transition: all 0.5s;
+#div_content_pages_render{
+  position: relative;
 }
+
 #header {
-  background-position:  center center;
-  background-repeat: no-repeat;
-  background-image: url(direccion);
+  width: 96%;
   height: 64px;
   background-color:#ffa836;
+  margin-left: 2.5%;
+  position: absolute;
+}
+
+
+
+#menu:hover + #container{
+  margin-left: 17%;
+  width: 81.2%;
+  transition: all 0.5s;
 }
 
 /*--------------------sidebar-header----------------------*/

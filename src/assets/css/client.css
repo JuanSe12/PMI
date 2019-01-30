@@ -13,9 +13,7 @@
 .edit-buttom{
     color: #333 !important;
 }
-.collapsible-modify{
-    padding: 10px !important; 
-}
+
 .form-input {
     margin-top: 10px;
 }
@@ -73,9 +71,7 @@
 .edit-buttom{
     color: #333 !important;
 }
-.collapsible-modify{
-    padding: 10px !important; 
-}
+
 .form-input {
     margin-top: 10px;
 }
@@ -85,4 +81,7 @@
 }
 .selectEdit{
     display: none;
+}
+.input-field-edit {
+    margin-top: 0%;
 }
