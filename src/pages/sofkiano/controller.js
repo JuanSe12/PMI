@@ -25,7 +25,7 @@ export default controller = {
             let skills = fillSkills(dataSkills);
 
             let li = `<li class="collection-item avatar">                        
-                            <div class="collapsible-header ">
+                            <div class="collapsible-header grow">
                                 <div class="row size-row">
                                     <div class="col s10">
                                         <div class="row">
