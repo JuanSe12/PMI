@@ -96,7 +96,7 @@ function addEvent(arrayObject) {
 }
 
 function addValSelectViewInformation(position, arrayObject) {
-  debugger;
+
   for (var index = 0; index < arrayObject.length; index++) {
     $(`#sector${position}`).find("option[value=" + arrayObject[index].sector + "]").prop("selected", true);
     $(`#sector${position}`).formSelect();
@@ -128,13 +128,15 @@ function toggleAndEditTitle() {
   $('#cardTitle').text('Editar un cliente');
 }
 
-function refresh(){
+function refresh() {
   $('#cardTitle').text('Registrar un cliente');
   $('#name').val("");
   $('#sector-holder').text('Sector');
-  // $("#typeClient").formSelect();
-  // $('#sector').find("option[value=" + objectFilter.sector + "]").prop("selected", true);
-  // $("#sector").formSelect();
+  $("#typeClient").formSelect();
+  $('#typeClient').find("option[value=" + 0 + "]").prop("selected", true);
+  $("#typeClient").formSelect();
+  $('#sector').find("option[value=" + 0 + "]").prop("selected", true);
+  $("#sector").formSelect();
   $('#size').val("");
   $('#nit').val("");
   $('#saveModal').show();
