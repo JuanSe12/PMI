@@ -29,8 +29,8 @@ export default controller = {
             idList += 1;
 
             let li =
-                `<li class="collection-item avatar">
-            <div class="collapsible-header">
+            `<li class="collection-item avatar">
+            <div class="collapsible-header grow">
                 <div class="row size-row">
                     <div class=" col s10">
                         <div class="row ">

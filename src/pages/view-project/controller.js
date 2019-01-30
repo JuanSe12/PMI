@@ -44,7 +44,8 @@ export default function fillProject(project) {
 
             setTimeout(() => {
                 document.getElementById('back').addEventListener('click',()=>{
-                    Route.routeTo('project');})
+                    Route.routeTo('project');}
+                    )
             }, 300);
 
        
