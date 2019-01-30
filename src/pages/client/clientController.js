@@ -17,7 +17,7 @@ export default async function fillClient() {
   for (let indexClient = 0; indexClient < arrayObject.length; indexClient++) {
     let li =
       `<li class="collection-item avatar">
-                <div class="collapsible-header modify-header">
+                <div class="grow collapsible-header  ">
                   <div class="row size-row">
                     <div class="col s10">
                       <div class="row">
