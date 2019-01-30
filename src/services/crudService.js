@@ -5,7 +5,7 @@ import Client from "../model/client.js";
 import Project from "../model/project.js";
 import Sofkiano from "../model/sofkiano.js";
 
-export default async function (num, arrayObject, defineModel) {
+export default async function (arrayObject, defineModel) {
     let arrayValue = Object.values(arrayObject[num]);
     let objectEdit = '';
     switch (defineModel) {
@@ -13,10 +13,11 @@ export default async function (num, arrayObject, defineModel) {
             objectEdit = new Client(
                 arrayValue[0],
                 arrayValue[1],
-                document.getElementById(`nit${num}`).value,
-                document.getElementById(`size${num}`).value,
-                document.getElementById(`sectorEdit${num}`).value,
-                document.getElementById(`type${num}`).value
+                arrayValue[2],
+                arrayValue[3],
+                arrayValue[4],
+                arrayValue[5],
+                arrayValue[6]
             )
             break;
         case 2:
