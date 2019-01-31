@@ -57,11 +57,6 @@ export default class DataService {
     }
 
 
-    static saveLocalStorage(filename ,data){
-        localStorage.setItem(filename, JSON.stringify(data));
-    }
-
-
     static getClientTypeByIds(ids){
         return loadByIds(CLIENT_TYPE_FILENAME, ClientType, ids)
     }
@@ -126,6 +121,8 @@ export default class DataService {
     }
  
 }
+
+
 function load(filename, constructor){
     let variables =[];
     return new Promise((resolve, reject) =>{
@@ -204,8 +201,8 @@ function saveNewOrEditModel(filename,constructor, instance){
                     let index = getIndex(client.id, models);
                     instance.id = client.id;
                     try {
-                        models.splice(index,1,instance)
-                        DataService.saveLocalStorage(filename,models)
+                        models.splice(index, 1, instance)
+                        saveLocalStorage(filename, models)
                         resolve(instance)                            
                     } catch (error) {
                         reject(error)
@@ -216,7 +213,7 @@ function saveNewOrEditModel(filename,constructor, instance){
                     instance.id = id + 1;
                     try {
                         models.push(instance)
-                        saveLocalStorage(filename,models)
+                        saveLocalStorage(filename, models)
                         resolve(instance)                  
                     } catch (error) {
                         reject(error)
@@ -246,6 +243,11 @@ function getIndex(id,models){
         model.id === id ? i = index : i = i;
     });
     return i;
+}
+
+
+function saveLocalStorage(filename ,data){
+    localStorage.setItem(filename, JSON.stringify(data));
 }
 
 
