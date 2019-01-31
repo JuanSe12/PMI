@@ -1,20 +1,22 @@
 import dataService from '../../services/data_service.js';
 import crudService from '../../services/crudService.js';
 import Config from "../../config/config.js";
-
+import Route from "../../services/route.js";
 
 let controller;
-
 
 export default controller = {
   async fillClient() {
     let arrayObject = [];
+    let arrayObjectTypeClient = [];
     try {
       arrayObject = await dataService.getAllClients();
+      arrayObjectTypeClient = await dataService.getAllClientTypes();
     } catch (error) {
       console.log(error)
     }
-    this.renderClients(arrayObject)
+    sessionStorage.arrayObjectTypeClient = JSON.stringify(arrayObjectTypeClient);
+    this.renderClients(arrayObject);
   },
 
 
@@ -48,25 +50,26 @@ export default controller = {
                       <div class="col s12">
                         <div class="row form-input">
                           <div class="input-field col s6">
-                            <input disabled value="${arrayObject[indexClient].nit}" id="nit${indexClient}" type="text" class="validate">
+                            <input disabled value="${arrayObject[indexClient].nit}" 
+                              id="nit${indexClient}" type="number" class="validate" required>
                             <label class="active title-input">Nit</label>
                           </div>
                           <div class="input-field col s6">
-                            <input disabled value="${arrayObject[indexClient].clientType}" id="type${indexClient}"  type="text" class="validate">
-                            <label class="active title-input">Type</label>
+                            <input value="${JSON.parse(sessionStorage.arrayObjectTypeClient)[arrayObject[indexClient].clientType - 1].name}" 
+                              id="type${indexClient}"  type="text" class="validate" disabled required>
+                            <label class="active title-input">Tipo de cliente</label>
                           </div>
                         </div>
                         <div class="row form-input">
                           <div class="input-field col s6">
-                            <input disabled value="${arrayObject[indexClient].size}" id="size${indexClient}" type="text" class="validate">
+                            <input disabled value="${arrayObject[indexClient].size}" 
+                              id="size${indexClient}" type="number" class="validate" required>
                             <label class="active title-input">Tamaño de la empresa</label>
                           </div>
-                          <div class="selectViewInformation input-field col s6">
-                            <select disabled id="sector${indexClient}">
-                              <option value="publico">Público</option>
-                              <option value="privado">Privado</option>
-                            </select>
-                            <label>Sector</label>
+                          <div class="input-field col s6">
+                            <input disabled value="${arrayObject[indexClient].sector}" 
+                              id="sectorView${indexClient}" type="text" class="validate" required>
+                            <label class="active title-input">Sector</label>
                           </div>
                         </div>
                       </div>
@@ -93,10 +96,28 @@ function addEvent(arrayObject) {
     })
     addValSelectViewInformation(i, arrayObject);
   }
+  $('#editModal').click(function (event) {
+    let objectEdit = {
+      id: JSON.parse(sessionStorage.objectFilter).id,
+      name: $('#name').val(),
+      nit: $('#nit').val(),
+      size: $('#size').val(),
+      sector: $("#sector").val(),
+      typeClient: $("#typeClient").val(),
+      img: JSON.parse(sessionStorage.objectFilter).img
+    }
+    crudService(objectEdit, 1).then(data => {
+      if (data.switch == 1) {
+        M.toast({ html: `${data.message}` });
+      } else {
+        M.toast({ html: `${data.message}` });
+      }
+    });
+    Route.routeTo('client', '');
+  })
 }
 
 function addValSelectViewInformation(position, arrayObject) {
-
   for (var index = 0; index < arrayObject.length; index++) {
     $(`#sector${position}`).find("option[value=" + arrayObject[index].sector + "]").prop("selected", true);
     $(`#sector${position}`).formSelect();
@@ -109,6 +130,7 @@ function addValSelectViewInformation(position, arrayObject) {
 function addValAndOpenModal() {
   dataService.getAllClients().then(arrayObjectEdit => {
     let objectFilter = arrayObjectEdit[JSON.parse(sessionStorage.referenceId) - 1]
+    sessionStorage.objectFilter = JSON.stringify(objectFilter);
     $('#name').val(objectFilter.name);
     $('#typeClient').find("option[value=" + objectFilter.clientType + "]").prop("selected", true);
     $("#typeClient").formSelect();
