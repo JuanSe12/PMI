@@ -6,8 +6,8 @@ const ID_CONTAINER = 'container';
 const ID_MENU_CONTAINER = 'menu';
 
 export default class Route{
-    static routeTo(path,some){
-        getElementAndRender(path,ID_CONTAINER, some);
+    static routeTo(path, params){
+        getElementAndRender(path,ID_CONTAINER, params);
     }
 
     static renderMenu(){
@@ -15,13 +15,13 @@ export default class Route{
     }
 }
 
-function getElementAndRender(path, idElement=ID_CONTAINER,some){
+function getElementAndRender(path, idElement=ID_CONTAINER, params){
     let file = `${Config.baseUrl()}/src/pages/${path}/template.html`
     $(`#${idElement}`).load(file);
     
     try {
         if(path==='view-project'){
-            init[`init${path}`](some);
+            init[`init${path}`](params);
         }
         else
             init[`init${path}`]();
