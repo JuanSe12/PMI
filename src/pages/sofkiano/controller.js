@@ -104,14 +104,14 @@ function fillTecno(sofkiano) {
     return tecnoTemplate;
 }
 
-function fillProjects(sofkiano) {
+function fillProjects(projects) {
     let tecnoTemplate = "";
-    for (let sofki of sofkiano) {
+    for (let project of projects) {
         let tecnoChips =
             `<div class="chips big-chips">                  
             <div class="chip big-chip">                  
-                <img src="${sofki.img}" alt="no disponible"> 
-                ${sofki.name}  ${sofki.percent} %
+                <img src="${project.img}" alt="no disponible"> 
+                ${project.name}  ${project.percent} %
             </div>
         </div> `;
         tecnoTemplate += tecnoChips;
