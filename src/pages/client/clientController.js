@@ -2,6 +2,7 @@ import dataService from '../../services/data_service.js';
 import crudService from '../../services/crudService.js';
 import Config from "../../config/config.js";
 import Route from "../../services/route.js";
+import Client from '../../model/client.js';
 
 let controller;
 
@@ -20,7 +21,6 @@ export default controller = {
 
 
   renderClients(arrayObject, arrayObjectTypeClient) {
-    debugger;
     var ul = document.getElementById("client-list");
     let template = "";
     for (let indexClient = 0; indexClient < arrayObject.length; indexClient++) {
@@ -78,9 +78,29 @@ export default controller = {
     ul.innerHTML = template;
     effectView();
     addEvent(arrayObject);
+  
   }
 }
 
+let editClient = function (event) {
+  let objectEdit = {
+    id: JSON.parse(sessionStorage.objectFilter).id,
+    name: $('#name').val(),
+    nit: $('#nit').val(),
+    size: $('#size').val(),
+    sector: $("#sector").val(),
+    typeClient: $("#typeClient").val(),
+    img: JSON.parse(sessionStorage.objectFilter).img
+  }
+  crudService(objectEdit, 1).then(data => {
+    if (data.switch == 1) {
+      M.toast({ html: `${data.message}` });
+      Route.routeTo('client');
+    } else {
+      M.toast({ html: `${data.message}` });
+    }
+  });
+}
 
 function addEvent(arrayObject) {
   for (var i = 0; i < arrayObject.length; i++) {
@@ -92,28 +112,32 @@ function addEvent(arrayObject) {
     })
     addValSelectViewInformation(i, arrayObject);
   }
-  $('#editModal').click(function (event) {
-    let objectEdit = {
-      id: JSON.parse(sessionStorage.objectFilter).id,
-      name: $('#name').val(),
-      nit: $('#nit').val(),
-      size: $('#size').val(),
-      sector: $("#sector").val(),
-      typeClient: $("#typeClient").val(),
-      img: JSON.parse(sessionStorage.objectFilter).img
-    }
-    debugger;
-    crudService(objectEdit, 1).then(data => {
-      if (data.switch == 1) {
-        M.toast({ html: `${data.message}` });
-        Route.routeTo('client');
-      } else {
-        M.toast({ html: `${data.message}` });
-      }
-    });
-
-  })
+  $('#editModal').click(editClient)
+  saveClient();
 }
+
+
+
+function saveClient(){
+  $('#saveModal').click(function (event) {
+    let client = new Client(
+      0,
+      $('#name').val(),
+      parseInt($('#nit').val()),
+      parseInt($('#size').val()),
+      $("#sector").val(),
+      parseInt($("#typeClient").val()),
+      "/src/assets/images/clients/default-client.jpg"
+    );
+    dataService.save(client).then( client =>{
+       Route.routeTo('client');
+       console.log(client);
+    },error => {
+      console.log(error);
+    })
+  
+  }
+)};
 
 function addValSelectViewInformation(position, arrayObject) {
 

@@ -126,6 +126,9 @@ export default class DataService {
     }
  
 }
+
+
+
 function load(filename, constructor){
     let variables =[];
     return new Promise((resolve, reject) =>{
@@ -216,7 +219,7 @@ function saveNewOrEditModel(filename,constructor, instance){
                     instance.id = id + 1;
                     try {
                         models.push(instance)
-                        saveLocalStorage(filename,models)
+                        DataService.saveLocalStorage(filename,models)
                         resolve(instance)                  
                     } catch (error) {
                         reject(error)
