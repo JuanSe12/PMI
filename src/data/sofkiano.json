@@ -8,6 +8,10 @@
             2,
             3
         ],
+        "percents": [
+            40,
+            60
+        ],
         "documentType": "CC",
         "documentNumber": 1040749576,
         "externalExperience": "36",
@@ -31,6 +35,10 @@
             1,
             4
         ],
+        "percents": [
+            60,
+            40
+        ],
         "documentType": "CC",
         "documentNumber": 94687049,
         "externalExperience": "12",
@@ -53,6 +61,10 @@
         "projects": [
             2,
             3
+        ],
+        "percents": [
+            50,
+            50
         ],
         "documentType": "CC",
         "documentNumber": 92873982,
@@ -78,6 +90,11 @@
             3,
             4
         ],
+        "percents": [
+            50,
+            50
+        ],
+        
         "documentType": "CC",
         "documentNumber": 92873982,
         "externalExperience": "12",
