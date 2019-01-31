@@ -7,6 +7,7 @@ const ID_MENU_CONTAINER = 'menu';
 
 export default class Route{
     static routeTo(path,some){
+        debugger;
         getElementAndRender(path,ID_CONTAINER, some);
     }
 

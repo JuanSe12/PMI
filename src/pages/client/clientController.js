@@ -5,7 +5,7 @@ import Route from "../../services/route.js";
 
 let controller;
 
-export default controller = { 
+export default controller = {
   async fillClient() {
     let arrayObject = [];
     let arrayObjectTypeClient = [];
@@ -109,12 +109,11 @@ function addEvent(arrayObject) {
     crudService(objectEdit, 1).then(data => {
       if (data.switch == 1) {
         M.toast({ html: `${data.message}` });
-        Route.routeTo('client');
       } else {
         M.toast({ html: `${data.message}` });
       }
     });
-
+    Route.routeTo('client', '');
   })
 }
 
