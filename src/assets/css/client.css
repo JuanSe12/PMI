@@ -87,3 +87,6 @@
     display: none;
     padding: 8.09px;
 }
+.container-client{
+    padding-block-end: 20px;
+}
