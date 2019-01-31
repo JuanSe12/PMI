@@ -22,7 +22,6 @@ export default controller = {
 
 
   renderClients(arrayObject) {
-  renderClients(arrayObject, arrayObjectTypeClient) {
     var ul = document.getElementById("client-list");
     let template = "";
     for (let indexClient = 0; indexClient < arrayObject.length; indexClient++) {
@@ -46,7 +45,6 @@ export default controller = {
                       </div>
                     </div>
                   </div>
-
                   <div class="collapsible-body ">
                     <div class="row">
                       <div class="col s12">
@@ -84,7 +82,6 @@ export default controller = {
     ul.innerHTML = template;
     effectView();
     addEvent(arrayObject);
-  
   }
 }
 
@@ -104,6 +101,7 @@ let editClient = function (event) {
       Route.routeTo('client');
     } else {
       M.toast({ html: `${data.message}` });
+      Route.routeTo('client');
     }
   });
 }
@@ -119,28 +117,17 @@ function addEvent(arrayObject) {
     addValSelectViewInformation(i, arrayObject);
   }
   $('#editModal').click(function (event) {
-    let objectEdit = {
-      id: JSON.parse(sessionStorage.objectFilter).id,
-      name: $('#name').val(),
-      nit: $('#nit').val(),
-      size: $('#size').val(),
-      sector: $("#sector").val(),
-      typeClient: $("#typeClient").val(),
-      img: JSON.parse(sessionStorage.objectFilter).img
-    }
-    crudService(objectEdit, 1).then(data => {
-      if (data.switch == 1) {
-        M.toast({ html: `${data.message}` });
-      } else {
-        M.toast({ html: `${data.message}` });
-      }
-    });
-    Route.routeTo('client', '');
+    editClient(); 
   })
-  saveClient();
+    validateTypeClient();
+    saveClient();
 }
 
-
+function validateTypeClient(){
+  $('#typeClientDiv').click(function (event) {
+    alert('asd');
+  });
+}
 
 function saveClient(){
   $('#saveModal').click(function (event) {
