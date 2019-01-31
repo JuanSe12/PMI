@@ -5,7 +5,7 @@ import Route from "../../services/route.js";
 
 let controller;
 
-export default controller = {
+export default controller = { 
   async fillClient() {
     let arrayObject = [];
     let arrayObjectTypeClient = [];
@@ -15,12 +15,12 @@ export default controller = {
     } catch (error) {
       console.log(error)
     }
-    this.renderClients(arrayObject, arrayObjectTypeClient)
+    sessionStorage.arrayObjectTypeClient = JSON.stringify(arrayObjectTypeClient);
+    this.renderClients(arrayObject);
   },
 
 
-  renderClients(arrayObject, arrayObjectTypeClient) {
-    debugger;
+  renderClients(arrayObject) {
     var ul = document.getElementById("client-list");
     let template = "";
     for (let indexClient = 0; indexClient < arrayObject.length; indexClient++) {
@@ -50,21 +50,25 @@ export default controller = {
                       <div class="col s12">
                         <div class="row form-input">
                           <div class="input-field col s6">
-                            <input disabled value="${arrayObject[indexClient].nit}" id="nit${indexClient}" type="number" class="validate" required>
+                            <input disabled value="${arrayObject[indexClient].nit}" 
+                              id="nit${indexClient}" type="number" class="validate" required>
                             <label class="active title-input">Nit</label>
                           </div>
                           <div class="input-field col s6">
-                            <input disabled value="${arrayObjectTypeClient[arrayObject[indexClient].clientType - 1].name}" id="type${indexClient}"  type="text" class="validate" required>
+                            <input value="${JSON.parse(sessionStorage.arrayObjectTypeClient)[arrayObject[indexClient].clientType - 1].name}" 
+                              id="type${indexClient}"  type="text" class="validate" disabled required>
                             <label class="active title-input">Tipo de cliente</label>
                           </div>
                         </div>
                         <div class="row form-input">
                           <div class="input-field col s6">
-                            <input disabled value="${arrayObject[indexClient].size}" id="size${indexClient}" type="number" class="validate" required>
+                            <input disabled value="${arrayObject[indexClient].size}" 
+                              id="size${indexClient}" type="number" class="validate" required>
                             <label class="active title-input">Tamaño de la empresa</label>
                           </div>
                           <div class="input-field col s6">
-                            <input disabled value="${arrayObject[indexClient].sector}" id="sectorView${indexClient}" type="text" class="validate" required>
+                            <input disabled value="${arrayObject[indexClient].sector}" 
+                              id="sectorView${indexClient}" type="text" class="validate" required>
                             <label class="active title-input">Sector</label>
                           </div>
                         </div>
@@ -102,7 +106,6 @@ function addEvent(arrayObject) {
       typeClient: $("#typeClient").val(),
       img: JSON.parse(sessionStorage.objectFilter).img
     }
-    debugger;
     crudService(objectEdit, 1).then(data => {
       if (data.switch == 1) {
         M.toast({ html: `${data.message}` });
@@ -116,10 +119,6 @@ function addEvent(arrayObject) {
 }
 
 function addValSelectViewInformation(position, arrayObject) {
-<<<<<<< HEAD
-=======
-
->>>>>>> df6ab2eba4c5015c7e8d0432c183ee3b684d4122
   for (var index = 0; index < arrayObject.length; index++) {
     $(`#sector${position}`).find("option[value=" + arrayObject[index].sector + "]").prop("selected", true);
     $(`#sector${position}`).formSelect();
