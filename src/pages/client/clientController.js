@@ -7,7 +7,7 @@ let controller;
 
 
 export default controller = {
-  async fillClient(){
+  async fillClient() {
     let arrayObject = [];
     try {
       arrayObject = await dataService.getAllClients();
@@ -18,7 +18,7 @@ export default controller = {
   },
 
 
-  renderClients(arrayObject){
+  renderClients(arrayObject) {
     var ul = document.getElementById("client-list");
     let template = "";
     for (let indexClient = 0; indexClient < arrayObject.length; indexClient++) {
@@ -29,7 +29,7 @@ export default controller = {
                       <div class="col s10">
                         <div class="row">
                           <div class="col s4">
-                            <img src="${Config.baseUrl()+arrayObject[indexClient].img}"
+                            <img src="${Config.baseUrl() + arrayObject[indexClient].img}"
                           alt="" class="img-size ">
                           </div>
                           <div class="col s7">                        
@@ -68,19 +68,7 @@ export default controller = {
                             </select>
                             <label>Sector</label>
                           </div>
-                          <div class="selectEdit input-field col s6">
-                            <select id="sectorEdit${indexClient}">
-                              <option value="publico">Público</option>
-                              <option value="privado">Privado</option>
-                            </select>
-                            <label>Sector</label>
-                          </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col s12">
-                        <button style="display:none;" class="testclient waves-effect waves-light btn" id="btnSave${indexClient}">Guardar</button>
                       </div>
                     </div>
                   </div>
@@ -91,33 +79,68 @@ export default controller = {
     ul.innerHTML = template;
     effectView();
     addEvent(arrayObject);
-    }
+  }
 }
 
 
 function addEvent(arrayObject) {
   for (var i = 0; i < arrayObject.length; i++) {
-    $(`#sector${i}`).val(arrayObject[i].sector);
-    $(`#sectorEdit${i}`).val(arrayObject[i].sector);
     $(`#editButtom${i}`).click(function (event) {
       let num = event.delegateTarget.id;
       let res = num.substring(10, num.length);
-      toggle(res);
+      sessionStorage.referenceId = (parseInt(res) + 1);
+      addValAndOpenModal();
     })
-    $(`#btnSave${i}`).click(function (event) {
-      let idBtnSave = event.delegateTarget.id;
-      let position = idBtnSave.substring(7, idBtnSave.length);
-      let num = 1;
-      crudService(position, arrayObject, num).then(response => {
-        if (response.message == "Se edito el dato con éxito") {
-          disabledInput(position);
-          alert(response.message);
-        } else {
-          alert(response.message);
-        }
-      });
-    })
+    addValSelectViewInformation(i, arrayObject);
   }
+}
+
+function addValSelectViewInformation(position, arrayObject) {
+
+  for (var index = 0; index < arrayObject.length; index++) {
+    $(`#sector${position}`).find("option[value=" + arrayObject[index].sector + "]").prop("selected", true);
+    $(`#sector${position}`).formSelect();
+  }
+  $('#modal-open').click(function (event) {
+    refresh();
+  })
+}
+
+function addValAndOpenModal() {
+  dataService.getAllClients().then(arrayObjectEdit => {
+    let objectFilter = arrayObjectEdit[JSON.parse(sessionStorage.referenceId) - 1]
+    $('#name').val(objectFilter.name);
+    $('#typeClient').find("option[value=" + objectFilter.clientType + "]").prop("selected", true);
+    $("#typeClient").formSelect();
+    $('#sector').find("option[value=" + objectFilter.sector + "]").prop("selected", true);
+    $("#sector").formSelect();
+    $('#size').val(objectFilter.size);
+    $('#nit').val(objectFilter.nit);
+    toggleAndEditTitle();
+    $('#modal1').modal('open');
+  })
+}
+
+function toggleAndEditTitle() {
+  $('#saveModal').hide();
+  $('#editModal').show();
+  $('#cardTitle').empty();
+  $('#cardTitle').text('Editar un cliente');
+}
+
+function refresh() {
+  $('#cardTitle').text('Registrar un cliente');
+  $('#name').val("");
+  $('#sector-holder').text('Sector');
+  $("#typeClient").formSelect();
+  $('#typeClient').find("option[value=" + 0 + "]").prop("selected", true);
+  $("#typeClient").formSelect();
+  $('#sector').find("option[value=" + 0 + "]").prop("selected", true);
+  $("#sector").formSelect();
+  $('#size').val("");
+  $('#nit').val("");
+  $('#saveModal').show();
+  $('#editModal').hide();
 }
 
 
@@ -131,36 +154,9 @@ function effectView() {
       $(".edit-buttom").css("display", "none");
     });
 
-
+    $('.edit-buttom').on("click", function (e) {
+      e.stopPropagation();
+    })
   });
 }
 
-function toggle(num) {
-  document.getElementById(`btnSave${num}`).style.display = "block";
-  let id = {
-    nit: "nit" + num,
-    type: "type" + num,
-    size: "size" + num,
-    sector: "sector" + num
-  }
-  if (document.getElementById(id.nit).disabled) {
-
-    document.getElementById(id.nit).disabled = false;
-    document.getElementById(id.type).disabled = false;
-    document.getElementById(id.size).disabled = false;
-    $(".selectViewInformation").css("display", "none");
-    $(".selectEdit").css("display", "block");
-  } else {
-    document.getElementById(`btnSave${num}`).style.display = "none";
-    disabledInput(num);
-  }
-}
-
-function disabledInput(num) {
-  document.getElementById(`nit${num}`).disabled = true;
-  document.getElementById(`type${num}`).disabled = true;
-  document.getElementById(`size${num}`).disabled = true;
-  document.getElementById(`btnSave${num}`).style.display = "none";
-  $(".selectViewInformation").css("display", "block");
-  $(".selectEdit").css("display", "none");
-}

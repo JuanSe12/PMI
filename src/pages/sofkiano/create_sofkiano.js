@@ -45,7 +45,7 @@ export default function DOMsaveSofkiano() {
             }
         } 
         //console.log(arrayTechnologiesDiv);
-        let sofkianoSave = new Sofkiano(0, firstName, lastName, "/src/assets/images/sofkianos/non-profile.png",typeDocument, numberDocument, externalExperienceTime, experienceTimeSofka, arrayFeaturesDiv, arrayTechnologiesDiv)
+        let sofkianoSave = new Sofkiano(0, firstName, lastName, "/src/assets/images/sofkianos/non-profile.png", [], [],typeDocument, numberDocument, externalExperienceTime, experienceTimeSofka, arrayFeaturesDiv, arrayTechnologiesDiv)
         DataService.save(sofkianoSave).then(
             sofkiano =>{
                 document.getElementById('modal1').removeAttribute("style");

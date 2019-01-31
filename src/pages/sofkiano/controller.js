@@ -10,19 +10,23 @@ export default controller = {
     fillSofkiano() {
         DataService.getAllSofkianos()
             .then(sofkianos => {
+
                 this.renderSofkianos(sofkianos);
             });
+
     },
 
-    
-    renderSofkianos(sofkianos){
+
+    renderSofkianos(sofkianos) {
         let template = "";
         var ul = document.getElementById("sofkianos-list");
         sofkianos.map(async (sofkiano) => {
+            let dataProject = await sofkiano.getProjects();
             let dataTech = await sofkiano.getTechnologies();
             let dataSkills = await sofkiano.getTechnologies();
             let tecnologhies = fillTecno(dataTech);
             let skills = fillSkills(dataSkills);
+            let projects = fillProjects(dataProject);
 
             let li = `<li class="collection-item avatar">                        
                             <div class="collapsible-header grow">
@@ -30,7 +34,7 @@ export default controller = {
                                     <div class="col s10">
                                         <div class="row">
                                             <div class="col s4">
-                                                <img src="${Config.baseUrl()+sofkiano.img}" alt="" class="img-size circle"> 
+                                                <img src="${Config.baseUrl() + sofkiano.img}" alt="" class="img-size circle"> 
                                             </div>
                                             <div class="col s6">
                                                 <p class="title-sofkiano">${sofkiano.firtsName} ${sofkiano.lastName}</p>
@@ -66,20 +70,22 @@ export default controller = {
                                 </div>      
                             </div>
                             <p>Características personales</p>
-                            `+ skills + `
+                                ${skills}
                             <p>Tecnologías</p>
-                                `+ tecnologhies + `  
+                                 ${tecnologhies}
+                            <p>Proyectos</p> 
+                                ${projects}
                             </form>                
                             </div>
                         </li>`;
             template += li;
         })
-        setTimeout(function () {
+        setTimeout(() => {
             ul.innerHTML = template;
             DOMsaveSofkiano();
-        }, 150);
+        }, 180);
     }
-    
+
 }
 
 
@@ -88,9 +94,25 @@ function fillTecno(sofkiano) {
     for (let sofki of sofkiano) {
         let tecnoChips =
             `<div class="chips">                  
-            <div class="chip">                  
+            <div class="chip ">                  
                 <img src="${sofki.icon}" alt="no disponible"> 
                 ${sofki.name}
+            </div>
+        </div> `;
+        tecnoTemplate += tecnoChips;
+    }
+
+    return tecnoTemplate;
+}
+
+function fillProjects(projects) {
+    let tecnoTemplate = "";
+    for (let project of projects) {
+        let tecnoChips =
+            `<div class="chips big-chips">                  
+            <div class="chip big-chip">                  
+                <img src="${project.img}" alt="no disponible"> 
+                ${project.name}  ${project.percent} %
             </div>
         </div> `;
         tecnoTemplate += tecnoChips;
