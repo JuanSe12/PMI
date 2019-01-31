@@ -11,7 +11,6 @@ Object.setPrototypeOf(init, {
     "initsofkiano": function () {
         sofkianoController.fillSofkiano();
         searchContext('sofkiano');
-        DOMsaveSofkiano();
     },
     "initproject": function () {
         projectController.fillProjects();

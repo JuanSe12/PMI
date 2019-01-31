@@ -212,7 +212,7 @@ function saveNewOrEditModel(filename,constructor, instance){
                     instance.id = id + 1;
                     try {
                         models.push(instance)
-                        saveLocalStorage(filename,models)
+                        DataService.saveLocalStorage(filename,models)
                         resolve(instance)                  
                     } catch (error) {
                         reject(error)
