@@ -57,6 +57,9 @@ export default controller = {
                            <p> <a class="edit-buttom" id="showMore${idList}">  <i class="material-icons">add_circle</i><p>Ver mas</p></a></p>
                       </div>
                 </div>
+                <div class="collapsible-body ">               
+                                      
+                </div>
             </li>`;
                 template += li;
 

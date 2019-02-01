@@ -51,7 +51,7 @@ export default controller = {
                                     </div>    
                                 </div>
                         </div>
-                            <div class="collapsible-body ">               
+                        <div class="collapsible-body ">               
                             <form class="col s12">
                             <div class="row">
                                 <div class="input-field col s6">
@@ -86,7 +86,7 @@ export default controller = {
                                 </div>
                             </div>
                             </form>                
-                            </div>
+                        </div>
                         </li>`;
                 template += li;
             })
@@ -166,38 +166,9 @@ function DomDeleteSofkiano(sofkianos) {
                     Route.routeTo('sofkiano');
                 }
             )
-                .catch(error => prompt('is no delete', error))
+                .catch(error => alert('is no delete', error))
         })
 
     });
 }
 
-const validateFieldsForMessage=()=>{
-    $("#last_name").blur(function () {
-        if ($("#last_name").val() === "") {
-           M.toast({ html: 'Ingrese los apellidos' });
-        }
-     });
-    
-     $("#number_document").blur(function () {
-        if ($("#number_document").val() === "") {
-           M.toast({ html: 'Ingrese el documento de identidad' });
-        }
-     });
-
-     $("#experience_time_sofka").blur(function () {
-        if ($("#experience_time_sofka").val() === "") {
-           M.toast({ html: 'Ingrese los meses de experiencia en Sofka' });
-        }
-     });
-
-     $("#external_experience_time").blur(function () {
-        if ($("#external_experience_time").val() === "") {
-           M.toast({ html: 'Ingrese los meses de experiencia en empresas externas' });
-        }
-     });
-
-}
-setTimeout(() => {
-    validateFieldsForMessage();
-}, 180);

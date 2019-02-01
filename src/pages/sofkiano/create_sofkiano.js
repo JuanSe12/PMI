@@ -71,6 +71,10 @@ export default controller = {
     }
 }
 
+function validateFields() {
+    return $('#firstname').val() === "" || $('#last_name').val() === "" || $('#type_document').val() === "" || $("#number_document").val() === "" ? true : false;
+}
+
 function renderFeatures(data){
     let divFeatures = document.getElementById('div_features');
     let features = "";
