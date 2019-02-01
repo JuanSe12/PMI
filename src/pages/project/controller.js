@@ -25,6 +25,7 @@ export default controller = {
             M.toast({ html: MESSAGE });
         }
         else {
+            console.log(projects)
             var ul = document.getElementById("business-list");
             let template = " ";
             let idList = 0;
