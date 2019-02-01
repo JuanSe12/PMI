@@ -25,8 +25,9 @@ export default controller = {
     var ul = document.getElementById("client-list");
     let template = "";
     for (let indexClient = 0; indexClient < arrayObject.length; indexClient++) {
-      let li =
-        `<li class="collection-item avatar">
+      try {
+        let li =
+          `<li class="collection-item avatar">
                   <div class="collapsible-header modify-header grow">
                     <div class="row size-row">
                       <div class="col s10">
@@ -76,12 +77,16 @@ export default controller = {
                     </div>
                   </div>
               </li>`;
-      template += li;
+        template += li;
+      } catch (error) {
+        console.log("No se pueden guardar datos vacios")
+      }
     }
 
     ul.innerHTML = template;
     effectView();
     addEvent(arrayObject);
+    validateTypeClientPerson()
   }
 }
 
@@ -117,19 +122,13 @@ function addEvent(arrayObject) {
     addValSelectViewInformation(i, arrayObject);
   }
   $('#editModal').click(function (event) {
-    editClient(); 
+    editClient();
   })
-    validateTypeClient();
-    saveClient();
+  saveClient();
 }
 
-function validateTypeClient(){
-  $('#typeClientDiv').click(function (event) {
-    alert('asd');
-  });
-}
 
-function saveClient(){
+function saveClient() {
   $('#saveModal').click(function (event) {
     let client = new Client(
       0,
@@ -140,15 +139,14 @@ function saveClient(){
       parseInt($("#typeClient").val()),
       "/src/assets/images/clients/default-client.jpg"
     );
-    dataService.save(client).then( client =>{
-       Route.routeTo('client');
-       console.log(client);
-    },error => {
+    dataService.save(client).then(client => {
+      Route.routeTo('client');
+      console.log(client);
+    }, error => {
       console.log(error);
     })
-  
-  }
-)};
+  })
+};
 
 function addValSelectViewInformation(position, arrayObject) {
   for (var index = 0; index < arrayObject.length; index++) {
@@ -158,6 +156,22 @@ function addValSelectViewInformation(position, arrayObject) {
   $('#modal-open').click(function (event) {
     refresh();
   })
+}
+
+function validateTypeClientPerson(){
+
+    $('select#typeClient').change(function (e) {
+       var select = $( "select#typeClient option:checked" ).val();
+       if (select == 1) {
+          $("input#size").prop('disabled', true);
+          $('#size').attr('placeholder', '1');
+       } else {
+        $("input#size").prop('disabled', false);
+        $('#size').attr('placeholder', 'Tamaño de la empresa');
+       }
+    });
+
+
 }
 
 function addValAndOpenModal() {
