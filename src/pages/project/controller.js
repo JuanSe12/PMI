@@ -35,29 +35,37 @@ export default controller = {
 
                 let li =
                     `<li class="collection-item avatar">
-            <div class="collapsible-header grow">
-                <div class="row size-row">
-                    <div class=" col s10">
-                        <div class="row ">
-                            <div class=" col s4">
-                                <img class="img-size circle" src="${Config.baseUrl() + project.img}" alt="NO">
-                            </div>
-                            <div class=" col s4 ">
-                                <div> <p class="title-client">${project.name} <p></div>
-                                <p> Cliente:                  
-                                ${clients[0].name}
-                                </p>
-                            </div>
-                            <div class="col s4 ">
-                                <p>Estado: ${state[0].name} </p>
+                        <div class="collapsible-header grow">
+                            <div class="row size-row">
+                                <div class=" col s4">
+                                    <img class="img-size circle" src="${Config.baseUrl() + project.img}" alt="NO">
+                                </div>                                       
+                                <div class=" col s6 ">
+                                    <div class="row">
+                                        <div class="col s6">
+                                            <p class="title-client">${project.name} </p>
+                                        </div>
+                                        <div class="col s6">
+                                            <p><b>Estado:</b> ${state[0].name}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s6">
+                                        <b>Cliente:</b> ${clients[0].name}
+                                        </div>
+                                    </div>
+                                    <!--<div class="row">
+                                        <div class="col s12" style="text-align: justify;">
+                                            <b>Descripción:</b> ${project.description}
+                                        </div>
+                                    </div>-->
+                                </div>
+                                <div class="col s2">
+                                    <a class="edit-buttom" id="showMore${idList}"><i class="material-icons">add_circle</i><p>Ver mas</p></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col s2">
-                           <p> <a class="edit-buttom" id="showMore${idList}">  <i class="material-icons">add_circle</i><p>Ver mas</p></a></p>
-                      </div>
-                </div>
-            </li>`;
+                    </li>`;
                 template += li;
 
             })
@@ -69,8 +77,6 @@ export default controller = {
                     projects.map(project => {
                         elementAt += 1;
                         addEvents(elementAt, project);
-
-
                     })
                 }, 250);
 
@@ -84,8 +90,8 @@ export default controller = {
     }
 }
 
-function addEvents(elementAt, project) {
 
+function addEvents(elementAt, project) {
     document.getElementById(`showMore${elementAt}`).addEventListener('click', function () {
         Route.routeTo("view-project", project);
     });
