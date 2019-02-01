@@ -76,8 +76,11 @@ export default controller = {
                                  ${tecnologhies}
                             <p>Proyectos</p> 
                                 ${projects}
-                            <p></p>
-                            <a id="btn-sofkian-delete-${sofkiano.id}"class="waves-effect waves-light btn" "><i class="material-icons left">delete</i>button</a>
+                            <div class="row">
+                                <div class="col s2 offset-s10">
+                                    <a id="btn-sofkian-delete-${sofkiano.id}"class="waves-effect waves-light btn red" "><i class="material-icons left">delete</i>Eliminar</a>
+                                </div>
+                            </div>
                             </form>                
                             </div>
                         </li>`;
