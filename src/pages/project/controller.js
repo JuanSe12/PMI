@@ -20,16 +20,21 @@ export default controller = {
 
 
     renderProject(projects) {
-        var ul = document.getElementById("business-list");
-        let template = " ";
-        let idList = 0;
-        projects.map(async (project) => {
-            let state = await project.getState();
-            let clients = await project.getClient();
-            idList += 1;
+        const MESSAGE = 'No existe un Proyecto con ese nombre';
+        if (projects.length == 0) {
+            M.toast({ html: MESSAGE });
+        }
+        else {
+            var ul = document.getElementById("business-list");
+            let template = " ";
+            let idList = 0;
+            projects.map(async (project) => {
+                let state = await project.getState();
+                let clients = await project.getClient();
+                idList += 1;
 
-            let li =
-            `<li class="collection-item avatar">
+                let li =
+                    `<li class="collection-item avatar">
             <div class="collapsible-header grow">
                 <div class="row size-row">
                     <div class=" col s10">
@@ -53,28 +58,29 @@ export default controller = {
                       </div>
                 </div>
             </li>`;
-            template += li;
+                template += li;
 
-        })
-        setTimeout( ()=> {
-            ul.innerHTML = template;
-            let elementAt = 0;
+            })
+            setTimeout(() => {
+                ul.innerHTML = template;
+                let elementAt = 0;
 
-            setTimeout(()=> {
-                projects.map(project => {
-                    elementAt += 1;
-                    addEvents(elementAt, project);
-
-
-                })
-            }, 250);
+                setTimeout(() => {
+                    projects.map(project => {
+                        elementAt += 1;
+                        addEvents(elementAt, project);
 
 
-        }, 150);
+                    })
+                }, 250);
+
+
+            }, 150);
 
 
 
 
+        }
     }
 }
 

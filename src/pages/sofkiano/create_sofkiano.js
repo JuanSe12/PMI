@@ -28,7 +28,7 @@ export default function DOMsaveSofkiano() {
         //console.log(firstName, lastName, typeDocument, numberDocument, experienceTimeSofka, externalExperienceTime);
         let features_array = document.getElementById(`div_features`);
         let checkFeature = features_array.getElementsByTagName(`input`);
-        //console.log(checkFeature);
+       
         let arrayFeaturesDiv = [];
         for (var i = 0; i < checkFeature.length; i++) { 
             if(checkFeature[i].checked){
@@ -37,14 +37,14 @@ export default function DOMsaveSofkiano() {
         } 
         let technologies_array = document.getElementById(`div_technologies`);
         let checkTechnology = technologies_array.getElementsByTagName(`input`);
-        //console.log(checkTechnology);
+        
         let arrayTechnologiesDiv = [];
         for (var i = 0; i < checkTechnology.length; i++) { 
             if(checkTechnology[i].checked){
                 arrayTechnologiesDiv.push(parseInt(checkTechnology[i].value));
             }
         } 
-        //console.log(arrayTechnologiesDiv);
+     
         let sofkianoSave = new Sofkiano(0, firstName, lastName, "/src/assets/images/sofkianos/non-profile.png", [], [],typeDocument, numberDocument, externalExperienceTime, experienceTimeSofka, arrayFeaturesDiv, arrayTechnologiesDiv)
         DataService.save(sofkianoSave).then(
             sofkiano =>{

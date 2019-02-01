@@ -259,7 +259,7 @@ function saveNewOrEditModel(filename,constructor, instance){
 function getLastId(models){
     let id = 0;
     models.forEach(model => {
-        id < model.id ? id = model.id : id = id;
+        id < model.id ? id = model.id : id;
     });
     return id;
 }
@@ -268,7 +268,7 @@ function getLastId(models){
 function getIndex(id,models){
     let i = 0
     models.forEach((model,index) => {
-        model.id === id ? i = index : i = i;
+        model.id === id ? i = index : i;
     });
     return i;
 }

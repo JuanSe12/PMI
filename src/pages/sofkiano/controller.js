@@ -148,7 +148,7 @@ function fillSkills(sofkiano) {
 }
 
 function DomDeleteSofkiano(sofkianos){
-    let btns = [];
+    
     sofkianos.forEach(sofkiano => {
         let btn = document.getElementById(`btn-sofkian-delete-${sofkiano.id}`);
         btn.addEventListener('click',function(event){
@@ -162,8 +162,8 @@ function DomDeleteSofkiano(sofkianos){
                     Route.routeTo('sofkiano');
                 }
             )
-            .catch( error => alert('is no delete', error))
+            .catch( error => prompt('is no delete', error))
         })
-        btns.push(btn);
+        
     });
 }

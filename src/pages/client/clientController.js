@@ -22,10 +22,16 @@ export default controller = {
 
 
   renderClients(clients) {
-    var ul = document.getElementById("client-list");
-    let template = "";
-    clients.forEach((client,indexClient) => {
-      let li =
+
+
+    if (clients.length == 0) {
+      M.toast({ html: 'No existe un Cliente con ese nombre' });
+    } 
+    else {
+      var ul = document.getElementById("client-list");
+      let template = "";
+      clients.forEach((client, indexClient) => {
+        let li =
           `<li class="collection-item avatar">
                   <div class="collapsible-header modify-header grow">
                     <div class="row size-row">
@@ -82,13 +88,14 @@ export default controller = {
                   </div>
               </li>`;
         template += li;
-    });
+      });
 
-    ul.innerHTML = template;
-    effectView();
-    addEvent(clients);
-    DomDeleteClient(clients);
-    validateTypeClientPerson()
+      ul.innerHTML = template;
+      effectView();
+      addEvent(clients);
+      DomDeleteClient(clients);
+      validateTypeClientPerson()
+    }
   }
 }
 
@@ -172,33 +179,34 @@ let editClient = function (event) {
 
 function saveClient() {
   $('#saveModal').click(function (event) {
-   
-    if(validateFields()){
-      M.toast({html: 'El registro no pudo ser ingresado, Faltan datos'});
-    }
-    else{
-    let client = new Client(
-      0,
-      $('#name').val(),
-      parseInt($('#nit').val()),
-      parseInt($('#size').val()),
-      $("#sector").val(),
-      parseInt($("#typeClient").val()),
-      "/src/assets/images/clients/default-client.jpg"
-    );
-    dataService.save(client).then(client => {
-      Route.routeTo('client');
-      console.log(client);
-    }, error => {
-      console.log(error);
-    })
-  
-  }
-}
-)};
 
-function validateFields(){
-  return $('#name').val()==="" || $('#nit').val()=== "" || $('#size').val()==="" || $("#sector").val()==="" || $("#typeClient").val()==="" ? true:false;
+    if (validateFields()) {
+      M.toast({ html: 'El registro no pudo ser ingresado, Faltan datos' });
+    }
+    else {
+      let client = new Client(
+        0,
+        $('#name').val(),
+        parseInt($('#nit').val()),
+        parseInt($('#size').val()),
+        $("#sector").val(),
+        parseInt($("#typeClient").val()),
+        "/src/assets/images/clients/default-client.jpg"
+      );
+      dataService.save(client).then(client => {
+        Route.routeTo('client');
+        console.log(client);
+      }, error => {
+        console.log(error);
+      })
+
+    }
+  }
+  )
+};
+
+function validateFields() {
+  return $('#name').val() === "" || $('#nit').val() === "" || $('#size').val() === "" || $("#sector").val() === "" || $("#typeClient").val() === "" ? true : false;
 }
 
 function addValSelectViewInformation(position, arrayObject) {
@@ -212,17 +220,17 @@ function addValSelectViewInformation(position, arrayObject) {
 }
 
 function validateFieldsByMessage() {
-  
 
-    $('select#typeClient').change(function (e) {
-      var select = $( "select#typeClient option:checked" ).val();
-      if (select == 1) {
-         $("input#size").prop('disabled', true);
-         $('#size').attr('placeholder', '1');
-      } 
-     
-   });
-  
+
+  $('select#typeClient').change(function (e) {
+    var select = $("select#typeClient option:checked").val();
+    if (select == 1) {
+      $("input#size").prop('disabled', true);
+      $('#size').attr('placeholder', '1');
+    }
+
+  });
+
 }
 
 
@@ -234,18 +242,18 @@ function toggleAndEditTitle() {
 }
 
 
-function validateTypeClientPerson(){
+function validateTypeClientPerson() {
 
-    $('select#typeClient').change(function (e) {
-       var select = $( "select#typeClient option:checked" ).val();
-       if (select == 1) {
-          $("input#size").prop('disabled', true);
-          $('#size').attr('placeholder', '1');
-       } else {
-        $("input#size").prop('disabled', false);
-        $('#size').attr('placeholder', 'Tamaño de la empresa');
-       }
-    });
+  $('select#typeClient').change(function (e) {
+    var select = $("select#typeClient option:checked").val();
+    if (select == 1) {
+      $("input#size").prop('disabled', true);
+      $('#size').attr('placeholder', '1');
+    } else {
+      $("input#size").prop('disabled', false);
+      $('#size').attr('placeholder', 'Tamaño de la empresa');
+    }
+  });
 
 
 }
@@ -267,24 +275,24 @@ function refresh() {
 }
 
 
-function DomDeleteClient(clients){
+function DomDeleteClient(clients) {
   let btns = [];
   clients.forEach(client => {
     let btn = document.getElementById(`btn-client-delete-${client.id}`);
-        btn.addEventListener('click',function(event){
-            dataService.delete(client).then(
-                clientDelete => {
-                    M.toast(
-                        {
-                            html: `Se eliminó con exito ${clientDelete.name}!`, 
-                            outDuration: 300
-                        })
-                    Route.routeTo('client');
-                }
-            )
-            .catch( error => alert('is no delete', error))
-        })
-        btns.push(btn);
+    btn.addEventListener('click', function (event) {
+      dataService.delete(client).then(
+        clientDelete => {
+          M.toast(
+            {
+              html: `Se eliminó con exito ${clientDelete.name}!`,
+              outDuration: 300
+            })
+          Route.routeTo('client');
+        }
+      )
+        .catch(error => alert('is no delete', error))
+    })
+    btns.push(btn);
   });
 }
 
