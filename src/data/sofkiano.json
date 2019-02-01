@@ -89,6 +89,10 @@
             3,
             4
         ],
+        "percents": [
+            50,
+            50
+        ],
         "documentType": "CC",
         "documentNumber": 92873982,
         "externalExperience": "12",
