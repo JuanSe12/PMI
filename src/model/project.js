@@ -1,7 +1,7 @@
 import DataService from "../services/data_service.js";
 
 export default class Project{
-    constructor(id, name, description, state, client, dateInit, dateFinish,technologies,img, sofkianos){
+    constructor(id, name, description, state, client, dateInit, dateFinish,technologies, img, sofkianos){
         this.id = id;
         this.name = name;
         this.description = description;
@@ -10,7 +10,7 @@ export default class Project{
         this.dateInit = dateInit;
         this.dateFinish = dateFinish;
         this.technologies = technologies;
-        this.img=img;
+        this.img = img;
         this.sofkianos = sofkianos;
     }
 
@@ -40,12 +40,24 @@ export default class Project{
 
 
     getDateInit(){
-        return new Date(...this.dateInit)
+        if(typeof this.dateInit == "object"){
+            return new Date(...this.dateInit)
+        }
+        else if(typeof this.dateInit == "string")
+        {
+            return new Date(this.dateInit)
+        }  
     }
 
 
     getDateFinish(){
-        return new Date(...this.dateFinish)
+        if(typeof this.dateFinish == "object"){
+            return new Date(...this.dateFinish)
+        }
+        else if(typeof this.dateFinish == "string")
+        {
+            return new Date(this.dateFinish)
+        }  
     }
 
 }

@@ -30,16 +30,10 @@
     margin-right: 30px;    
 }
 
-.btn-see-more{
-    cursor: pointer;
-}
 #title-project{
     height: 50px;
 }
 
-.margin-display{
-    margin: 5%;
-}
 .chips-div > img{
     height: 50px;
     width: 50px;
@@ -76,7 +70,9 @@
     position: absolute;
     font-size: 20px;
 }
-
+.margin-project{
+    margin: 3%;
+}
 .icons-delete-sofki{
     display: none;
     margin-left: 42px;
@@ -87,4 +83,8 @@
 
 .classTemp{
     display: none;
+}
+
+.title-p{
+    color: #ffa836;
 }
