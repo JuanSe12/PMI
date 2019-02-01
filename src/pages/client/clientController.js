@@ -169,41 +169,51 @@ let editClient = function (event) {
     if (data.switch == 1) {
       M.toast({ html: `${data.message}` });
       Route.routeTo('client');
+      setTimeout(function(){
+        let element = document.getElementById('clientes_titulo');
+        element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
+      }, 100);
     } else {
       M.toast({ html: `${data.message}` });
       Route.routeTo('client');
+      setTimeout(function(){
+        let element = document.getElementById('clientes_titulo');
+        element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
+      }, 100);
     }
   });
 }
 
-
 function saveClient() {
   $('#saveModal').click(function (event) {
-
-    if (validateFields()) {
-      M.toast({ html: 'El registro no pudo ser ingresado, Faltan datos' });
+   
+    if(validateFields()){
+      M.toast({html: 'El registro no pudo ser ingresado, Faltan datos'});
     }
-    else {
-      let client = new Client(
-        0,
-        $('#name').val(),
-        parseInt($('#nit').val()),
-        parseInt($('#size').val()),
-        $("#sector").val(),
-        parseInt($("#typeClient").val()),
-        "/src/assets/images/clients/default-client.jpg"
-      );
-      dataService.save(client).then(client => {
-        Route.routeTo('client');
-        console.log(client);
-      }, error => {
-        console.log(error);
-      })
-
-    }
+    else{
+    let client = new Client(
+      0,
+      $('#name').val(),
+      parseInt($('#nit').val()),
+      parseInt($('#size').val()),
+      $("#sector").val(),
+      parseInt($("#typeClient").val()),
+      "/src/assets/images/clients/default-client.jpg"
+    );
+    dataService.save(client).then(client => {
+      Route.routeTo('client');
+      setTimeout(function(){
+        let element = document.getElementById('clientes_titulo');
+        element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
+      }, 100);
+      console.log(client);
+    }, error => {
+      console.log(error);
+    })
+  
   }
-  )
-};
+}
+)};
 
 function validateFields() {
   return $('#name').val() === "" || $('#nit').val() === "" || $('#size').val() === "" || $("#sector").val() === "" || $("#typeClient").val() === "" ? true : false;

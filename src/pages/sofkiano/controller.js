@@ -1,6 +1,6 @@
 import DataService from "../../services/data_service.js";
 import Config from "../../config/config.js"
-import DomSaveSofkiano from "./create_sofkiano.js";
+import DomSave from "./create_sofkiano.js";
 import Route from "../../services/route.js"
 
 let controller;
@@ -88,7 +88,7 @@ export default controller = {
         })
         setTimeout(() => {
             ul.innerHTML = template;
-            DomSaveSofkiano();
+            DomSave.saveSofkiano();
             DomDeleteSofkiano(sofkianos);
         }, 180);
     }
