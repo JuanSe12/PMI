@@ -194,6 +194,7 @@ export default async function fillProject() {
                     TechnologiesContent.innerHTML = contentNew + newElement;
                     document.getElementById('modal1').removeAttribute("style");
                     document.getElementsByClassName('modal-overlay')[0].removeAttribute("style");
+                    document.getElementsByClassName('body')[0].removeAttribute("style");
 
                 });
             })
