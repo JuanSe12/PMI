@@ -21,7 +21,7 @@ export function save() {
         let elementTech = "";
         for (let index = 0; index < TechnologiesContent.childNodes.length; index++) {
             elementTech = TechnologiesContent.childNodes[index].id;
-            arrayTech.push(elementTech.substring(9, elementTech.length));
+            arrayTech.push(parseInt(elementTech.substring(9, elementTech.length)));
         }
 
         clientInsert = client.childNodes[0].id;
@@ -32,7 +32,7 @@ export function save() {
         let elementSofki = "";
         for (let index = 0; index < sofkianos.childNodes.length; index++) {
             elementSofki = sofkianos.childNodes[index].id;
-            arraySofkiano.push(elementSofki.substring(10, elementSofki.length));
+            arraySofkiano.push(parseInt(elementSofki.substring(10, elementSofki.length)));
         }
 
         DataService.save(new ModelProject(
@@ -40,11 +40,14 @@ export function save() {
             nameProject,
             objetive,
             2,
-            clientInsert,
-            startDate,
-            finishDate,
+            parseInt(clientInsert),
+            new Date(startDate).toString(),
+            new Date(finishDate).toString(),
             arrayTech,
+            "/src/assets/images/projects/project1.jpg",
             arraySofkiano
         ))
+
+        M.toast({html:"Se guardaron satisfactoriamente los datos"})
     })
 }

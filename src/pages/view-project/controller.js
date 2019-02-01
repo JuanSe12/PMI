@@ -5,6 +5,7 @@ import { save } from "./saveData.js";
 export default async function fillProject() {
     DataService.getProjectByIds([1]).then(
         projects => {
+            debugger;
             var TechnologiesContent = document.getElementById("container-tech");
             let sofkianosContent = document.getElementById("project-sofkianos-list");
             let titleProject = document.getElementById('title-project');
@@ -23,8 +24,10 @@ export default async function fillProject() {
 
             let prueba = document.getElementById('project-business-image');
 
+
             project.getClient().then(
                 client => {
+                    
                     //console.log(client[0].name);
                     let clientStr = `<img src="${Config.baseUrl() + client[0].img}" alt="" class="resize circle" id="project-business-image${client[0].id}">
                     ${client[0].name} <a style="display:none;" href="#" class="view-edit" onclick="" id="delete-icon-business"><i class="material-icons md-36">close</i></a>`
