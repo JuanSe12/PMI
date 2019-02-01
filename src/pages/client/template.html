@@ -31,13 +31,13 @@
             <div class="card-action">
                <form class="col s12">
                   <div class="row">
-                     <div class=" input-field col s12">
-                        <input id="name" type="text" class="validate" name="field1" required>
-                        <label for="name" class="active">Nombre del cliente</label>
+                     <div class="input-field col s12">
+                        <input id="name" type="text" class="validate"  required>
+                        <label for="name" class="active"  data-error="wrong" data-success="right" >Nombre del cliente</label>
                      </div>
                      <div class="input-field col s6">
                         <div class="input-field col s11" id="typeClientDiv">
-                           <select id="typeClient" required>
+                           <select id="typeClient" >
                               <option value="0" disabled selected>Tipo de cliente</option>
                               <option value="1">Persona</option>
                               <option value="2">Empresa</option>
@@ -46,7 +46,7 @@
                      </div>
                      <div class="input-field col s6">
                         <div class="input-field col s12">
-                           <select id="sector" required>
+                           <select id="sector"  >
                               <option value="0" disabled selected>Sector</option>
                               <option value="Público">Público</option>
                               <option value="Privado">Privado</option>
@@ -89,27 +89,11 @@
 
    $(document).ready(function () {
 
-      $("#name").blur(function () {
-         if ($("#name").val() === "") {
-            M.toast({ html: 'Ingrese el nombre' });
-         }
-      });
-
-         $("#size").blur(function () {
-            if ($("#size").val() === "") {
-               M.toast({ html: 'Ingrese el tamaño de la empresa' });
-            }
-         });
-
-         $("#nit").blur(function () {
-            if ($("#nit").val() === "") {
-               M.toast({ html: 'Ingrese el nit' });
-            }
-         });
-         
-
-             
-      $('.collapsible').collapsible();
+       $('.collapsible').collapsible();   
    });
    M.AutoInit();
+
+   
+  
+
 </script>

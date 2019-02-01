@@ -119,6 +119,31 @@ export default class DataService {
             return saveNewOrEditModel(TECHNOLOGY_FILENAME, Technology, model)
         }
     }
+
+
+    static delete(model){
+        if(model instanceof ClientType){
+            return deleteModel(CLIENT_TYPE_FILENAME, ClientType, model)
+        }
+        else if(model instanceof Client){
+            return deleteModel(CLIENT_FILENAME, Client, model)
+        }
+        else if(model instanceof Feature){
+            return deleteModel(FEATURES_FILENAME, Feature, model)
+        }
+        else if(model instanceof ProjectState){
+            return deleteModel(PROJECT_STATE_FILENAME, ProjectState, model)
+        }
+        else if(model instanceof Project){
+            return deleteModel(PROJECT_FILENAME, Project, model)
+        }
+        else if(model instanceof Sofkiano){
+            return deleteModel(SOFKIANO_FILENAME, Sofkiano, model)
+        }
+        else if(model instanceof Technology){
+            return deleteModel(TECHNOLOGY_FILENAME, Technology, model)
+        }
+    }
  
 }
 
@@ -251,6 +276,31 @@ function getIndex(id,models){
 
 function saveLocalStorage(filename ,data){
     localStorage.setItem(filename, JSON.stringify(data));
+}
+
+
+function deleteModel(filename,constructor, instance){
+    return new Promise((resolve, reject) =>{
+        load(filename, constructor).then(
+            models =>{
+                let model = models.find(object => object.id === instance.id)
+
+                if(model){
+                    let index = getIndex(model.id, models);
+                    try {
+                        models.splice(index, 1)
+                        saveLocalStorage(filename, models)
+                        resolve(model)                            
+                    } catch (error) {
+                        reject(error)
+                    }
+                }
+            }
+        )
+        .catch(err=>{
+            reject(err)
+        })
+    });
 }
 
 

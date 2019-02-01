@@ -1,6 +1,7 @@
 import DataService from "../../services/data_service.js";
 import Config from "../../config/config.js"
-import DOMsaveSofkiano from "./create_sofkiano.js";
+import DomSaveSofkiano from "./create_sofkiano.js";
+import Route from "../../services/route.js"
 
 let controller;
 
@@ -75,6 +76,11 @@ export default controller = {
                                  ${tecnologhies}
                             <p>Proyectos</p> 
                                 ${projects}
+                            <div class="row">
+                                <div class="col s2 offset-s10">
+                                    <a id="btn-sofkian-delete-${sofkiano.id}"class="waves-effect waves-light btn red" "><i class="material-icons left">delete</i>Eliminar</a>
+                                </div>
+                            </div>
                             </form>                
                             </div>
                         </li>`;
@@ -82,7 +88,8 @@ export default controller = {
         })
         setTimeout(() => {
             ul.innerHTML = template;
-            DOMsaveSofkiano();
+            DomSaveSofkiano();
+            DomDeleteSofkiano(sofkianos);
         }, 180);
     }
 
@@ -138,4 +145,25 @@ function fillSkills(sofkiano) {
     }
 
     return skillTemplate;
+}
+
+function DomDeleteSofkiano(sofkianos){
+    let btns = [];
+    sofkianos.forEach(sofkiano => {
+        let btn = document.getElementById(`btn-sofkian-delete-${sofkiano.id}`);
+        btn.addEventListener('click',function(event){
+            DataService.delete(sofkiano).then(
+                sofkianoDelete => {
+                    M.toast(
+                        {
+                            html: `Se eliminó con exito ${sofkianoDelete.firtsName} ${sofkianoDelete.lastName}!`, 
+                            outDuration: 300
+                        })
+                    Route.routeTo('sofkiano');
+                }
+            )
+            .catch( error => alert('is no delete', error))
+        })
+        btns.push(btn);
+    });
 }

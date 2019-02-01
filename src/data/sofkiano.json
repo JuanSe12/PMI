@@ -77,8 +77,7 @@
         "technologies": [
             1,
             8,
-            3,
-            10
+            3
         ]
     },
     {
@@ -94,7 +93,6 @@
             50,
             50
         ],
-        
         "documentType": "CC",
         "documentNumber": 92873982,
         "externalExperience": "12",
