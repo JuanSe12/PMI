@@ -19,17 +19,21 @@ export default controller = {
 
 
     renderSofkianos(sofkianos) {
-        let template = "";
-        var ul = document.getElementById("sofkianos-list");
-        sofkianos.map(async (sofkiano) => {
-            let dataProject = await sofkiano.getProjects();
-            let dataTech = await sofkiano.getTechnologies();
-            let dataSkills = await sofkiano.getTechnologies();
-            let tecnologhies = fillTecno(dataTech);
-            let skills = fillSkills(dataSkills);
-            let projects = fillProjects(dataProject);
+        if (sofkianos.length == 0) {
+            M.toast({ html: 'No existe un Sofkiano con ese nombre' });
+        }
+        else {
+            let template = "";
+            var ul = document.getElementById("sofkianos-list");
+            sofkianos.map(async (sofkiano) => {
+                let dataProject = await sofkiano.getProjects();
+                let dataTech = await sofkiano.getTechnologies();
+                let dataSkills = await sofkiano.getTechnologies();
+                let tecnologhies = fillTecno(dataTech);
+                let skills = fillSkills(dataSkills);
+                let projects = fillProjects(dataProject);
 
-            let li = `<li class="collection-item avatar">                        
+                let li = `<li class="collection-item avatar">                        
                             <div class="collapsible-header grow">
                                 <div class="row size-row">
                                     <div class="col s10">
@@ -84,15 +88,15 @@ export default controller = {
                             </form>                
                             </div>
                         </li>`;
-            template += li;
-        })
-        setTimeout(() => {
-            ul.innerHTML = template;
-            DomSave.saveSofkiano();
-            DomDeleteSofkiano(sofkianos);
-        }, 180);
+                template += li;
+            })
+            setTimeout(() => {
+                ul.innerHTML = template;
+                DomSave.saveSofkiano();
+                DomDeleteSofkiano(sofkianos);
+            }, 180);
+        }
     }
-
 }
 
 
@@ -147,23 +151,23 @@ function fillSkills(sofkiano) {
     return skillTemplate;
 }
 
-function DomDeleteSofkiano(sofkianos){
-    
+function DomDeleteSofkiano(sofkianos) {
+
     sofkianos.forEach(sofkiano => {
         let btn = document.getElementById(`btn-sofkian-delete-${sofkiano.id}`);
-        btn.addEventListener('click',function(event){
+        btn.addEventListener('click', function (event) {
             DataService.delete(sofkiano).then(
                 sofkianoDelete => {
                     M.toast(
                         {
-                            html: `Se eliminó con exito ${sofkianoDelete.firtsName} ${sofkianoDelete.lastName}!`, 
+                            html: `Se eliminó con exito ${sofkianoDelete.firtsName} ${sofkianoDelete.lastName}!`,
                             outDuration: 300
                         })
                     Route.routeTo('sofkiano');
                 }
             )
-            .catch( error => prompt('is no delete', error))
+                .catch(error => prompt('is no delete', error))
         })
-        
+
     });
 }
