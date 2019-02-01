@@ -1,7 +1,7 @@
 import DataService from "../services/data_service.js";
 
 export default class Project{
-    constructor(id, name, description, state, client, dateInit, dateFinish,technologies, sofkianos){
+    constructor(id, name, description, state, client, dateInit, dateFinish,technologies,img, sofkianos){
         this.id = id;
         this.name = name;
         this.description = description;
@@ -10,6 +10,7 @@ export default class Project{
         this.dateInit = dateInit;
         this.dateFinish = dateFinish;
         this.technologies = technologies;
+        this.img=img;
         this.sofkianos = sofkianos;
     }
 
