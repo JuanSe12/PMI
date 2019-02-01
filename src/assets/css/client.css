@@ -23,8 +23,8 @@
 }
 
 .img-size {
-    width: 65% !important;
-    height: 30% !important;
+    width: 40% !important;
+    height: auto;
 }
 
 .title-client{
@@ -90,3 +90,8 @@
 .container-client{
     padding-block-end: 20px;
 }
+div.modal-content{
+    padding: 0rem !important    ;
+    height: auto !important;
+}
+

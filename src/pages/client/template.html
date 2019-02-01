@@ -36,7 +36,7 @@
                         <label for="name" class="active"  data-error="wrong" data-success="right" >Nombre del cliente</label>
                      </div>
                      <div class="input-field col s6">
-                        <div class="input-field col s11" id=typeClientDiv">
+                        <div class="input-field col s11" id="typeClientDiv">
                            <select id="typeClient" >
                               <option value="0" disabled selected>Tipo de cliente</option>
                               <option value="1">Persona</option>
@@ -88,15 +88,24 @@
    });
 
    $(document).ready(function () {
-      $('.collapsible').collapsible();
+      $("#name").blur(function () {
+    if ($("#name").val() === "") {
+       M.toast({ html: 'Ingrese el nombre' });
+    }
+ });
 
-      $('select#typeClient').change(function (e) {
-         var select = $( "select#typeClient option:checked" ).val();
-         if (select == 1) {
-            $("input#size").prop('disabled', true);
-            $('#size').attr('placeholder', '1');
-         } 
-      });
+    $("#size").blur(function () {
+       if ($("#size").val() === "") {
+          M.toast({ html: 'Ingrese el tamaño de la empresa' });
+       }
+    });
+
+    $("#nit").blur(function () {
+       if ($("#nit").val() === "") {
+          M.toast({ html: 'Ingrese el nit' });
+       }
+    });
+       $('.collapsible').collapsible();   
    });
    M.AutoInit();
 

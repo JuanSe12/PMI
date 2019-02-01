@@ -21,23 +21,22 @@ export default controller = {
   },
 
 
-  renderClients(arrayObject) {
+  renderClients(clients) {
     var ul = document.getElementById("client-list");
     let template = "";
-    for (let indexClient = 0; indexClient < arrayObject.length; indexClient++) {
-      try {
-        let li =
+    clients.forEach((client,indexClient) => {
+      let li =
           `<li class="collection-item avatar">
                   <div class="collapsible-header modify-header grow">
                     <div class="row size-row">
                       <div class="col s10">
                         <div class="row">
                           <div class="col s4">
-                            <img src="${Config.baseUrl() + arrayObject[indexClient].img}"
+                            <img src="${Config.baseUrl()}${client.img}"
                           alt="" class="img-size ">
                           </div>
                           <div class="col s7">                        
-                            <p class="title-client">${arrayObject[indexClient].name}</p>
+                            <p class="title-client">${client.name}</p>
                           </div>
                         </div>
                       </div>
@@ -51,26 +50,31 @@ export default controller = {
                       <div class="col s12">
                         <div class="row form-input">
                           <div class="input-field col s6">
-                            <input disabled value="${arrayObject[indexClient].nit}" 
+                            <input disabled value="${client.nit}" 
                               id="nit${indexClient}" type="number" class="validate" required>
                             <label class="active title-input">Nit</label>
                           </div>
                           <div class="input-field col s6">
-                            <input value="${JSON.parse(sessionStorage.arrayObjectTypeClient)[arrayObject[indexClient].clientType - 1].name}" 
+                            <input value="${JSON.parse(sessionStorage.arrayObjectTypeClient)[client.clientType - 1].name}" 
                               id="type${indexClient}"  type="text" class="validate" disabled required>
                             <label class="active title-input">Tipo de cliente</label>
                           </div>
                         </div>
                         <div class="row form-input">
                           <div class="input-field col s6">
-                            <input disabled value="${arrayObject[indexClient].size}" 
+                            <input disabled value="${client.size}" 
                               id="size${indexClient}" type="number" class="validate" required>
                             <label class="active title-input">Tamaño de la empresa</label>
                           </div>
                           <div class="input-field col s6">
-                            <input disabled value="${arrayObject[indexClient].sector}" 
+                            <input disabled value="${client.sector}" 
                               id="sectorView${indexClient}" type="text" class="validate" required>
                             <label class="active title-input">Sector</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col offset-s10 s2">
+                            <a id="btn-client-delete-${client.id}"class="waves-effect waves-light btn red" "><i class="material-icons left">delete</i>Eliminar</a>                            
                           </div>
                         </div>
                       </div>
@@ -78,17 +82,71 @@ export default controller = {
                   </div>
               </li>`;
         template += li;
-      } catch (error) {
-        console.log("No se pueden guardar datos vacios")
-      }
-    }
+    });
 
     ul.innerHTML = template;
     effectView();
-    addEvent(arrayObject);
+    addEvent(clients);
+    DomDeleteClient(clients);
     validateTypeClientPerson()
   }
 }
+
+
+function effectView() {
+  $(document).ready(function () {
+    $('select').formSelect();
+
+    $(".collapsible").hover(function (i) {
+      $(".edit-buttom").css("display", "block");
+    }, function () {
+      $(".edit-buttom").css("display", "none");
+    });
+
+    $('.edit-buttom').on("click", function (e) {
+      e.stopPropagation();
+    })
+  });
+}
+
+
+function addEvent(arrayObject) {
+  for (var i = 0; i < arrayObject.length; i++) {
+    $(`#editButtom${i}`).click(function (event) {
+      let num = event.delegateTarget.id;
+      let res = num.substring(10, num.length);
+      sessionStorage.referenceId = (parseInt(res) + 1);
+      addValAndOpenModal();
+    })
+    addValSelectViewInformation(i, arrayObject);
+  }
+  $('#editModal').click(function (event) {
+    editClient();
+  })
+  saveClient();
+}
+
+
+function addValAndOpenModal() {
+  dataService.getAllClients().then(arrayObjectEdit => {
+    let objectFilter = arrayObjectEdit[JSON.parse(sessionStorage.referenceId) - 1]
+    sessionStorage.objectFilter = JSON.stringify(objectFilter);
+    $('#name').val(objectFilter.name);
+    $('#typeClient').find("option[value=" + objectFilter.clientType + "]").prop("selected", true);
+    $("#typeClient").formSelect();
+    $('#sector').find("option[value=" + objectFilter.sector + "]").prop("selected", true);
+    $("#sector").formSelect();
+    $('#size').val(objectFilter.size);
+    $('#nit').val(objectFilter.nit);
+    toggleAndEditTitle();
+    $('#modal1').modal('open');
+  })
+}
+
+
+
+
+
 
 let editClient = function (event) {
   let objectEdit = {
@@ -119,25 +177,14 @@ let editClient = function (event) {
   });
 }
 
-function addEvent(arrayObject) {
-  for (var i = 0; i < arrayObject.length; i++) {
-    $(`#editButtom${i}`).click(function (event) {
-      let num = event.delegateTarget.id;
-      let res = num.substring(10, num.length);
-      sessionStorage.referenceId = (parseInt(res) + 1);
-      addValAndOpenModal();
-    })
-    addValSelectViewInformation(i, arrayObject);
-  }
-  $('#editModal').click(function (event) {
-    editClient();
-  })
-  saveClient();
-}
-
 
 function saveClient() {
   $('#saveModal').click(function (event) {
+   
+    if(validateFields()){
+      M.toast({html: 'El registro no pudo ser ingresado, Faltan datos'});
+    }
+    else{
     let client = new Client(
       0,
       $('#name').val(),
@@ -157,8 +204,14 @@ function saveClient() {
     }, error => {
       console.log(error);
     })
-  })
-};
+  
+  }
+}
+)};
+
+function validateFields(){
+  return $('#name').val()==="" || $('#nit').val()=== "" || $('#size').val()==="" || $("#sector").val()==="" || $("#typeClient").val()==="" ? true:false;
+}
 
 function addValSelectViewInformation(position, arrayObject) {
   for (var index = 0; index < arrayObject.length; index++) {
@@ -169,6 +222,29 @@ function addValSelectViewInformation(position, arrayObject) {
     refresh();
   })
 }
+
+function validateFieldsByMessage() {
+  
+
+    $('select#typeClient').change(function (e) {
+      var select = $( "select#typeClient option:checked" ).val();
+      if (select == 1) {
+         $("input#size").prop('disabled', true);
+         $('#size').attr('placeholder', '1');
+      } 
+     
+   });
+  
+}
+
+
+function toggleAndEditTitle() {
+  $('#saveModal').hide();
+  $('#editModal').show();
+  $('#cardTitle').empty();
+  $('#cardTitle').text('Editar un cliente');
+}
+
 
 function validateTypeClientPerson(){
 
@@ -186,28 +262,6 @@ function validateTypeClientPerson(){
 
 }
 
-function addValAndOpenModal() {
-  dataService.getAllClients().then(arrayObjectEdit => {
-    let objectFilter = arrayObjectEdit[JSON.parse(sessionStorage.referenceId) - 1]
-    sessionStorage.objectFilter = JSON.stringify(objectFilter);
-    $('#name').val(objectFilter.name);
-    $('#typeClient').find("option[value=" + objectFilter.clientType + "]").prop("selected", true);
-    $("#typeClient").formSelect();
-    $('#sector').find("option[value=" + objectFilter.sector + "]").prop("selected", true);
-    $("#sector").formSelect();
-    $('#size').val(objectFilter.size);
-    $('#nit').val(objectFilter.nit);
-    toggleAndEditTitle();
-    $('#modal1').modal('open');
-  })
-}
-
-function toggleAndEditTitle() {
-  $('#saveModal').hide();
-  $('#editModal').show();
-  $('#cardTitle').empty();
-  $('#cardTitle').text('Editar un cliente');
-}
 
 function refresh() {
   $('#cardTitle').text('Registrar un cliente');
@@ -225,19 +279,25 @@ function refresh() {
 }
 
 
-function effectView() {
-  $(document).ready(function () {
-    $('select').formSelect();
-
-    $(".collapsible").hover(function (i) {
-      $(".edit-buttom").css("display", "block");
-    }, function () {
-      $(".edit-buttom").css("display", "none");
-    });
-
-    $('.edit-buttom').on("click", function (e) {
-      e.stopPropagation();
-    })
+function DomDeleteClient(clients){
+  let btns = [];
+  clients.forEach(client => {
+    let btn = document.getElementById(`btn-client-delete-${client.id}`);
+        btn.addEventListener('click',function(event){
+            dataService.delete(client).then(
+                clientDelete => {
+                    M.toast(
+                        {
+                            html: `Se eliminó con exito ${clientDelete.name}!`, 
+                            outDuration: 300
+                        })
+                    Route.routeTo('client');
+                }
+            )
+            .catch( error => alert('is no delete', error))
+        })
+        btns.push(btn);
   });
 }
 
+validateFieldsByMessage();
