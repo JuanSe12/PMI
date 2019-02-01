@@ -1,6 +1,7 @@
 import DataService from "../../services/data_service.js";
 import Config from "../../config/config.js"
-
+import DomSave from "./create_sofkiano.js";
+import Route from "../../services/route.js"
 
 let controller;
 
@@ -18,17 +19,21 @@ export default controller = {
 
 
     renderSofkianos(sofkianos) {
-        let template = "";
-        var ul = document.getElementById("sofkianos-list");
-        sofkianos.map(async (sofkiano) => {
-            let dataProject = await sofkiano.getProjects();
-            let dataTech = await sofkiano.getTechnologies();
-            let dataSkills = await sofkiano.getTechnologies();
-            let tecnologhies = fillTecno(dataTech);
-            let skills = fillSkills(dataSkills);
-            let projects = fillProjects(dataProject);
+        if (sofkianos.length == 0) {
+            M.toast({ html: 'No existe un Sofkiano con ese nombre' });
+        }
+        else {
+            let template = "";
+            var ul = document.getElementById("sofkianos-list");
+            sofkianos.map(async (sofkiano) => {
+                let dataProject = await sofkiano.getProjects();
+                let dataTech = await sofkiano.getTechnologies();
+                let dataSkills = await sofkiano.getTechnologies();
+                let tecnologhies = fillTecno(dataTech);
+                let skills = fillSkills(dataSkills);
+                let projects = fillProjects(dataProject);
 
-            let li = `<li class="collection-item avatar">                        
+                let li = `<li class="collection-item avatar">                        
                             <div class="collapsible-header grow">
                                 <div class="row size-row">
                                     <div class="col s10">
@@ -75,16 +80,23 @@ export default controller = {
                                  ${tecnologhies}
                             <p>Proyectos</p> 
                                 ${projects}
+                            <div class="row">
+                                <div class="col s2 offset-s10">
+                                    <a id="btn-sofkian-delete-${sofkiano.id}"class="waves-effect waves-light btn red" "><i class="material-icons left">delete</i>Eliminar</a>
+                                </div>
+                            </div>
                             </form>                
                             </div>
                         </li>`;
-            template += li;
-        })
-        setTimeout(() => {
-            ul.innerHTML = template;
-        }, 180);
+                template += li;
+            })
+            setTimeout(() => {
+                ul.innerHTML = template;
+                DomSave.saveSofkiano();
+                DomDeleteSofkiano(sofkianos);
+            }, 180);
+        }
     }
-
 }
 
 
@@ -104,14 +116,14 @@ function fillTecno(sofkiano) {
     return tecnoTemplate;
 }
 
-function fillProjects(sofkiano) {
+function fillProjects(projects) {
     let tecnoTemplate = "";
-    for (let sofki of sofkiano) {
+    for (let project of projects) {
         let tecnoChips =
             `<div class="chips big-chips">                  
             <div class="chip big-chip">                  
-                <img src="${sofki.img}" alt="no disponible"> 
-                ${sofki.name}  ${sofki.percent} %
+                <img src="${project.img}" alt="no disponible"> 
+                ${project.name}  ${project.percent} %
             </div>
         </div> `;
         tecnoTemplate += tecnoChips;
@@ -137,4 +149,25 @@ function fillSkills(sofkiano) {
     }
 
     return skillTemplate;
+}
+
+function DomDeleteSofkiano(sofkianos) {
+
+    sofkianos.forEach(sofkiano => {
+        let btn = document.getElementById(`btn-sofkian-delete-${sofkiano.id}`);
+        btn.addEventListener('click', function (event) {
+            DataService.delete(sofkiano).then(
+                sofkianoDelete => {
+                    M.toast(
+                        {
+                            html: `Se eliminó con exito ${sofkianoDelete.firtsName} ${sofkianoDelete.lastName}!`,
+                            outDuration: 300
+                        })
+                    Route.routeTo('sofkiano');
+                }
+            )
+                .catch(error => prompt('is no delete', error))
+        })
+
+    });
 }

@@ -19,19 +19,19 @@ function take_url(url){
         let element = document.getElementById('proyectos_titulo');
         element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
     }
-    else if(url == 'proyectos'){
+    else if(url == 'project'){
         setTimeout(function(){
             let element = document.getElementById('proyectos_titulo');
             element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
         }, 100);
     }
-    else if(url == 'clientes'){
+    else if(url == 'client'){
         setTimeout(function(){
             let element = document.getElementById('clientes_titulo');
             element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
         }, 100);
     }
-    else if(url == 'sofkianos'){
+    else if(url == 'sofkiano'){
         setTimeout(function(){
             let element = document.getElementById('sofkianos_titulo');
             element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
