@@ -212,23 +212,7 @@ function addValSelectViewInformation(position, arrayObject) {
 }
 
 function validateFieldsByMessage() {
-  $("#name").blur(function () {
-    if ($("#name").val() === "") {
-       M.toast({ html: 'Ingrese el nombre' });
-    }
- });
-
-    $("#size").blur(function () {
-       if ($("#size").val() === "") {
-          M.toast({ html: 'Ingrese el tamaño de la empresa' });
-       }
-    });
-
-    $("#nit").blur(function () {
-       if ($("#nit").val() === "") {
-          M.toast({ html: 'Ingrese el nit' });
-       }
-    });
+  
 
     $('select#typeClient').change(function (e) {
       var select = $( "select#typeClient option:checked" ).val();
@@ -236,6 +220,7 @@ function validateFieldsByMessage() {
          $("input#size").prop('disabled', true);
          $('#size').attr('placeholder', '1');
       } 
+     
    });
   
 }
