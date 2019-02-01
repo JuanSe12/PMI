@@ -104,9 +104,17 @@ let editClient = function (event) {
     if (data.switch == 1) {
       M.toast({ html: `${data.message}` });
       Route.routeTo('client');
+      setTimeout(function(){
+        let element = document.getElementById('clientes_titulo');
+        element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
+      }, 100);
     } else {
       M.toast({ html: `${data.message}` });
       Route.routeTo('client');
+      setTimeout(function(){
+        let element = document.getElementById('clientes_titulo');
+        element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
+      }, 100);
     }
   });
 }
@@ -141,6 +149,10 @@ function saveClient() {
     );
     dataService.save(client).then(client => {
       Route.routeTo('client');
+      setTimeout(function(){
+        let element = document.getElementById('clientes_titulo');
+        element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
+      }, 100);
       console.log(client);
     }, error => {
       console.log(error);
