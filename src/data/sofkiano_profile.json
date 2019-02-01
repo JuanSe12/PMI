@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "Full-Stack",
+        "description": ""
+    },
+    {
+        "id": 2,
+        "name": "Back-End",
+        "description": ""
+    },
+    {
+        "id": 3,
+        "name": "Front-End",
+        "description": ""
+    },
+    {
+        "id": 4,
+        "name": "Trainer",
+        "description": ""
+    }
+]

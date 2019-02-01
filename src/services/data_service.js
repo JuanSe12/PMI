@@ -6,6 +6,7 @@ import Project from "../model/project.js";
 import Sofkiano from "../model/sofkiano.js";
 import Technology from "../model/technology.js";
 import Config from "../config/config.js"
+import SofkianoProfile from "../model/sofkiano_profile.js";
 
 
 const CLIENT_TYPE_FILENAME = 'client_type.json';
@@ -13,8 +14,10 @@ const CLIENT_FILENAME = 'client.json';
 const FEATURES_FILENAME = 'feature.json';
 const PROJECT_STATE_FILENAME = 'project_state.json';
 const PROJECT_FILENAME = 'project.json';
+const SOFKIANO_PROFILE_FILENAME = 'sofkiano_profile.json';
 const SOFKIANO_FILENAME = 'sofkiano.json';
 const TECHNOLOGY_FILENAME = 'technology.json';
+
 
 
 let localStorage = window.localStorage
@@ -44,6 +47,11 @@ export default class DataService {
 
     static getAllProjects(){
         return load(PROJECT_FILENAME, Project);
+    }
+
+
+    static getAllSofkianoProfiles(){
+        return load(SOFKIANO_PROFILE_FILENAME, SofkianoProfile);
     }
 
 
@@ -86,6 +94,11 @@ export default class DataService {
     }
 
 
+    static getSofkianoProfileByIds(ids){
+        return loadByIds(SOFKIANO_PROFILE_FILENAME, SofkianoProfile, ids)
+    }
+
+
     static getSofkianoByIds(ids){
         return loadByIds(SOFKIANO_FILENAME, Sofkiano, ids)
     }
@@ -112,6 +125,9 @@ export default class DataService {
         else if(model instanceof Project){
             return saveNewOrEditModel(PROJECT_FILENAME, Project, model)
         }
+        else if(model instanceof SofkianoProfile){
+            return saveNewOrEditModel(SOFKIANO_PROFILE_FILENAME, SofkianoProfile, model)
+        }
         else if(model instanceof Sofkiano){
             return saveNewOrEditModel(SOFKIANO_FILENAME, Sofkiano, model)
         }
@@ -137,6 +153,9 @@ export default class DataService {
         else if(model instanceof Project){
             return deleteModel(PROJECT_FILENAME, Project, model)
         }
+        else if(model instanceof SofkianoProfile){
+            return deleteModel(SOFKIANO_PROFILE_FILENAME, SofkianoProfile, model)
+        }
         else if(model instanceof Sofkiano){
             return deleteModel(SOFKIANO_FILENAME, Sofkiano, model)
         }
@@ -146,9 +165,6 @@ export default class DataService {
     }
  
 }
-
-
-
 
 
 function load(filename, constructor){
@@ -259,7 +275,7 @@ function saveNewOrEditModel(filename,constructor, instance){
 function getLastId(models){
     let id = 0;
     models.forEach(model => {
-        id < model.id ? id = model.id : id = id;
+        id < model.id ? id = model.id : id;
     });
     return id;
 }
@@ -268,7 +284,7 @@ function getLastId(models){
 function getIndex(id,models){
     let i = 0
     models.forEach((model,index) => {
-        model.id === id ? i = index : i = i;
+        model.id === id ? i = index : i;
     });
     return i;
 }

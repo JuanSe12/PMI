@@ -6,16 +6,16 @@ const ID_CONTAINER = 'container';
 const ID_MENU_CONTAINER = 'menu';
 
 export default class Route{
-    static routeTo(path, params=''){
-        getElementAndRender(path,ID_CONTAINER, params);
+    static routeTo(path, params){
+        getElementAndRender(path, params,ID_CONTAINER);
     }
 
     static renderMenu(){
-        getElementAndRender('menu',ID_MENU_CONTAINER);
+        getElementAndRender('menu',"",ID_MENU_CONTAINER);
     }
 }
 
-function getElementAndRender(path, idElement=ID_CONTAINER, params){
+function getElementAndRender(path,params,idElement=ID_CONTAINER){
     let file = `${Config.baseUrl()}/src/pages/${path}/template.html`
     $(`#${idElement}`).load(file);
     
