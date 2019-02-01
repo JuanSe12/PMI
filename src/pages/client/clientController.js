@@ -2,6 +2,7 @@ import dataService from '../../services/data_service.js';
 import crudService from '../../services/crudService.js';
 import Config from "../../config/config.js";
 import Route from "../../services/route.js";
+import Client from '../../model/client.js';
 
 let controller;
 
@@ -44,7 +45,6 @@ export default controller = {
                       </div>
                     </div>
                   </div>
-
                   <div class="collapsible-body ">
                     <div class="row">
                       <div class="col s12">
@@ -85,6 +85,26 @@ export default controller = {
   }
 }
 
+let editClient = function (event) {
+  let objectEdit = {
+    id: JSON.parse(sessionStorage.objectFilter).id,
+    name: $('#name').val(),
+    nit: $('#nit').val(),
+    size: $('#size').val(),
+    sector: $("#sector").val(),
+    typeClient: $("#typeClient").val(),
+    img: JSON.parse(sessionStorage.objectFilter).img
+  }
+  crudService(objectEdit, 1).then(data => {
+    if (data.switch == 1) {
+      M.toast({ html: `${data.message}` });
+      Route.routeTo('client');
+    } else {
+      M.toast({ html: `${data.message}` });
+      Route.routeTo('client');
+    }
+  });
+}
 
 function addEvent(arrayObject) {
   for (var i = 0; i < arrayObject.length; i++) {
@@ -97,24 +117,48 @@ function addEvent(arrayObject) {
     addValSelectViewInformation(i, arrayObject);
   }
   $('#editModal').click(function (event) {
-    let objectEdit = {
-      id: JSON.parse(sessionStorage.objectFilter).id,
-      name: $('#name').val(),
-      nit: $('#nit').val(),
-      size: $('#size').val(),
-      sector: $("#sector").val(),
-      typeClient: $("#typeClient").val(),
-      img: JSON.parse(sessionStorage.objectFilter).img
-    }
-    crudService(objectEdit, 1).then(data => {
-      if (data.switch == 1) {
-        M.toast({ html: `${data.message}` });
-      } else {
-        M.toast({ html: `${data.message}` });
-      }
-    });
-    Route.routeTo('client', '');
+    editClient(); 
   })
+  
+    validateTypeClient();
+    saveClient();
+}
+
+function validateTypeClient(){
+  $('#typeClientDiv').click(function (event) {
+    alert('asd');
+  });
+}
+
+function saveClient(array){
+  $('#saveModal').click(function (event) {
+    if(validateFields()){
+      alert("Llenar campos Vacios");
+      refresh();
+    }
+    else{
+    let client = new Client(
+      0,
+      $('#name').val(),
+      parseInt($('#nit').val()),
+      parseInt($('#size').val()),
+      $("#sector").val(),
+      parseInt($("#typeClient").val()),
+      "/src/assets/images/clients/default-client.jpg"
+    );
+    dataService.save(client).then( client =>{
+       Route.routeTo('client');
+       console.log(client);
+    },error => {
+      console.log(error);
+    })
+  
+  }
+}
+)};
+
+function validateFields(){
+  return $('#name').val()==="" || $('#nit').val()=== "" || $('#size').val()==="" || $("#sector").val()==="" || $("#typeClient").val()==="" ? true:false;
 }
 
 function addValSelectViewInformation(position, arrayObject) {

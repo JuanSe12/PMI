@@ -123,6 +123,9 @@ export default class DataService {
 }
 
 
+
+
+
 function load(filename, constructor){
     let variables =[];
     return new Promise((resolve, reject) =>{
@@ -151,7 +154,7 @@ function loadJsonFromFileOrLocalStorage(filename){
         else{
             
             $.getJSON(`${Config.baseUrl()}/src/data/${filename}`, function(json) {
-                DataService.saveLocalStorage(filename,json);
+                saveLocalStorage(filename,json);
                 resolve(json)
             })
             .fail(function(){
