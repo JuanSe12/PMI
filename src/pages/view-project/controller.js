@@ -133,6 +133,7 @@ export default async function fillProject(project) {
         sofkianosContent.innerHTML = contentNew + newElement;
         document.getElementById('modalSofkiano').removeAttribute("style");
         document.getElementsByClassName('modal-overlay')[0].removeAttribute("style");
+        $('.icons-delete-sofki').css("display","block");
 
     });
 
@@ -188,6 +189,7 @@ export default async function fillProject(project) {
 
         TechnologiesContent.innerHTML = contentNew + newElement;
         document.getElementById('modal1').removeAttribute("style");
+        $('.icons-delete').css("display","block");
         document.getElementsByClassName('modal-overlay')[0].removeAttribute("style");
 
     });
