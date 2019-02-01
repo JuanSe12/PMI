@@ -26,7 +26,7 @@ export default async function fillProject() {
             project.getClient().then(
                 client => {
                     //console.log(client[0].name);
-                    let clientStr = `<img src="${Config.baseUrl() + client[0].img}" alt="" class="resize circle" id="project-business-image">
+                    let clientStr = `<img src="${Config.baseUrl() + client[0].img}" alt="" class="resize circle" id="project-business-image${client[0].id}">
                     ${client[0].name} <a style="display:none;" href="#" class="view-edit" onclick="" id="delete-icon-business"><i class="material-icons md-36">close</i></a>`
 
 
@@ -59,7 +59,7 @@ export default async function fillProject() {
 
                         let sessionClient = JSON.parse(sessionStorage.clients)[arrayClientInput[0] - 1];
 
-                        let newClient = `<img src="${Config.baseUrl() + sessionClient.img}" alt="" class="resize circle" id="project-business-image">
+                        let newClient = `<img src="${Config.baseUrl() + sessionClient.img}" alt="" class="resize circle" id="project-business-image${sessionClient.id}">
                         
                         ${sessionClient.name} <a style="display:none;" href="#" class="view-edit" onclick="" id="delete-icon-business"><i class="material-icons md-36">close</i></a>`
 
