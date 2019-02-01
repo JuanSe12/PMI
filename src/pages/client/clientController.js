@@ -132,9 +132,9 @@ function validateTypeClient(){
 
 function saveClient(array){
   $('#saveModal').click(function (event) {
+   
     if(validateFields()){
-      alert("Llenar campos Vacios");
-      refresh();
+      M.toast({html: 'El registro no pudo ser ingresado, Faltan datos'});
     }
     else{
     let client = new Client(
@@ -169,6 +169,26 @@ function addValSelectViewInformation(position, arrayObject) {
   $('#modal-open').click(function (event) {
     refresh();
   })
+}
+function validateFieldsByMessage() {
+  $("#name").blur(function () {
+    if ($("#name").val() === "") {
+       M.toast({ html: 'Ingrese el nombre' });
+    }
+ });
+
+    $("#size").blur(function () {
+       if ($("#size").val() === "") {
+          M.toast({ html: 'Ingrese el tamaño de la empresa' });
+       }
+    });
+
+    $("#nit").blur(function () {
+       if ($("#nit").val() === "") {
+          M.toast({ html: 'Ingrese el nit' });
+       }
+    });
+  
 }
 
 function addValAndOpenModal() {
@@ -226,3 +246,4 @@ function effectView() {
   });
 }
 
+validateFieldsByMessage();
