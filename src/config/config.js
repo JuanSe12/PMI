@@ -1,5 +1,5 @@
 const baseUrl = 'http://localhost'
-const port = ':8080'
+const port = ''
 export default class Config{
     static baseUrl(){
         return `${baseUrl}${port}`
