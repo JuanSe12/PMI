@@ -1,20 +1,23 @@
 import dataService from '../../services/data_service.js';
 import crudService from '../../services/crudService.js';
 import Config from "../../config/config.js";
-
+import Route from "../../services/route.js";
+import Client from '../../model/client.js';
 
 let controller;
-
 
 export default controller = {
   async fillClient() {
     let arrayObject = [];
+    let arrayObjectTypeClient = [];
     try {
       arrayObject = await dataService.getAllClients();
+      arrayObjectTypeClient = await dataService.getAllClientTypes();
     } catch (error) {
       console.log(error)
     }
-    this.renderClients(arrayObject)
+    sessionStorage.arrayObjectTypeClient = JSON.stringify(arrayObjectTypeClient);
+    this.renderClients(arrayObject);
   },
 
 
@@ -22,8 +25,9 @@ export default controller = {
     var ul = document.getElementById("client-list");
     let template = "";
     for (let indexClient = 0; indexClient < arrayObject.length; indexClient++) {
-      let li =
-        `<li class="collection-item avatar">
+      try {
+        let li =
+          `<li class="collection-item avatar">
                   <div class="collapsible-header modify-header grow">
                     <div class="row size-row">
                       <div class="col s10">
@@ -42,46 +46,70 @@ export default controller = {
                       </div>
                     </div>
                   </div>
-
                   <div class="collapsible-body ">
                     <div class="row">
                       <div class="col s12">
                         <div class="row form-input">
                           <div class="input-field col s6">
-                            <input disabled value="${arrayObject[indexClient].nit}" id="nit${indexClient}" type="text" class="validate">
+                            <input disabled value="${arrayObject[indexClient].nit}" 
+                              id="nit${indexClient}" type="number" class="validate" required>
                             <label class="active title-input">Nit</label>
                           </div>
                           <div class="input-field col s6">
-                            <input disabled value="${arrayObject[indexClient].clientType}" id="type${indexClient}"  type="text" class="validate">
-                            <label class="active title-input">Type</label>
+                            <input value="${JSON.parse(sessionStorage.arrayObjectTypeClient)[arrayObject[indexClient].clientType - 1].name}" 
+                              id="type${indexClient}"  type="text" class="validate" disabled required>
+                            <label class="active title-input">Tipo de cliente</label>
                           </div>
                         </div>
                         <div class="row form-input">
                           <div class="input-field col s6">
-                            <input disabled value="${arrayObject[indexClient].size}" id="size${indexClient}" type="text" class="validate">
+                            <input disabled value="${arrayObject[indexClient].size}" 
+                              id="size${indexClient}" type="number" class="validate" required>
                             <label class="active title-input">Tamaño de la empresa</label>
                           </div>
-                          <div class="selectViewInformation input-field col s6">
-                            <select disabled id="sector${indexClient}">
-                              <option value="publico">Público</option>
-                              <option value="privado">Privado</option>
-                            </select>
-                            <label>Sector</label>
+                          <div class="input-field col s6">
+                            <input disabled value="${arrayObject[indexClient].sector}" 
+                              id="sectorView${indexClient}" type="text" class="validate" required>
+                            <label class="active title-input">Sector</label>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
               </li>`;
-      template += li;
+        template += li;
+      } catch (error) {
+        console.log("No se pueden guardar datos vacios")
+      }
     }
 
     ul.innerHTML = template;
     effectView();
     addEvent(arrayObject);
+    validateTypeClientPerson()
   }
 }
 
+let editClient = function (event) {
+  let objectEdit = {
+    id: JSON.parse(sessionStorage.objectFilter).id,
+    name: $('#name').val(),
+    nit: $('#nit').val(),
+    size: $('#size').val(),
+    sector: $("#sector").val(),
+    typeClient: $("#typeClient").val(),
+    img: JSON.parse(sessionStorage.objectFilter).img
+  }
+  crudService(objectEdit, 1).then(data => {
+    if (data.switch == 1) {
+      M.toast({ html: `${data.message}` });
+      Route.routeTo('client');
+    } else {
+      M.toast({ html: `${data.message}` });
+      Route.routeTo('client');
+    }
+  });
+}
 
 function addEvent(arrayObject) {
   for (var i = 0; i < arrayObject.length; i++) {
@@ -93,10 +121,34 @@ function addEvent(arrayObject) {
     })
     addValSelectViewInformation(i, arrayObject);
   }
+  $('#editModal').click(function (event) {
+    editClient();
+  })
+  saveClient();
 }
 
-function addValSelectViewInformation(position, arrayObject) {
 
+function saveClient() {
+  $('#saveModal').click(function (event) {
+    let client = new Client(
+      0,
+      $('#name').val(),
+      parseInt($('#nit').val()),
+      parseInt($('#size').val()),
+      $("#sector").val(),
+      parseInt($("#typeClient").val()),
+      "/src/assets/images/clients/default-client.jpg"
+    );
+    dataService.save(client).then(client => {
+      Route.routeTo('client');
+      console.log(client);
+    }, error => {
+      console.log(error);
+    })
+  })
+};
+
+function addValSelectViewInformation(position, arrayObject) {
   for (var index = 0; index < arrayObject.length; index++) {
     $(`#sector${position}`).find("option[value=" + arrayObject[index].sector + "]").prop("selected", true);
     $(`#sector${position}`).formSelect();
@@ -106,9 +158,26 @@ function addValSelectViewInformation(position, arrayObject) {
   })
 }
 
+function validateTypeClientPerson(){
+
+    $('select#typeClient').change(function (e) {
+       var select = $( "select#typeClient option:checked" ).val();
+       if (select == 1) {
+          $("input#size").prop('disabled', true);
+          $('#size').attr('placeholder', '1');
+       } else {
+        $("input#size").prop('disabled', false);
+        $('#size').attr('placeholder', 'Tamaño de la empresa');
+       }
+    });
+
+
+}
+
 function addValAndOpenModal() {
   dataService.getAllClients().then(arrayObjectEdit => {
     let objectFilter = arrayObjectEdit[JSON.parse(sessionStorage.referenceId) - 1]
+    sessionStorage.objectFilter = JSON.stringify(objectFilter);
     $('#name').val(objectFilter.name);
     $('#typeClient').find("option[value=" + objectFilter.clientType + "]").prop("selected", true);
     $("#typeClient").formSelect();
