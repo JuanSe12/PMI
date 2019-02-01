@@ -134,8 +134,14 @@ div.card-content{
     border-style: solid;
 
 }
-.card-title{
+.card-title {
     font-family: 'Raleway', sans-serif ;
     color: #3e3e3e;
     font-weight: 700 !important;
+}
+.card-second-title{
+    font-family: 'Raleway', sans-serif ;
+    font-weight: 700 !important;
+    color: #3e3e3e;
+    font-size: 110%;
 }
