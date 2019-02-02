@@ -25,7 +25,6 @@ function validateFieldsByMessage() {
 }
 
 function validateFields() {
-    debugger;
     return $('#name').val() === "" || $('#nit').val() === "" || $('#size').val() === "" || $("#sector").val() === "" || $("#typeClient").val() === "" ? true : false;
 }
 
