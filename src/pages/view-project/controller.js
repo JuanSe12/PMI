@@ -1,9 +1,24 @@
 import DataService from "../../services/data_service.js";
 import Config from "../../config/config.js"
 import { save } from "./saveData.js";
+import Project from "../../model/project.js";
+
+
+let technologiesAvailable = []
+let projectEdit = new Project();
+
+function deleteTechnology(id, array){
+    array.forEach((item,index) => {
+        if(item === id){
+            array.splice(index,1);
+        }
+    });
+    return array;
+}
 
 export default async function fillProject(project) {
 
+    projectEdit = project;
     var TechnologiesContent = "";
     let sofkianosContent = "";
     let titleProject = "";
@@ -18,7 +33,16 @@ export default async function fillProject(project) {
      //saveButton();
     //save();
 
-
+    DataService.getAllTechnologies().then(
+        technologies => {
+            technologies.forEach(technology =>{
+                technologiesAvailable.push(technology.id);
+            })
+            projectEdit.technologies.forEach(idTechnology => {
+                technologiesAvailable = deleteTechnology(idTechnology,technologiesAvailable)
+            });
+        }
+    )
 
     ///////Client
 
@@ -139,58 +163,39 @@ export default async function fillProject(project) {
 
     //////////////// Technologies
 
-
-
     var tech = await project.getTechnologies();
     technologies = fillTecno(tech);
     TechnologiesContent = document.getElementById("container-tech")
     TechnologiesContent.innerHTML = technologies;
     document.getElementById('add_tech').addEventListener('click', function () {
-        let sessionTech = JSON.parse(sessionStorage.tec);
-        let modalTech = [];
-
-        for (let i = 0; i < sessionTech.length; i++) {
-            let exist = false;
-            for (let j = 0; j < tech.length; j++) {
-                if (sessionTech[i].id != tech[j].id) {
-                    exist = true;
-                } else {
-                    exist = false;
-                    break;
-                }
+        DataService.getTechnologiesByIds(technologiesAvailable).then(
+            technologies => {
+                renderTech(technologies);
             }
-            if (exist != false) {
-                modalTech.push(sessionTech[i]);
-            }
-        }
-        renderTech(modalTech);
+        )
+        
     });
 
     document.getElementById('add_technologies').addEventListener('click', function () {
         let technologiesArray = document.getElementById("div_techs");
         let checkTechnology = technologiesArray.getElementsByTagName('input');
         let arrayTechnologiesInput = [];
+
         for (var i = 0; i < checkTechnology.length; i++) {
             if (checkTechnology[i].checked) {
-                arrayTechnologiesInput.push(parseInt(checkTechnology[i].value));
+                technologiesAvailable = deleteTechnology(parseInt(checkTechnology[i].value), technologiesAvailable)
+                projectEdit.technologies.push(parseInt(checkTechnology[i].value))
             }
         }
-        console.log(arrayTechnologiesInput);
-        let sessionTech = JSON.parse(sessionStorage.tec);
-        let projectTech = [];
 
-        for (let index = 0; index < arrayTechnologiesInput.length; index++) {
-
-            projectTech.push(sessionTech[arrayTechnologiesInput[index] - 1]);
-
-        }
-        let newElement = fillTecno(projectTech);
-        let contentNew = $("#container-tech").html();
-
-        TechnologiesContent.innerHTML = contentNew + newElement;
-        document.getElementById('modal1').removeAttribute("style");
-        $('.icons-delete').css("display","block");
-        document.getElementsByClassName('modal-overlay')[0].removeAttribute("style");
+        DataService.getTechnologiesByIds(projectEdit.technologies).then(
+            technologies => {
+                TechnologiesContent.innerHTML = fillTecno(technologies);
+            }
+        )
+        setTimeout(function(){
+            $('.icons-delete').css("display","block");
+        },300)
 
     });
 
@@ -293,10 +298,11 @@ function renderClient(data) {
 
 function deleteIcon(index, projects) {
     $(document).ready(function () {
-        $(`#icons-delete-view${index + 1}`).click(function (event) {
-            $(`#chip-tech${index + 1}`).remove();
-            projects.splice(index, 1);
-            console.log(projects);
+        $(`#icons-delete-view${index}`).click(function (event) {
+            $(`#chip-tech${index}`).remove();
+            projectEdit.technologies = deleteTechnology(index, projectEdit.technologies)
+            technologiesAvailable.push(index);
+            console.log(projectEdit);
         })
     })
 
@@ -313,19 +319,20 @@ function deleteIconSofki(index, projects) {
 
 }
 
-function fillTecno(projects) {
+function fillTecno(technologies) {
     let tecnoTemplate = "";
-    for (let index = 0; index < projects.length; index++) {
-        let tecno = `<div class="chips-div" id="chip-tech${projects[index].id}">
-        <div class="content-elements">
-        <a href=# id="icons-delete-view${projects[index].id}"><i class="close material-icons icons-delete" >close</i></a>
-        <img src="${Config.baseUrl() + projects[index].icon}" alt="">
-        </div>
-        <p>${projects[index].name}</p>
-    </div>`;
+    for (let index = 0; index < technologies.length; index++) {
+        let tecno = 
+        `<div class="chips-div" id="chip-tech${technologies[index].id}">
+            <div class="content-elements">
+            <a href=# id="icons-delete-view${technologies[index].id}"><i class="close material-icons icons-delete" >close</i></a>
+            <img src="${Config.baseUrl() + technologies[index].icon}" alt="">
+            </div>
+            <p>${technologies[index].name}</p>
+        </div>`;
         tecnoTemplate += tecno;
         //debugger;
-        deleteIcon(index, projects);
+        deleteIcon(technologies[index].id, technologies);
 
     }
     return tecnoTemplate;
