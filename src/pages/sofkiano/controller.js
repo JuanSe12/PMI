@@ -18,7 +18,6 @@ export default controller = {
     },
 
     getSofkianoData(){
-        DataService.
     },
 
 
@@ -55,7 +54,7 @@ export default controller = {
                                     </div>    
                                 </div>
                         </div>
-                            <div class="collapsible-body ">               
+                        <div class="collapsible-body ">               
                             <form class="col s12">
                             <div class="row">
                                 <div class="input-field col s6">
@@ -90,7 +89,7 @@ export default controller = {
                                 </div>
                             </div>
                             </form>                
-                            </div>
+                        </div>
                         </li>`;
                 template += li;
             })
@@ -178,3 +177,4 @@ function DomDeleteSofkiano(sofkianos) {
 
     });
 }
+

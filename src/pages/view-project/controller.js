@@ -3,208 +3,217 @@ import DataService from "../../services/data_service.js";
 import Config from "../../config/config.js"
 import { save } from "./saveData.js";
 
-export default async function fillProject() {
-    DataService.getProjectByIds([1]).then(
-        projects => {
-            var TechnologiesContent = document.getElementById("container-tech");
-            let sofkianosContent = document.getElementById("project-sofkianos-list");
-            let titleProject = document.getElementById('title-project');
-            let template = "";
-            let project = projects[0];
-            let startDate = project.getDateInit();
-            let finishDate = project.getDateFinish();
-            let technologies = "";
-            let sofkiano = "";
-            //console.log(project)
-            let nameBusiness = "";
-            editButton(project);
-            //saveButton();
-            save();
+export default async function fillProject(project) {
+
+    var TechnologiesContent = "";
+    let sofkianosContent = "";
+    let titleProject = "";
+    let template = "";
+    let startDate = "";
+    let finishDate = "";
+    let technologies = "";
+    let sofkiano = "";
+    let prueba = "";
+    //console.log(project)
+    let nameBusiness = "";
+     //saveButton();
+    //save();
 
 
-            let prueba = document.getElementById('project-business-image');
 
-            project.getClient().then(
-                client => {
-                    //console.log(client[0].name);
-                    let clientStr = `<img src="${Config.baseUrl() + client[0].img}" alt="" class="resize circle" id="project-business-image${client[0].id}">
+    ///////Client
+
+    var client = await project.getClient();
+
+
+    //console.log(client[0].name);
+    let clientStr = `<img src="${Config.baseUrl() + client[0].img}" alt="" class="resize circle" id="project-business-image${client[0].id}">
                     ${client[0].name} <a style="display:none;" href="#" class="view-edit" onclick="" id="delete-icon-business"><i class="material-icons md-36">close</i></a>`
 
 
-                    document.getElementById('business-name').innerHTML = clientStr;
-                    deleteBusiness(client);
+    document.getElementById('business-name').innerHTML = clientStr;
+    deleteBusiness(client);
 
 
-                    document.getElementById('add_modal_client').addEventListener('click', function () {
+    document.getElementById('add_modal_client').addEventListener('click', function () {
 
-                        if (document.getElementById("business-name") != null) {
+        if (document.getElementById("business-name") != null) {
 
-                            alert("No se puede tener más de un cliente");
+            alert("No se puede tener más de un cliente");
 
-                        } else {
-                            let sessionClient = JSON.parse(sessionStorage.clients);
-                            renderClient(sessionClient);
-                        }
+        } else {
+            let sessionClient = JSON.parse(sessionStorage.clients);
+            renderClient(sessionClient);
+        }
 
-                    });
+    });
 
-                    document.getElementById('add_client').addEventListener('click', function () {
-                        let sofkiArray = document.getElementById("div_clientModal");
-                        let checkClient = sofkiArray.getElementsByTagName('input');
-                        let arrayClientInput = [];
-                        for (var i = 0; i < checkClient.length; i++) {
-                            if (checkClient[i].checked) {
-                                arrayClientInput.push(parseInt(checkClient[i].value));
-                            }
-                        }
+    document.getElementById('add_client').addEventListener('click', function () {
+        let sofkiArray = document.getElementById("div_clientModal");
+        let checkClient = sofkiArray.getElementsByTagName('input');
+        let arrayClientInput = [];
+        for (var i = 0; i < checkClient.length; i++) {
+            if (checkClient[i].checked) {
+                arrayClientInput.push(parseInt(checkClient[i].value));
+            }
+        }
 
-                        let sessionClient = JSON.parse(sessionStorage.clients)[arrayClientInput[0] - 1];
+        let sessionClient = JSON.parse(sessionStorage.clients)[arrayClientInput[0] - 1];
 
-                        let newClient = `<img src="${Config.baseUrl() + sessionClient.img}" alt="" class="resize circle" id="project-business-image${sessionClient.id}">
+        let newClient = `<img src="${Config.baseUrl() + sessionClient.img}" alt="" class="resize circle" id="project-business-image${sessionClient.id}">
                         
                         ${sessionClient.name} <a style="display:none;" href="#" class="view-edit" onclick="" id="delete-icon-business"><i class="material-icons md-36">close</i></a>`
 
-                        let li = document.createElement("li");
-                        document.getElementById('content-Business').appendChild(li);
-                        $(li).addClass("collection-item avatar");
-                        $(li).attr("id", "business-name");
+        let li = document.createElement("li");
+        document.getElementById('content-Business').appendChild(li);
+        $(li).addClass("collection-item avatar");
+        $(li).attr("id", "business-name");
 
-                        document.getElementById('business-name').innerHTML = newClient;
+        document.getElementById('business-name').innerHTML = newClient;
 
-                    });
+        document.getElementById('modalClient').removeAttribute("style");
+        document.getElementsByClassName('modal-overlay')[0].removeAttribute("style");
 
+    });
 
+    //////////////Sofkianos
 
+    var sofkianos = await project.getSofkianos();
+
+    //console.log(sofkianos);
+    sofkiano = fillSofkianos(sofkianos);
+    //console.log(sofkiano);
+    sofkianosContent = document.getElementById("project-sofkianos-list");
+    sofkianosContent.innerHTML = sofkiano;
+    document.getElementById('add_modal_sofkiano').addEventListener('click', function () {
+
+        let sessionSofki = JSON.parse(sessionStorage.sofki);
+        let modalSofki = [];
+
+        for (let i = 0; i < sessionSofki.length; i++) {
+            let exist = false;
+            for (let j = 0; j < sofkianos.length; j++) {
+                if (sessionSofki[i].id != sofkianos[j].id) {
+                    exist = true;
+                } else {
+                    exist = false;
+                    break;
                 }
-            )
+            }
+            if (exist != false) {
+                modalSofki.push(sessionSofki[i]);
+            }
+        }
+        renderSofkianos(modalSofki);
+    });
 
-            project.getSofkianos().then(
-                sofkianos => {
-                    //console.log(sofkianos);
-                    sofkiano = fillSofkianos(sofkianos);
-                    //console.log(sofkiano);
-                    sofkianosContent.innerHTML = sofkiano;
-                    document.getElementById('add_modal_sofkiano').addEventListener('click', function () {
+    document.getElementById('add_sofki').addEventListener('click', function () {
+        let sofkiArray = document.getElementById("div_SofkiModal");
+        let checkTechnology = sofkiArray.getElementsByTagName('input');
+        let arraySofkiInput = [];
+        for (var i = 0; i < checkTechnology.length; i++) {
+            if (checkTechnology[i].checked) {
+                arraySofkiInput.push(parseInt(checkTechnology[i].value));
+            }
+        }
+        //debugger;
+        console.log(arraySofkiInput);
+        let sessionSofki = JSON.parse(sessionStorage.sofki);
+        let projectSofki = [];
 
-                        let sessionSofki = JSON.parse(sessionStorage.sofki);
-                        let modalSofki = [];
+        for (let index = 0; index < arraySofkiInput.length; index++) {
 
-                        for (let i = 0; i < sessionSofki.length; i++) {
-                            let exist = false;
-                            for (let j = 0; j < sofkianos.length; j++) {
-                                if (sessionSofki[i].id != sofkianos[j].id) {
-                                    exist = true;
-                                } else {
-                                    exist = false;
-                                    break;
-                                }
-                            }
-                            if (exist != false) {
-                                modalSofki.push(sessionSofki[i]);
-                            }
-                        }
-                        renderSofkianos(modalSofki);
+            projectSofki.push(sessionSofki[arraySofkiInput[index] - 1]);
 
-                    });
+        }
+        let newElement = fillSofkianos(projectSofki);
+        let contentNew = $("#project-sofkianos-list").html();
+        sofkianosContent.innerHTML = contentNew + newElement;
+        document.getElementById('modalSofkiano').removeAttribute("style");
+        document.getElementsByClassName('modal-overlay')[0].removeAttribute("style");
 
-                    document.getElementById('add_sofki').addEventListener('click', function () {
-                        let sofkiArray = document.getElementById("div_SofkiModal");
-                        let checkTechnology = sofkiArray.getElementsByTagName('input');
-                        let arraySofkiInput = [];
-                        for (var i = 0; i < checkTechnology.length; i++) {
-                            if (checkTechnology[i].checked) {
-                                arraySofkiInput.push(parseInt(checkTechnology[i].value));
-                            }
-                        }
-                        //debugger;
-                        console.log(arraySofkiInput);
-                        let sessionSofki = JSON.parse(sessionStorage.sofki);
-                        let projectSofki = [];
+    });
 
-                        for (let index = 0; index < arraySofkiInput.length; index++) {
-
-                            projectSofki.push(sessionSofki[arraySofkiInput[index] - 1]);
-
-                        }
-                        let newElement = fillSofkianos(projectSofki);
-                        let contentNew = $("#project-sofkianos-list").html();
-                        sofkianosContent.innerHTML = contentNew + newElement;
-
-                    });
-                })
+    //////////////// Technologies
 
 
 
-            titleProject.innerText = project.name;
-            document.getElementById('input-project-objetive').value = project.description;
-            document.getElementById('input-project-start-date').value = startDate;
-            document.getElementById('input-project-finish-date').value = finishDate;
+    var tech = await project.getTechnologies();
+    technologies = fillTecno(tech);
+    TechnologiesContent = document.getElementById("container-tech")
+    TechnologiesContent.innerHTML = technologies;
+    document.getElementById('add_tech').addEventListener('click', function () {
+        let sessionTech = JSON.parse(sessionStorage.tec);
+        let modalTech = [];
+
+        for (let i = 0; i < sessionTech.length; i++) {
+            let exist = false;
+            for (let j = 0; j < tech.length; j++) {
+                if (sessionTech[i].id != tech[j].id) {
+                    exist = true;
+                } else {
+                    exist = false;
+                    break;
+                }
+            }
+            if (exist != false) {
+                modalTech.push(sessionTech[i]);
+            }
+        }
+        renderTech(modalTech);
+    });
+
+    document.getElementById('add_technologies').addEventListener('click', function () {
+        let technologiesArray = document.getElementById("div_techs");
+        let checkTechnology = technologiesArray.getElementsByTagName('input');
+        let arrayTechnologiesInput = [];
+        for (var i = 0; i < checkTechnology.length; i++) {
+            if (checkTechnology[i].checked) {
+                arrayTechnologiesInput.push(parseInt(checkTechnology[i].value));
+            }
+        }
+        console.log(arrayTechnologiesInput);
+        let sessionTech = JSON.parse(sessionStorage.tec);
+        let projectTech = [];
+
+        for (let index = 0; index < arrayTechnologiesInput.length; index++) {
+
+            projectTech.push(sessionTech[arrayTechnologiesInput[index] - 1]);
+
+        }
+        let newElement = fillTecno(projectTech);
+        let contentNew = $("#container-tech").html();
+
+        TechnologiesContent.innerHTML = contentNew + newElement;
+        document.getElementById('modal1').removeAttribute("style");
+        document.getElementsByClassName('modal-overlay')[0].removeAttribute("style");
+
+    });
 
 
 
-            project.getTechnologies().then(tech => {
-                technologies = fillTecno(tech);
-                TechnologiesContent.innerHTML = technologies;
-                document.getElementById('add_tech').addEventListener('click', function () {
-                    let sessionTech = JSON.parse(sessionStorage.tec);
-                    let modalTech = [];
-
-                    for (let i = 0; i < sessionTech.length; i++) {
-                        let exist = false;
-                        for (let j = 0; j < tech.length; j++) {
-                            if (sessionTech[i].id != tech[j].id) {
-                                exist = true;
-                            } else {
-                                exist = false;
-                                break;
-                            }
-                        }
-                        if (exist != false) {
-                            modalTech.push(sessionTech[i]);
-                        }
-                    }
-                    renderTech(modalTech);
-                });
-
-                document.getElementById('add_technologies').addEventListener('click', function () {
-                    let technologiesArray = document.getElementById("div_techs");
-                    let checkTechnology = technologiesArray.getElementsByTagName('input');
-                    let arrayTechnologiesInput = [];
-                    for (var i = 0; i < checkTechnology.length; i++) {
-                        if (checkTechnology[i].checked) {
-                            arrayTechnologiesInput.push(parseInt(checkTechnology[i].value));
-                        }
-                    }
-                    console.log(arrayTechnologiesInput);
-                    let sessionTech = JSON.parse(sessionStorage.tec);
-                    let projectTech = [];
-
-                    for (let index = 0; index < arrayTechnologiesInput.length; index++) {
-
-                        projectTech.push(sessionTech[arrayTechnologiesInput[index] - 1]);
-
-                    }
-                    let newElement = fillTecno(projectTech);
-                    let contentNew = $("#container-tech").html();
-                    
-                    TechnologiesContent.innerHTML = contentNew + newElement;
-
-                });
-            })
 
 
+        
 
-        })
 
-
-    
     var sessionClient = await DataService.getAllClients();
     var sessionTech = await DataService.getAllTechnologies();
     var sessionSofki = await DataService.getAllSofkianos();
-
+    editButton(project);
+    save();
     sessionStorage.tec = JSON.stringify(sessionTech);
     sessionStorage.clients = JSON.stringify(sessionClient);
     sessionStorage.sofki = JSON.stringify(sessionSofki);
+
+    prueba = document.getElementById('project-business-image');
+    startDate = project.getDateInit();
+    finishDate = project.getDateFinish();
+    titleProject = document.getElementById('title-project');
+    titleProject.innerHTML = project.name;
+    document.getElementById('input-project-objetive').value = project.description;
+    document.getElementById('input-project-start-date').value = startDate;
+    document.getElementById('input-project-finish-date').value = finishDate;
     // console.log(sessionTech);
     //var selectTech = document.getElementById('dropTech');
 

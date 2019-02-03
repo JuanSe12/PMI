@@ -37,11 +37,11 @@
                   <form class="col s12">
                      <div class="row">
                         <div class="input-field col s6">
-                           <input id="firstname" type="text" class="validate">
+                           <input id="firstname" type="text" class="validate" required>
                            <label for="firstname" class="active">Nombres</label>
                         </div>
                         <div class="input-field col s6">
-                           <input id="last_name" type="text" class="validate">
+                           <input id="last_name" type="text" class="validate" required>
                            <label for="last_name" class="active">Apellidos</label>
                         </div>      
                      </div>
@@ -56,18 +56,18 @@
                            <label>Tipo de documento</label>
                          </div>
                         <div class="input-field col s6">
-                             <input id="number_document" type="number" class="validate">
+                             <input id="number_document" type="number" class="validate" required>
                              <label for="number_document" class="active">Número de documento</label>
                         </div>      
                      </div>
 
                      <div class="row">
                         <div class="input-field col s6">
-                           <input id="experience_time_sofka" type="text" class="validate">
+                           <input id="experience_time_sofka" type="number" class="validate" required>
                            <label for="experience_time_sofka" class="active">Tiempo de experiencia en Sofka</label>
                         </div>
                         <div class="input-field col s6">
-                           <input id="external_experience_time" type="text" class="validate">
+                           <input id="external_experience_time" type="number" class="validate" required>
                            <label for="external_experience_time" class="active">Tiempo de experiencia externa</label>
                         </div>      
                      </div>
@@ -110,15 +110,5 @@
       <a href="#!" class="modal-close btn grey btn-primary">Cancelar</a>
    </div>
 </div>
-<script>
-   document.addEventListener('DOMContentLoaded', function () {
-        var elems = document.querySelectorAll('.fixed-action-btn');
-        var instances = M.FloatingActionButton.init(elems, options);
-   });
-   M.AutoInit();
-   $(document).ready(function () {
-      $('.collapsible').collapsible();
-
-     
-   });
-</script>
+<script src="./src/assets/js/common/common.js"></script>
+<script src="./src/pages/sofkiano/validations.js"></script>

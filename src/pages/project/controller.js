@@ -25,6 +25,7 @@ export default controller = {
             M.toast({ html: MESSAGE });
         }
         else {
+            console.log(projects)
             var ul = document.getElementById("business-list");
             let template = " ";
             let idList = 0;
@@ -65,7 +66,13 @@ export default controller = {
                                 </div>
                             </div>
                         </div>
-                    </li>`;
+                    </div>
+                    
+                </div>
+                <div class="collapsible-body ">               
+                                      
+                </div>
+            </li>`;
                 template += li;
 
             })

@@ -7,6 +7,7 @@ const ID_MENU_CONTAINER = 'menu';
 
 export default class Route{
     static routeTo(path, params){
+        
         getElementAndRender(path, params,ID_CONTAINER);
     }
 
@@ -16,11 +17,13 @@ export default class Route{
 }
 
 function getElementAndRender(path,params,idElement=ID_CONTAINER){
+    
     let file = `${Config.baseUrl()}/src/pages/${path}/template.html`
     $(`#${idElement}`).load(file);
     
     try {
         if(path==='view-project'){
+            
             init[`init${path}`](params);
         }
         else if (path==='view-edit-sofkiano') {

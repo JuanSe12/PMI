@@ -81,35 +81,5 @@
 </div>
 
 
-<script>
-   document.addEventListener('DOMContentLoaded', function () {
-      var elems = document.querySelectorAll('.fixed-action-btn');
-      var instances = M.FloatingActionButton.init(elems, options);
-   });
-
-   $(document).ready(function () {
-      $("#name").blur(function () {
-    if ($("#name").val() === "") {
-       M.toast({ html: 'Ingrese el nombre' });
-    }
- });
-
-    $("#size").blur(function () {
-       if ($("#size").val() === "") {
-          M.toast({ html: 'Ingrese el tamaño de la empresa' });
-       }
-    });
-
-    $("#nit").blur(function () {
-       if ($("#nit").val() === "") {
-          M.toast({ html: 'Ingrese el nit' });
-       }
-    });
-       $('.collapsible').collapsible();   
-   });
-   M.AutoInit();
-
-   
-  
-
-</script>
+<script src="./src/assets/js/common/common.js"></script>
+<script  src="./src/pages/client/validations.js">
