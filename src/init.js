@@ -13,7 +13,6 @@ Object.setPrototypeOf(init, {
     "initsofkiano": function () {
         sofkianoController.fillSofkiano();
         searchContext('sofkiano');
-        DOMsaveSofkiano();
     },
     "initproject": function () {
         projectController.fillProjects();
@@ -23,9 +22,13 @@ Object.setPrototypeOf(init, {
         clientController.fillClient();
         searchContext('client');
     },
+    "initview-edit-sofkiano": function (value) {
+        //fillProject(value);
+        //aqui agrego el codigo para que renderize mi formulario de editar
+    },
     "initview-project": function (value) {
         fillProject(value);
-        
+        //aqui agrego el codigo para que renderize mi formulario de editar
     }
 });
 export default init;

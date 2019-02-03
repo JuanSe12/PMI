@@ -17,6 +17,9 @@ export default controller = {
 
     },
 
+    getSofkianoData(){
+    },
+
 
     renderSofkianos(sofkianos) {
         if (sofkianos.length == 0) {
@@ -28,7 +31,7 @@ export default controller = {
             sofkianos.map(async (sofkiano) => {
                 let dataProject = await sofkiano.getProjects();
                 let dataTech = await sofkiano.getTechnologies();
-                let dataSkills = await sofkiano.getTechnologies();
+                let dataSkills = await sofkiano.getFeatures();
                 let tecnologhies = fillTecno(dataTech);
                 let skills = fillSkills(dataSkills);
                 let projects = fillProjects(dataProject);
@@ -164,9 +167,12 @@ function DomDeleteSofkiano(sofkianos) {
                             outDuration: 300
                         })
                     Route.routeTo('sofkiano');
+                    setTimeout(function(){
+                        let element = document.getElementById('sofkianos_titulo');
+                        element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
+                    }, 100);
                 }
-            )
-                .catch(error => alert('is no delete', error))
+            ).catch(error => prompt('is no delete', error))
         })
 
     });
