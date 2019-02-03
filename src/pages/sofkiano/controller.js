@@ -17,6 +17,10 @@ export default controller = {
 
     },
 
+    getSofkianoData(){
+        DataService.
+    },
+
 
     renderSofkianos(sofkianos) {
         if (sofkianos.length == 0) {
@@ -164,9 +168,12 @@ function DomDeleteSofkiano(sofkianos) {
                             outDuration: 300
                         })
                     Route.routeTo('sofkiano');
+                    setTimeout(function(){
+                        let element = document.getElementById('sofkianos_titulo');
+                        element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
+                    }, 100);
                 }
-            )
-                .catch(error => prompt('is no delete', error))
+            ).catch(error => prompt('is no delete', error))
         })
 
     });

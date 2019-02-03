@@ -1,3 +1,4 @@
+
 import DataService from "../../services/data_service.js";
 import Config from "../../config/config.js"
 import { save } from "./saveData.js";
@@ -70,9 +71,6 @@ export default async function fillProject() {
 
                         document.getElementById('business-name').innerHTML = newClient;
 
-                        document.getElementById('modalClient').removeAttribute("style");
-                        document.getElementsByClassName('modal-overlay')[0].removeAttribute("style");
-
                     });
 
 
@@ -131,8 +129,6 @@ export default async function fillProject() {
                         let newElement = fillSofkianos(projectSofki);
                         let contentNew = $("#project-sofkianos-list").html();
                         sofkianosContent.innerHTML = contentNew + newElement;
-                        document.getElementById('modalSofkiano').removeAttribute("style");
-                        document.getElementsByClassName('modal-overlay')[0].removeAttribute("style");
 
                     });
                 })
@@ -192,9 +188,6 @@ export default async function fillProject() {
                     let contentNew = $("#container-tech").html();
                     
                     TechnologiesContent.innerHTML = contentNew + newElement;
-                    document.getElementById('modal1').removeAttribute("style");
-                    document.getElementsByClassName('modal-overlay')[0].removeAttribute("style");
-                    document.getElementsByClassName('body')[0].removeAttribute("style");
 
                 });
             })

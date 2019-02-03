@@ -22,9 +22,9 @@ Object.setPrototypeOf(init, {
         clientController.fillClient();
         searchContext('client');
     },
-    "initview-project": function (value) {
-        fillProject(value);
-        
+    "initview-edit-sofkiano": function (value) {
+        //fillProject(value);
+        //aqui agrego el codigo para que renderize mi formulario de editar
     }
 });
 export default init;

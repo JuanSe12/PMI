@@ -23,8 +23,12 @@ function getElementAndRender(path,params,idElement=ID_CONTAINER){
         if(path==='view-project'){
             init[`init${path}`](params);
         }
+        else if (path==='view-edit-sofkiano') {
+            init[`init${path}`](params);
+        }
         else
             init[`init${path}`]();
+            
     } catch (error) {
         console.log(error);
     }

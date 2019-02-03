@@ -54,7 +54,6 @@ export default controller = {
             DataService.save(sofkianoSave).then(
                 sofkiano =>{
                     M.toast({html: 'Se guardó con exito el sofkiano!', outDuration: 300});
-                    document.getElementsByTagName("BODY")[0].removeAttribute("style");
                     Route.routeTo('sofkiano');
                     setTimeout(function(){
                         let element = document.getElementById('sofkianos_titulo');
