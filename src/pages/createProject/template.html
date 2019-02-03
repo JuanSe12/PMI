@@ -1,0 +1,169 @@
+<div class="margin-project">
+    <div class="collapsible content-project">
+        <div class="row">
+            <div class="col s12">
+                <div class="icons">
+                    <a href="#" onclick="" id="editDocument"><i class="material-icons md-36">edit</i></a>
+                    <a  href="#"   id="saveDocument"><i class="material-icons md-36">save</i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div id="content-title-project">
+            <input class="title-p" id="title-project"></input>
+        </div>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        Objetivo:
+                        <input  value="Parrafo objetivo" id="input-project-objetive" type="text" class="validate">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6">
+                        Fecha Inicio:
+                        <input  value="Fecha" id="input-project-start-date" class="datepicker">
+                    </div>
+                    <div class="input-field col s6">
+                        Fecha Fin:
+                        <input  value="Fecha" id="input-project-finish-date" class="datepicker">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12" id="dropdown-tech">
+                        <div class="col s6">
+                            <h5>Tecnologías</h5>
+                        </div>
+
+                        <div  class="input-field col s2 offset-s4 ">
+                            <a class="btn-floating center-image modal-trigger" id="add_tech" href="#modal1"><i class="material-icons">add</i></a>
+                        </div>
+                    </div>
+
+                    <div class="col s12" id="container-tech">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="col 6">
+                            <h5>Cliente</h5>
+                        </div>
+                        <div  class="input-field col s2 offset-s4 ">
+                            <a class="btn-floating center-image modal-trigger" id="add_modal_client" href="#modalClient"><i
+                                    class="material-icons">add</i></a>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <ul  id="content-Business">
+                            <li class="collection-item avatar" id="business-name">
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12">
+                        <div class="col 6">
+                            <h5>Sofkianos</h5>
+                        </div>
+                        <div  class="input-field col s2 offset-s4 ">
+                            <a class="btn-floating center-image modal-trigger" id="add_modal_sofkiano" href="#modalSofkiano"><i
+                                    class="material-icons">add</i></a>
+                        </div>
+
+                    </div>
+                    <div class="col s12">
+                        <ul  id="project-sofkianos-list">
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            M.AutoInit();
+            $('.datepicker').datepicker();
+            $('select').formSelect();
+        });
+    </script>
+</div>
+
+<!-- Modal Structure tech -->
+<div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <!--contenido de modal inicio de formulario-->
+        <div style="height: 200px;">
+            <div class="col m12" style="margin-top: -2%;">
+                <div class="card" style="height: 740px;">
+                    <div class="card-content black-text" style="height: 48px;">
+                        <h4 class="card-title" style="margin-top: -17px;">Añadir Tecnologias</h4>
+                    </div>
+                    <div class="card-action" style="height: 720px;" id="div_techs">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--contenido de modal cierre de formulario-->
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn orange btn-primary modal-close" id="add_technologies">Guardar</button>
+        <a href="#!" class="modal-close btn grey btn-primary">Cancelar</a>
+    </div>
+</div>
+
+
+<!-- Modal Structure clientes-->
+<div id="modalClient" class="classTemp">
+    <div class="modal-content">
+        <!--contenido de modal inicio de formulario-->
+        <div style="height: 200px;">
+            <div class="col m12" style="margin-top: -2%;">
+                <div class="card" style="height: 740px;">
+                    <div class="card-content black-text" style="height: 48px;">
+                        <h4 class="card-title" style="margin-top: -17px;">Añadir Cliente</h4>
+                    </div>
+                    <div class="card-action" style="height: 720px;" id="div_clientModal">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--contenido de modal cierre de formulario-->
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn orange btn-primary modal-close" id="add_client">Guardar</button>
+        <a href="#!" class="modal-close btn grey btn-primary">Cancelar</a>
+    </div>
+</div>
+
+
+<!-- Modal Structure clientes-->
+<div id="modalSofkiano" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <!--contenido de modal inicio de formulario-->
+        <div style="height: 200px;">
+            <div class="col m12" style="margin-top: -2%;">
+                <div class="card" style="height: 740px;">
+                    <div class="card-content black-text" style="height: 48px;">
+                        <h4 class="card-title" style="margin-top: -17px;">Añadir Sofkianos</h4>
+                    </div>
+                    <div class="card-action" style="height: 720px;" id="div_SofkiModal">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--contenido de modal cierre de formulario-->
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn orange btn-primary modal-close" id="add_sofki">Guardar</button>
+        <a href="#!" class="modal-close btn grey btn-primary">Cancelar</a>
+    </div>
+</div>
