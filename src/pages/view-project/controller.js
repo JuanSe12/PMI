@@ -5,9 +5,10 @@ import Project from "../../model/project.js";
 
 
 let technologiesAvailable = []
+let sofkianosAvailable = [];
 let projectEdit = new Project();
 
-function deleteTechnology(id, array){
+function deleteItem(id, array){
     array.forEach((item,index) => {
         if(item === id){
             array.splice(index,1);
@@ -33,13 +34,27 @@ export default async function fillProject(project) {
      //saveButton();
     //save();
 
+    DataService.getAllSofkianos().then(
+        sofkianos => {
+            sofkianos.forEach(sofkiano =>{
+                sofkianosAvailable.push(sofkiano.id);
+            })
+            projectEdit.sofkianos.forEach(idSofkiano => {
+                sofkianosAvailable = deleteItem(idSofkiano,sofkianosAvailable)
+            });
+        }
+    )
+
+
+    debugger;
     DataService.getAllTechnologies().then(
         technologies => {
             technologies.forEach(technology =>{
                 technologiesAvailable.push(technology.id);
             })
+            
             projectEdit.technologies.forEach(idTechnology => {
-                technologiesAvailable = deleteTechnology(idTechnology,technologiesAvailable)
+                technologiesAvailable = deleteItem(idTechnology,technologiesAvailable)
             });
         }
     )
@@ -98,66 +113,38 @@ export default async function fillProject(project) {
         document.getElementsByClassName('modal-overlay')[0].removeAttribute("style");
 
     });
-
-
-
     //////////////Sofkianos
-
     var sofkianos = await project.getSofkianos();
-
-    //console.log(sofkianos);
     sofkiano = fillSofkianos(sofkianos);
-    //console.log(sofkiano);
     sofkianosContent = document.getElementById("project-sofkianos-list");
     sofkianosContent.innerHTML = sofkiano;
     document.getElementById('add_modal_sofkiano').addEventListener('click', function () {
 
-        let sessionSofki = JSON.parse(sessionStorage.sofki);
-        let modalSofki = [];
-
-        for (let i = 0; i < sessionSofki.length; i++) {
-            let exist = false;
-            for (let j = 0; j < sofkianos.length; j++) {
-                if (sessionSofki[i].id != sofkianos[j].id) {
-                    exist = true;
-                } else {
-                    exist = false;
-                    break;
-                }
-            }
-            if (exist != false) {
-                modalSofki.push(sessionSofki[i]);
-            }
-        }
-        renderSofkianos(modalSofki);
-
+        DataService.getSofkianoByIds(sofkianosAvailable).then(
+            sofkianos => {
+                renderSofkianos(sofkianos);
+            })
     });
 
     document.getElementById('add_sofki').addEventListener('click', function () {
         let sofkiArray = document.getElementById("div_SofkiModal");
-        let checkTechnology = sofkiArray.getElementsByTagName('input');
+        let checkSofkiano = sofkiArray.getElementsByTagName('input');
         let arraySofkiInput = [];
-        for (var i = 0; i < checkTechnology.length; i++) {
-            if (checkTechnology[i].checked) {
-                arraySofkiInput.push(parseInt(checkTechnology[i].value));
+        for (var i = 0; i < checkSofkiano.length; i++) {
+            if (checkSofkiano[i].checked) {
+                sofkianosAvailable = deleteItem(parseInt(checkSofkiano[i].value), sofkianosAvailable)
+                projectEdit.sofkianos.push(parseInt(checkSofkiano[i].value))
             }
         }
-        //debugger;
-        console.log(arraySofkiInput);
-        let sessionSofki = JSON.parse(sessionStorage.sofki);
-        let projectSofki = [];
 
-        for (let index = 0; index < arraySofkiInput.length; index++) {
-
-            projectSofki.push(sessionSofki[arraySofkiInput[index] - 1]);
-
-        }
-        let newElement = fillSofkianos(projectSofki);
-        let contentNew = $("#project-sofkianos-list").html();
-        sofkianosContent.innerHTML = contentNew + newElement;
-        document.getElementById('modalSofkiano').removeAttribute("style");
-        document.getElementsByClassName('modal-overlay')[0].removeAttribute("style");
-        $('.icons-delete-sofki').css("display","block");
+        DataService.getSofkianoByIds(projectEdit.sofkianos).then(
+            sofkiano => {
+                sofkianosContent.innerHTML = fillSofkianos(sofkiano);
+            }
+        )
+        setTimeout(function(){
+            $('.icons-delete-sofki').css("display","block");
+        },300)
 
     });
 
@@ -183,7 +170,7 @@ export default async function fillProject(project) {
 
         for (var i = 0; i < checkTechnology.length; i++) {
             if (checkTechnology[i].checked) {
-                technologiesAvailable = deleteTechnology(parseInt(checkTechnology[i].value), technologiesAvailable)
+                technologiesAvailable = deleteItem(parseInt(checkTechnology[i].value), technologiesAvailable)
                 projectEdit.technologies.push(parseInt(checkTechnology[i].value))
             }
         }
@@ -300,9 +287,9 @@ function deleteIcon(index, projects) {
     $(document).ready(function () {
         $(`#icons-delete-view${index}`).click(function (event) {
             $(`#chip-tech${index}`).remove();
-            projectEdit.technologies = deleteTechnology(index, projectEdit.technologies)
+            projectEdit.technologies = deleteItem(index, projectEdit.technologies)
             technologiesAvailable.push(index);
-            console.log(projectEdit);
+            //console.log(projectEdit);
         })
     })
 
@@ -310,10 +297,11 @@ function deleteIcon(index, projects) {
 
 function deleteIconSofki(index, projects) {
     $(document).ready(function () {
-        $(`#icons-delete-view-sofki${index + 1}`).click(function (event) {
-            $(`#chip-sofki${index + 1}`).remove();
-            projects.splice(index, 1);
-            console.log(projects);
+        $(`#icons-delete-view-sofki${index}`).click(function (event) {
+            $(`#chip-sofki${index}`).remove();
+            projectEdit.sofkianos = deleteItem(index, projectEdit.sofkianos)
+            sofkianosAvailable.push(index)
+            //console.log(projects);
         })
     })
 
@@ -351,14 +339,7 @@ function fillSofkianos(sofkiano) {
         //console.log(sofkianoList);
         sofkianoTemplate += sofkianoList;
 
-        deleteIconSofki(index, sofkiano);
+        deleteIconSofki(sofkiano[index].id, sofkiano);
     }
     return sofkianoTemplate;
 }
-
-/*<li class="collection-item avatar list-sofkianos">
-                <img src="${Config.baseUrl() + sofki.img}" alt="" class="circle ">
-                <br>
-                ${sofki.firtsName}
-                <i style="display:none;" class="close material-icons view-edit" id="">close</i>
-            </li> */
