@@ -25,6 +25,10 @@ Object.setPrototypeOf(init, {
     "initview-edit-sofkiano": function (value) {
         //fillProject(value);
         //aqui agrego el codigo para que renderize mi formulario de editar
+    },
+    "initview-project": function (value) {
+        fillProject(value);
+        //aqui agrego el codigo para que renderize mi formulario de editar
     }
 });
 export default init;
