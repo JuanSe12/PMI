@@ -8,7 +8,7 @@ import Project from "../../model/project.js";
 let technologiesAvailable = []
 let projectEdit = new Project();
 
-function deleteTechnology(id, array){
+function deleteIdArrya(id, array){
     array.forEach((item,index) => {
         if(item === id){
             array.splice(index,1);
@@ -40,7 +40,7 @@ export default async function fillProject(project) {
                 technologiesAvailable.push(technology.id);
             })
             projectEdit.technologies.forEach(idTechnology => {
-                technologiesAvailable = deleteTechnology(idTechnology,technologiesAvailable)
+                technologiesAvailable = deleteIdArrya(idTechnology,technologiesAvailable)
             });
         }
     )
@@ -181,7 +181,7 @@ export default async function fillProject(project) {
 
         for (var i = 0; i < checkTechnology.length; i++) {
             if (checkTechnology[i].checked) {
-                technologiesAvailable = deleteTechnology(parseInt(checkTechnology[i].value), technologiesAvailable)
+                technologiesAvailable = deleteIdArrya(parseInt(checkTechnology[i].value), technologiesAvailable)
                 projectEdit.technologies.push(parseInt(checkTechnology[i].value))
             }
         }
@@ -299,7 +299,7 @@ function deleteIcon(index, projects) {
     $(document).ready(function () {
         $(`#icons-delete-view${index}`).click(function (event) {
             $(`#chip-tech${index}`).remove();
-            projectEdit.technologies = deleteTechnology(index, projectEdit.technologies)
+            projectEdit.technologies = deleteIdArrya(index, projectEdit.technologies)
             technologiesAvailable.push(index);
             console.log(projectEdit);
         })
