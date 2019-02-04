@@ -7,6 +7,7 @@ import Project from "../../model/project.js";
 
 let technologiesAvailable = []
 let sofkianosAvailable = [];
+let sofkianoDeleteProject = new Set();
 let projectEdit = new Project();
 
 function deleteItem(id, array){
@@ -20,20 +21,15 @@ function deleteItem(id, array){
 
 export default async function fillProject(project) {
 
-    projectEdit = project;
     var TechnologiesContent = "";
     let sofkianosContent = "";
     let titleProject = "";
-    let template = "";
     let startDate = "";
     let finishDate = "";
     let technologies = "";
     let sofkiano = "";
     let prueba = "";
-    //console.log(project)
-    let nameBusiness = "";
-     //saveButton();
-    //save();
+    projectEdit = project;
 
     DataService.getAllSofkianos().then(
         sofkianos => {
@@ -46,8 +42,6 @@ export default async function fillProject(project) {
         }
     )
 
-
-    debugger;
     DataService.getAllTechnologies().then(
         technologies => {
             technologies.forEach(technology =>{
@@ -136,8 +130,12 @@ export default async function fillProject(project) {
             if (checkSofkiano[i].checked) {
                 sofkianosAvailable = deleteItem(parseInt(checkSofkiano[i].value), sofkianosAvailable)
                 projectEdit.sofkianos.push(parseInt(checkSofkiano[i].value))
+                sofkianoDeleteProject = new Set(deleteItem(parseInt(checkSofkiano[i].value),
+                    Array.from(sofkianoDeleteProject)));
             }
         }
+        console.log(sofkianoDeleteProject);
+        
 
         DataService.getSofkianoByIds(projectEdit.sofkianos).then(
             sofkiano => {
@@ -189,17 +187,12 @@ export default async function fillProject(project) {
     });
 
 
-
-
-
-        
-
-
     var sessionClient = await DataService.getAllClients();
     var sessionTech = await DataService.getAllTechnologies();
     var sessionSofki = await DataService.getAllSofkianos();
     editButton(project);
-    save();
+
+
     sessionStorage.tec = JSON.stringify(sessionTech);
     sessionStorage.clients = JSON.stringify(sessionClient);
     sessionStorage.sofki = JSON.stringify(sessionSofki);
@@ -212,9 +205,11 @@ export default async function fillProject(project) {
     document.getElementById('input-project-objetive').value = project.description;
     document.getElementById('input-project-start-date').value = startDate;
     document.getElementById('input-project-finish-date').value = finishDate;
-    // console.log(sessionTech);
-    //var selectTech = document.getElementById('dropTech');
 
+    
+    document.getElementById('saveDocument').addEventListener('click', function () {
+        save(projectEdit, Array.from(sofkianoDeleteProject));
+    });
 
 }
 
@@ -303,8 +298,9 @@ function deleteIconSofki(index, projects) {
         $(`#icons-delete-view-sofki${index}`).click(function (event) {
             $(`#chip-sofki${index}`).remove();
             projectEdit.sofkianos = deleteItem(index, projectEdit.sofkianos)
-            sofkianosAvailable.push(index)
-            //console.log(projects);
+            sofkianoDeleteProject.add(index);          
+            sofkianosAvailable.push(index);
+            console.log(sofkianoDeleteProject);
         })
     })
 
@@ -322,7 +318,6 @@ function fillTecno(technologies) {
             <p>${technologies[index].name}</p>
         </div>`;
         tecnoTemplate += tecno;
-        //debugger;
         deleteIcon(technologies[index].id, technologies);
 
     }
@@ -339,7 +334,6 @@ function fillSofkianos(sofkiano) {
         </div>
         <p>${sofkiano[index].firtsName}</p>
         </div>`;
-        //console.log(sofkianoList);
         sofkianoTemplate += sofkianoList;
 
         deleteIconSofki(sofkiano[index].id, sofkiano);

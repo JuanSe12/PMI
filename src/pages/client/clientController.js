@@ -83,7 +83,7 @@ export default controller = {
                         <div class="row">
                           <div class="col offset-s10 s2">
                             <a id="btn-client-delete-${client.id}" 
-                            class="waves-effect waves-light btn red" ">
+                            class="waves-effect waves-light btn red">
                               <i class="material-icons left">delete</i>
                               Eliminar
                             </a>                            

@@ -89,6 +89,9 @@ function addEvents(elementAt, project) {
 function setEventAddProject(){
     document.getElementById('add-project-button').addEventListener('click',
     function(){
+        setTimeout(() => {
+            
+        }, 100);
         Route.routeTo('create-project');
     })
 }

@@ -49,7 +49,7 @@ export function save() {
             arraySofkiano
         )).then(()=>{
              M.toast({html:"Se guardaron satisfactoriamente los datos"})
-             Route.routeTo("project")});
+             Route.routeTo("project")}); 
 
         
     })
