@@ -17,12 +17,17 @@ function deleteItem(id, array){
 }
 
 export default async function fillSofkianoEdit(sofkiano){
-    sofkianoEdit = sofkiano;
+    
     var TechnologiesContent = "";
     let featuresContent = "";
     let template = "";
     let technologies = "";
     let feature = "";
+
+    technologiesAvailable = [];
+    featuresAvailable = [];
+    sofkianoEdit = new Sofkiano();
+    sofkianoEdit = sofkiano;
 
     DataService.getAllFeatures().then(
         features => {
