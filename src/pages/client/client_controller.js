@@ -1,3 +1,5 @@
+'use strict';
+
 import dataService from '../../services/data_service.js';
 import config from "../../config/config.js";
 import { validateTypeClientPerson, validateFieldsByMessage, validateFields,fillFieldsValidation } from './validation_client.js';

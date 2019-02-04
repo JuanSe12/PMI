@@ -1,9 +1,11 @@
+'use strict';
 
-import DataService from "../../services/data_service.js";
-import Config from "../../config/config.js"
-import { save } from "./save_data.js";
-import Project from "../../model/project.js";
-
+import DataService from '../../services/data_service.js';
+import Config from '../../config/config.js';
+import { save } from './save_data.js';
+import Project from '../../model/project.js';
+import { renderSofkianos, renderClient, renderTech } from './render_components.js';
+import { fillSofkianos, fillTecno } from './fill_components.js';
 
 let technologiesAvailable = []
 let sofkianosAvailable = [];
@@ -62,8 +64,6 @@ export default async function fillProject(project) {
 
     var client = await project.getClient();
 
-
-    //console.log(client[0].name);
     let clientStr = `<img src="${Config.baseUrl() + client[0].img}" alt="" class="resize circle" id="project-business-image${client[0].id}">
                     ${client[0].name} <a style="display:none;" href="#" class="view-edit" onclick="" id="delete-icon-business"><i class="material-icons md-36">close</i></a>`
 
@@ -126,10 +126,10 @@ export default async function fillProject(project) {
             })
     });
 
+    
     document.getElementById('add_sofki').addEventListener('click', function () {
         let sofkiArray = document.getElementById("div_SofkiModal");
         let checkSofkiano = sofkiArray.getElementsByTagName('input');
-        let arraySofkiInput = [];
         for (var i = 0; i < checkSofkiano.length; i++) {
             if (checkSofkiano[i].checked) {
                 sofkianosAvailable = deleteItem(parseInt(checkSofkiano[i].value), sofkianosAvailable)
@@ -138,7 +138,6 @@ export default async function fillProject(project) {
                     Array.from(sofkianoDeleteProject)));
             }
         }
-        console.log(sofkianoDeleteProject);
 
 
         DataService.getSofkianoByIds(projectEdit.sofkianos).then(
@@ -217,12 +216,10 @@ export default async function fillProject(project) {
 
 }
 
-//falta
 function deleteBusiness(client) {
 
     $(document).ready(function () {
         $(`#delete-icon-business`).click(function (event) {
-            console.log("Imagen de la empresa eliminado");
             $(`#business-name`).remove();
             $(`#modalClient`).removeClass("classTemp");
             $(`#modalClient`).addClass("modal modal-fixed-footer");
@@ -244,103 +241,4 @@ function editButton(project) {
         document.getElementById("content-title-project").innerHTML = `<input class="title" id="title-project"></input>`;
         document.getElementById('title-project').value = project.name;
     })
-}
-
-function renderSofkianos(data) {
-    let div_SofkiModal = document.getElementById("div_SofkiModal");
-    let sofkiano = "";
-
-    data.forEach((item, index) => {
-
-        index % 2 == 0 ? sofkiano += '<div class="row">' : sofkiano += "";
-        sofkiano += `<div class="col s6"><label class="mov_check"><input type="checkbox" class="filled-in" name="technology${item.id}" id="technology${item.id}" value=${item.id}><span>${item.firtsName}</span></label></div>`;
-        (index + 1) % 2 == 0 ? sofkiano += '</div>' : sofkiano += "";
-    });
-    div_SofkiModal.innerHTML = sofkiano;
-}
-
-function renderTech(data) {
-    let div_tech = document.getElementById("div_techs");
-    let techs = "";
-
-    data.forEach((item, index) => {
-
-        index % 2 == 0 ? techs += '<div class="row">' : techs += "";
-        techs += `<div class="col s6"><label class="mov_check"><input type="checkbox" class="filled-in" name="technology${item.id}" id="technology${item.id}" value=${item.id}><span>${item.name}</span></label></div>`;
-        (index + 1) % 2 == 0 ? techs += '</div>' : techs += "";
-    });
-    div_tech.innerHTML = techs;
-}
-
-function renderClient(data) {
-    let div_clientModal = document.getElementById("div_clientModal");
-    let client = "";
-
-    data.forEach((item, index) => {
-
-        index % 2 == 0 ? client += '<div class="row">' : client += "";
-        client += `<div class="col s6"><label class="mov_check"><input type="radio" class="filled-in" name="clientModal" id="clientModal${item.id}" value=${item.id}><span>${item.name}</span></label></div>`;
-        (index + 1) % 2 == 0 ? client += '</div>' : client += "";
-    });
-    div_clientModal.innerHTML = client;
-}
-
-function deleteIcon(index, projects) {
-    $(document).ready(function () {
-        $(`#icons-delete-view${index}`).click(function (event) {
-            $(`#chip-tech${index}`).remove();
-            projectEdit.technologies = deleteItem(index, projectEdit.technologies)
-            technologiesAvailable.push(index);
-            //console.log(projectEdit);
-        })
-    })
-
-}
-
-function deleteIconSofki(index, projects) {
-    $(document).ready(function () {
-        $(`#icons-delete-view-sofki${index}`).click(function (event) {
-            $(`#chip-sofki${index}`).remove();
-            projectEdit.sofkianos = deleteItem(index, projectEdit.sofkianos)
-            sofkianoDeleteProject.add(index);
-            sofkianosAvailable.push(index);
-            console.log(sofkianoDeleteProject);
-        })
-    })
-
-}
-
-function fillTecno(technologies) {
-    let tecnoTemplate = "";
-    for (let index = 0; index < technologies.length; index++) {
-        let tecno =
-            `<div class="chips-div" id="chip-tech${technologies[index].id}">
-            <div class="content-elements">
-            <a href=# id="icons-delete-view${technologies[index].id}"><i class="close material-icons icons-delete" >close</i></a>
-            <img src="${Config.baseUrl() + technologies[index].icon}" alt="">
-            </div>
-            <p>${technologies[index].name}</p>
-        </div>`;
-        tecnoTemplate += tecno;
-        deleteIcon(technologies[index].id, technologies);
-
-    }
-    return tecnoTemplate;
-}
-
-function fillSofkianos(sofkiano) {
-    let sofkianoTemplate = "";
-    for (let index = 0; index < sofkiano.length; index++) {
-        let sofkianoList = `<div class="chips-div" id="chip-sofki${sofkiano[index].id}">
-        <div class="content-elements">
-        <a href=# id="icons-delete-view-sofki${sofkiano[index].id}"><i class="close material-icons icons-delete-sofki" >close</i></a>
-        <img src="${Config.baseUrl() + sofkiano[index].img}" alt="">
-        </div>
-        <p>${sofkiano[index].firtsName}</p>
-        </div>`;
-        sofkianoTemplate += sofkianoList;
-
-        deleteIconSofki(sofkiano[index].id, sofkiano);
-    }
-    return sofkianoTemplate;
 }

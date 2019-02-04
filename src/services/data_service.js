@@ -119,7 +119,6 @@ export default class DataService {
                             
                             if(sofkiano.projects.length < 2){
                                 arraySofkianos.push(sofkiano);
-                                console.log(sofkiano);
                             } 
                         });
                         resolve(arraySofkianos);
