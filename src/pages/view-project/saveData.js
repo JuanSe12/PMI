@@ -4,10 +4,11 @@ import DataService from "../../services/data_service.js";
 import ModelProject from "../../model/project.js";
 import Route from "../../services/route.js";
 
-export function save() {
-    //debugger;
-    document.getElementById('saveDocument').addEventListener('click', function () {
+export function save(project, deleteSofkianos) {
+   
 
+        console.log(deleteSofkianos);
+        
         var TechnologiesContent = document.getElementById("container-tech");
         let nameProject = document.getElementById("title-project").value;
         let objetive = document.getElementById("input-project-objetive").value;
@@ -36,20 +37,46 @@ export function save() {
             arraySofkiano.push(parseInt(elementSofki.substring(10, elementSofki.length)));
         }
 
-        DataService.save(new ModelProject(
-            1,
-            nameProject,
-            objetive,
-            2,
-            parseInt(clientInsert),
-            new Date(startDate).toString(),
-            new Date(finishDate).toString(),
-            arrayTech,
-            "/src/assets/images/projects/project1.jpg",
-            arraySofkiano
-        ))
+        project.name = nameProject;
+        project.description = objetive;
+        project.client = parseInt(clientInsert);
+        project.dateInit = new Date(startDate).toString();
+        project.dateFinish = new Date(finishDate).toString();
+
+
+        DataService.save(project).then(
+            project => {
+                console.log(deleteSofkianos);
+                
+                project.getSofkianos().then(
+                    sofkianos => {
+                        sofkianos.forEach(sofkiano => {
+                            sofkiano.projects = Array.from(new Set(sofkiano.projects).add(project.id))
+                            DataService.save(sofkiano);
+                        });
+                    }
+                )
+                DataService.getSofkianoByIds(deleteSofkianos).then(
+                    sofkianos =>{
+                        sofkianos.forEach(sofkiano => {
+                            sofkiano.projects = deleteItem(project.id, sofkiano.projects);
+                            DataService.save(sofkiano)
+                        });
+                    }
+                );
+                
+            }
+        )
 
         M.toast({html:"Se guardaron satisfactoriamente los datos"})
         Route.routeTo("project");
-    })
+}
+
+function deleteItem(id, array){
+    array.forEach((item,index) => {
+        if(item === id){
+            array.splice(index,1);
+        }
+    });
+    return array;
 }
