@@ -49,23 +49,19 @@ export default async function createProject() {
     ///////Client
 
     //FIXXX
-    var client = await project.getClient();
+    //var client = await project.getClient();
 
-    deleteBusiness(client);
+    //deleteBusiness(client);
 
-
-    document.getElementById('add_modal_client').addEventListener('click', function () {
-
-        if (document.getElementById("business-name") != null) {
-
-            alert("No se puede tener más de un cliente");
-
-        } else {
-            let sessionClient = JSON.parse(sessionStorage.clients);
-            renderClient(sessionClient);
-        }
-
-    });
+        document.getElementById('add_modal_client').addEventListener('click', function () {
+            if (document.getElementById("business-name") != null) {
+                alert("No se puede tener más de un cliente");
+            } else {
+                let sessionClient = JSON.parse(sessionStorage.clients);
+                renderClient(sessionClient);
+            }
+        });
+    
 
     document.getElementById('add_client').addEventListener('click', function () {
         let sofkiArray = document.getElementById("div_clientModal");
@@ -88,8 +84,9 @@ export default async function createProject() {
     });
     //////////////Sofkianos
     sofkianosContent = document.getElementById("project-sofkianos-list");
-    document.getElementById('add_modal_sofkiano').addEventListener('click', function () {
 
+    document.getElementById('add_modal_sofkiano').addEventListener('click', function () {
+        console.log('asdf');
         DataService.getSofkianoByIds(sofkianosAvailable).then(
             sofkianos => {
                 renderSofkianos(sofkianos);
@@ -121,6 +118,7 @@ export default async function createProject() {
 
     TechnologiesContent = document.getElementById("container-tech")
     document.getElementById('add_tech').addEventListener('click', function () {
+        console.log('click add tech')
         DataService.getTechnologiesByIds(technologiesAvailable).then(
             technologies => {
                 renderTech(technologies);
