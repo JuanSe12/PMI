@@ -23,7 +23,7 @@ export default async function createProject() {
     var TechnologiesContent = "";
     let sofkianosContent = "";
 
-    DataService.getAllSofkianos().then(
+    DataService.getAvailableSofkianosProject().then(
         sofkianos => {
             sofkianos.forEach(sofkiano =>{
                 sofkianosAvailable.push(sofkiano.id);
