@@ -34,8 +34,6 @@ export default async function createProject() {
         }
     )
 
-
-    debugger;
     DataService.getAllTechnologies().then(
         technologies => {
             technologies.forEach(technology =>{
