@@ -109,6 +109,29 @@ export default class DataService {
     }
 
 
+    static getAvailableSofkianosProject(){
+        let arraySofkianos = [];
+        return new Promise(
+            (resolve, reject) =>{
+                load(SOFKIANO_FILENAME, Sofkiano).then(
+                    sofkianos =>{
+                        sofkianos.forEach(sofkiano => {
+                            
+                            if(sofkiano.projects.length < 2){
+                                arraySofkianos.push(sofkiano);
+                                console.log(sofkiano);
+                            } 
+                        });
+                        resolve(arraySofkianos);
+                    }
+                )
+                .catch(
+                    error => reject(error)
+                )
+            }); 
+    }
+
+
     static save(model){
         if(model instanceof ClientType){
             return saveNewOrEditModel(CLIENT_TYPE_FILENAME, ClientType, model)
@@ -189,12 +212,10 @@ function loadJsonFromFileOrLocalStorage(filename){
         if(dataIsLocalStorage(filename)){
             let json = JSON.parse(localStorage.getItem(filename))
             setTimeout(()=>{
-                console.log("hola juan"+json);
                 resolve(json)
             },50)
         }
         else{
-            
             $.getJSON(`${Config.baseUrl()}/src/data/${filename}`, function(json) {
                 //saveLocalStorage(filename,json);
                 resolve(json)
