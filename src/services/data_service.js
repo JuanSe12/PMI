@@ -216,8 +216,9 @@ function loadJsonFromFileOrLocalStorage(filename){
             },50)
         }
         else{
+            
             $.getJSON(`${Config.baseUrl()}/src/data/${filename}`, function(json) {
-                //saveLocalStorage(filename,json);
+                saveLocalStorage(filename,json);
                 resolve(json)
             })
             .fail(function(){
