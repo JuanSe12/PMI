@@ -5,7 +5,8 @@ import crudService from '../../services/crudService.js';
 import {
     validateTypeClientPerson,
     validateFieldsByMessage,
-    validateFields
+    validateFields,
+    fillFieldsValidation
 } from './validationClient.js';
 import Client from '../../model/client.js';
 import Route from "../../services/route.js";

@@ -11,25 +11,26 @@ import createProjectController from "./pages/create-project/controller.js";
 let init = {}
 
 Object.setPrototypeOf(init, {
+    
     "initsofkiano": function () {
         setTimeout(function () {
             sofkianoController.fillSofkiano();
             searchContext('sofkiano');
             DOMsaveSofkiano();
-        }, 300);
+        }, 150);
     },
     "initproject": function () {
         setTimeout(function () {
             projectController.fillProjects();
             searchContext('project');
-        }, 300);
+        }, 150);
 
     },
     "initclient": function () {
         setTimeout(function () {
             clientController.fillClient();
             searchContext('client');
-        }, 300)
+        }, 150)
     },
     "initview-edit-sofkiano": function (value) {
         //fillProject(value);
@@ -38,13 +39,15 @@ Object.setPrototypeOf(init, {
     "initview-project": function (value) {
         setTimeout(() => {
             fillProject(value);             
-        }, 300);
+        }, 150);
 
     },
     "initcreate-project": function () {
         setTimeout(() => {
             createProjectController();
-        }, 300);
+        }, 150);
     }
+
+    
 });
 export default init;

@@ -1,6 +1,6 @@
 import dataService from '../../services/data_service.js';
 import config from "../../config/config.js";
-import { validateTypeClientPerson, validateFieldsByMessage, validateFields } from './validationClient.js';
+import { validateTypeClientPerson, validateFieldsByMessage, validateFields,fillFieldsValidation } from './validationClient.js';
 import { editClient, saveClient, domDeleteClient } from './crud.js';
 import { refresh, toggleAndEditTitle, effectView } from './event.js';
 
@@ -102,6 +102,7 @@ export default controller = {
       domDeleteClient(clients);
       validateTypeClientPerson();
       validateFieldsByMessage();
+      fillFieldsValidation();
     }
   }
 }
@@ -148,3 +149,4 @@ function addValSelectViewInformation(position, arrayObject) {
     refresh();
   })
 }
+
