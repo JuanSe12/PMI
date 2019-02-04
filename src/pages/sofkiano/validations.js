@@ -1,4 +1,4 @@
-const validateFieldsForMessage=()=>{    
+function validateFieldsForMessage(){    
  
     $("#firstname").blur(function () {
         if ($("#firstname").val() === "") {
@@ -30,4 +30,13 @@ const validateFieldsForMessage=()=>{
      });
 
 }
- validateFieldsForMessage();
+
+
+function validateFields() {
+    return $('#firstname').val() === "" || $('#last_name').val() === "" || $('#type_document').val() === "" || $("#number_document").val() === "" || $("#experience_time_sofka").val() === "" || $("#external_experience_time").val() === "" ? true : false;
+}
+
+export{
+    validateFieldsForMessage,
+    validateFields
+}

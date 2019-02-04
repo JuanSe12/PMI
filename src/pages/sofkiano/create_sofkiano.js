@@ -1,6 +1,7 @@
 import DataService from "../../services/data_service.js";
 import Sofkiano from "../../model/sofkiano.js";
-import Route from "../../services/route.js"
+import Route from "../../services/route.js";
+import {validateFieldsForMessage, validateFields} from "../../pages/sofkiano/validations.js";
 
 
 let controller;
@@ -22,9 +23,9 @@ export default controller = {
 
         let buttonSave = document.getElementById('save_sofkiano');
         buttonSave.addEventListener('click', function () {
-            //console.log("data");
+
             if (validateFields()) {
-                M.toast({html: 'El registro no pudo ser realizado, Faltan datos'});
+                M.toast({ html: 'El registro no pudo ser realizado, Faltan datos' });
             }
             else {
                 let firstName = document.getElementById('firstname').value;
@@ -33,27 +34,25 @@ export default controller = {
                 let numberDocument = document.getElementById('number_document').value;
                 let experienceTimeSofka = document.getElementById('experience_time_sofka').value;
                 let externalExperienceTime = document.getElementById('external_experience_time').value;
-                //console.log(firstName, lastName, typeDocument, numberDocument, experienceTimeSofka, externalExperienceTime);
                 let featuresArray = document.getElementById(`div_features`);
                 let checkFeature = featuresArray.getElementsByTagName(`input`);
-                //console.log(checkFeature);
+
                 let arrayFeaturesDiv = [];
                 for (var i = 0; i < checkFeature.length; i++) {
                     if (checkFeature[i].checked) {
                         arrayFeaturesDiv.push(parseInt(checkFeature[i].value));
                     }
                 }
-                //console.log(arrayFeaturesDiv);
+
                 let technologiesArray = document.getElementById(`div_technologies`);
                 let checkTechnology = technologiesArray.getElementsByTagName(`input`);
-                //console.log(checkTechnology);
                 let arrayTechnologiesDiv = [];
                 for (var i = 0; i < checkTechnology.length; i++) {
                     if (checkTechnology[i].checked) {
                         arrayTechnologiesDiv.push(parseInt(checkTechnology[i].value));
                     }
                 }
-                //console.log(arrayTechnologiesDiv);
+
                 let sofkianoSave = new Sofkiano(0, firstName, lastName, "/src/assets/images/sofkianos/non-profile.png", [], [], typeDocument, numberDocument, externalExperienceTime, experienceTimeSofka, arrayFeaturesDiv, arrayTechnologiesDiv)
                 Route.routeTo('sofkiano');
                 DataService.save(sofkianoSave).then(
@@ -78,9 +77,7 @@ export default controller = {
 
 }
 
-function validateFields() {
-    return $('#firstname').val() === "" || $('#last_name').val() === "" || $('#type_document').val() === "" || $("#number_document").val() === "" || $("#experience_time_sofka").val() === "" || $("#external_experience_time").val() === "" ? true : false;
-}
+
 
 function renderFeatures(data) {
     let divFeatures = document.getElementById('div_features');
