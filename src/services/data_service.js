@@ -189,13 +189,14 @@ function loadJsonFromFileOrLocalStorage(filename){
         if(dataIsLocalStorage(filename)){
             let json = JSON.parse(localStorage.getItem(filename))
             setTimeout(()=>{
+                console.log("hola juan"+json);
                 resolve(json)
             },50)
         }
         else{
             
             $.getJSON(`${Config.baseUrl()}/src/data/${filename}`, function(json) {
-                saveLocalStorage(filename,json);
+                //saveLocalStorage(filename,json);
                 resolve(json)
             })
             .fail(function(){
@@ -253,6 +254,8 @@ function saveNewOrEditModel(filename,constructor, instance){
                     }
                 }
                 else{
+                                   
+                    
                     let id = getLastId(models)
                     instance.id = id + 1;
                     try {

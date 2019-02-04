@@ -6,29 +6,48 @@ import sofkianoController from "./pages/sofkiano/controller.js";
 import projectController from "./pages/project/controller.js";
 import clientController from "./pages/client/clientController.js";
 import searchContext from "./pages/head-bar/controller.js";
+import createProjectController from "./pages/create-project/controller.js";
 
 let init = {}
 
 Object.setPrototypeOf(init, {
+    
     "initsofkiano": function () {
-        sofkianoController.fillSofkiano();
-        searchContext('sofkiano');
+        setTimeout(function () {
+            sofkianoController.fillSofkiano();
+            searchContext('sofkiano');
+            DOMsaveSofkiano();
+        }, 150);
     },
     "initproject": function () {
-        projectController.fillProjects();
-        searchContext('project');
+        setTimeout(function () {
+            projectController.fillProjects();
+            searchContext('project');
+        }, 150);
+
     },
     "initclient": function () {
-        clientController.fillClient();
-        searchContext('client');
+        setTimeout(function () {
+            clientController.fillClient();
+            searchContext('client');
+        }, 150)
     },
     "initview-sofkiano": function (value) {
         fillSofkianoEdit(value);
         //aqui agrego el codigo para que renderize mi formulario de editar
     },
     "initview-project": function (value) {
-        fillProject(value);
-        //aqui agrego el codigo para que renderize mi formulario de editar
+        setTimeout(() => {
+            fillProject(value);             
+        }, 150);
+
+    },
+    "initcreate-project": function () {
+        setTimeout(() => {
+            createProjectController();
+        }, 150);
     }
+
+    
 });
 export default init;

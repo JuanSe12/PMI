@@ -1,7 +1,8 @@
 import DataService from "../../services/data_service.js";
 import Config from "../../config/config.js"
 import DomSave from "./create_sofkiano.js";
-import Route from "../../services/route.js"
+import Route from "../../services/route.js";
+import {validateFieldsForMessage, validateFields} from "../../pages/sofkiano/validations.js";
 
 let controller;
 
@@ -100,6 +101,7 @@ export default controller = {
                     })
                 }, 250);
                 DomSave.saveSofkiano();
+                validateFieldsForMessage();
                 DomDeleteSofkiano(sofkianos);
             }, 180);
         }
