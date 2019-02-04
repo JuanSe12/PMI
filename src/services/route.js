@@ -26,7 +26,7 @@ function getElementAndRender(path,params,idElement=ID_CONTAINER){
             
             init[`init${path}`](params);
         }
-        else if (path==='view-edit-sofkiano') {
+        else if (path==='view-sofkiano') {
             init[`init${path}`](params);
         }
         else

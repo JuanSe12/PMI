@@ -5,7 +5,6 @@ import Route from "../../services/route.js"
 
 let controller;
 
-
 export default controller = {
 
     fillSofkiano() {
@@ -17,18 +16,17 @@ export default controller = {
 
     },
 
-    getSofkianoData(){
-    },
-
 
     renderSofkianos(sofkianos) {
         if (sofkianos.length == 0) {
             M.toast({ html: 'No existe un Sofkiano con ese nombre' });
         }
         else {
+            let idSofkList = 0;
             let template = "";
             var ul = document.getElementById("sofkianos-list");
             sofkianos.map(async (sofkiano) => {
+                idSofkList += 1;
                 let dataProject = await sofkiano.getProjects();
                 let dataTech = await sofkiano.getTechnologies();
                 let dataSkills = await sofkiano.getFeatures();
@@ -50,7 +48,7 @@ export default controller = {
                                         </div>
                                     </div>
                                     <div class="col s2">
-                                    <a class="edit-buttom" id="editButtom"><i class="material-icons">edit</i></i></a>
+                                    <a class="edit-buttom" id="edit-sofkiano${sofkiano.id}" onclick=""><i class="material-icons">edit</i></i></a>
                                     </div>    
                                 </div>
                         </div>
@@ -85,7 +83,7 @@ export default controller = {
                                 ${projects}
                             <div class="row">
                                 <div class="col s2 offset-s10">
-                                    <a id="btn-sofkian-delete-${sofkiano.id}"class="waves-effect waves-light btn red" "><i class="material-icons left">delete</i>Eliminar</a>
+                                    <a id="btn-sofkian-delete-${sofkiano.id}"class="waves-effect waves-light btn red"><i class="material-icons left">delete</i>Eliminar</a>
                                 </div>
                             </div>
                             </form>                
@@ -93,15 +91,29 @@ export default controller = {
                         </li>`;
                 template += li;
             })
-            setTimeout(() => {
+            setTimeout(function(){
                 ul.innerHTML = template;
+
+                setTimeout(function(){
+                    sofkianos.map(sofkiano => {
+                        addEvents(sofkiano.id, sofkiano);
+                    })
+                }, 250);
                 DomSave.saveSofkiano();
                 DomDeleteSofkiano(sofkianos);
             }, 180);
         }
     }
+
+    
 }
 
+function addEvents(sofkian_id, sofkiano) {
+    let buttonEdit = document.getElementById(`edit-sofkiano${sofkian_id}`);
+    buttonEdit.addEventListener('click', function () {
+        Route.routeTo("view-sofkiano", sofkiano);
+    });
+}
 
 function fillTecno(sofkiano) {
     let tecnoTemplate = "";

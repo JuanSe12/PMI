@@ -1,6 +1,6 @@
 
 
-
+import fillSofkianoEdit from "./pages/view-sofkiano/controller.js";
 import fillProject from "./pages/view-project/controller.js";
 import sofkianoController from "./pages/sofkiano/controller.js";
 import projectController from "./pages/project/controller.js";
@@ -22,8 +22,8 @@ Object.setPrototypeOf(init, {
         clientController.fillClient();
         searchContext('client');
     },
-    "initview-edit-sofkiano": function (value) {
-        //fillProject(value);
+    "initview-sofkiano": function (value) {
+        fillSofkianoEdit(value);
         //aqui agrego el codigo para que renderize mi formulario de editar
     },
     "initview-project": function (value) {
