@@ -26,8 +26,12 @@ function getElementAndRender(path,params,idElement=ID_CONTAINER){
             
             init[`init${path}`](params);
         }
+        else if (path==='view-edit-sofkiano') {
+            init[`init${path}`](params);
+        }
         else
             init[`init${path}`]();
+            
     } catch (error) {
         console.log(error);
     }

@@ -1,3 +1,4 @@
+
 import DataService from "../../services/data_service.js";
 import Config from "../../config/config.js"
 import { save } from "./saveData.js";
@@ -113,13 +114,14 @@ export default async function fillProject(project) {
         document.getElementsByClassName('modal-overlay')[0].removeAttribute("style");
 
     });
+
+  
     //////////////Sofkianos
     var sofkianos = await project.getSofkianos();
     sofkiano = fillSofkianos(sofkianos);
     sofkianosContent = document.getElementById("project-sofkianos-list");
     sofkianosContent.innerHTML = sofkiano;
     document.getElementById('add_modal_sofkiano').addEventListener('click', function () {
-
         DataService.getSofkianoByIds(sofkianosAvailable).then(
             sofkianos => {
                 renderSofkianos(sofkianos);
@@ -190,6 +192,7 @@ export default async function fillProject(project) {
 
 
 
+        
 
 
     var sessionClient = await DataService.getAllClients();

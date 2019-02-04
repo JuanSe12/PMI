@@ -2,6 +2,7 @@
 
 import DataService from "../../services/data_service.js";
 import ModelProject from "../../model/project.js";
+import Route from "../../services/route.js";
 
 export function save() {
     //debugger;
@@ -49,5 +50,6 @@ export function save() {
         ))
 
         M.toast({html:"Se guardaron satisfactoriamente los datos"})
+        Route.routeTo("project");
     })
 }

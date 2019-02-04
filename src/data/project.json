@@ -2,7 +2,7 @@
     {
        "id": 1,
        "name": "Genesis Sofka",
-       "description": "Proyecto Genesis",
+       "description": "Proyecto Genesis es realizado con altos entandares de calidad por Sofka Technologies, este software es realizado con spring boot angular y mongodb",
        "state": 1,
        "client": 1,
        "dateInit": [2018, 11, 24, 10, 33, 30, 0],

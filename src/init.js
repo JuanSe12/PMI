@@ -32,6 +32,10 @@ Object.setPrototypeOf(init, {
             searchContext('client');
         }, 300)
     },
+    "initview-edit-sofkiano": function (value) {
+        //fillProject(value);
+        //aqui agrego el codigo para que renderize mi formulario de editar
+    },
     "initview-project": function (value) {
         setTimeout(() => {
             fillProject(value);             
@@ -46,5 +50,4 @@ Object.setPrototypeOf(init, {
 
     
 });
-setTimeout(300);
 export default init;

@@ -1,10 +1,10 @@
 import dataService from '../../services/data_service.js';
-import crudService from '../../services/crudService.js';
-import Config from "../../config/config.js";
-import Route from "../../services/route.js";
-import Client from '../../model/client.js';
+import config from "../../config/config.js";
+import { validateTypeClientPerson, validateFieldsByMessage, validateFields } from './validationClient.js';
+import { editClient, saveClient, domDeleteClient } from './crud.js';
+import { refresh, toggleAndEditTitle, effectView } from './event.js';
 
-let controller;
+var controller = {};
 
 export default controller = {
   async fillClient() {
@@ -20,13 +20,12 @@ export default controller = {
     this.renderClients(arrayObject);
   },
 
-
   renderClients(clients) {
 
 
     if (clients.length == 0) {
       M.toast({ html: 'No existe un Cliente con ese nombre' });
-    } 
+    }
     else {
       var ul = document.getElementById("client-list");
       let template = "";
@@ -38,7 +37,7 @@ export default controller = {
                       <div class="col s10">
                         <div class="row">
                           <div class="col s4">
-                            <img src="${Config.baseUrl()}${client.img}"
+                            <img src="${config.baseUrl()}${client.img}"
                           alt="" class="img-size ">
                           </div>
                           <div class="col s7">                        
@@ -47,7 +46,9 @@ export default controller = {
                         </div>
                       </div>
                       <div class="col s2">
-                        <a style="display:none;" class="edit-buttom" id="editButtom${indexClient}"><i class="material-icons">edit</i></a>
+                        <a style="display:none;" class="edit-buttom" id="editButtom${indexClient}">
+                          <i class="material-icons">edit</i>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -61,7 +62,8 @@ export default controller = {
                             <label class="active title-input">Nit</label>
                           </div>
                           <div class="input-field col s6">
-                            <input value="${JSON.parse(sessionStorage.arrayObjectTypeClient)[client.clientType - 1].name}" 
+                            <input value="${JSON.parse(sessionStorage.arrayObjectTypeClient)
+          [client.clientType - 1].name}" 
                               id="type${indexClient}"  type="text" class="validate" disabled required>
                             <label class="active title-input">Tipo de cliente</label>
                           </div>
@@ -80,7 +82,11 @@ export default controller = {
                         </div>
                         <div class="row">
                           <div class="col offset-s10 s2">
-                            <a id="btn-client-delete-${client.id}"class="waves-effect waves-light btn red" "><i class="material-icons left">delete</i>Eliminar</a>                            
+                            <a id="btn-client-delete-${client.id}" 
+                            class="waves-effect waves-light btn red" ">
+                              <i class="material-icons left">delete</i>
+                              Eliminar
+                            </a>                            
                           </div>
                         </div>
                       </div>
@@ -93,46 +99,12 @@ export default controller = {
       ul.innerHTML = template;
       effectView();
       addEvent(clients);
-      DomDeleteClient(clients);
-      validateTypeClientPerson()
+      domDeleteClient(clients);
+      validateTypeClientPerson();
+      validateFieldsByMessage();
     }
   }
 }
-
-
-function effectView() {
-  $(document).ready(function () {
-    $('select').formSelect();
-
-    $(".collapsible").hover(function (i) {
-      $(".edit-buttom").css("display", "block");
-    }, function () {
-      $(".edit-buttom").css("display", "none");
-    });
-
-    $('.edit-buttom').on("click", function (e) {
-      e.stopPropagation();
-    })
-  });
-}
-
-
-function addEvent(arrayObject) {
-  for (var i = 0; i < arrayObject.length; i++) {
-    $(`#editButtom${i}`).click(function (event) {
-      let num = event.delegateTarget.id;
-      let res = num.substring(10, num.length);
-      sessionStorage.referenceId = (parseInt(res) + 1);
-      addValAndOpenModal();
-    })
-    addValSelectViewInformation(i, arrayObject);
-  }
-  $('#editModal').click(function (event) {
-    editClient();
-  })
-  saveClient();
-}
-
 
 function addValAndOpenModal() {
   dataService.getAllClients().then(arrayObjectEdit => {
@@ -150,160 +122,29 @@ function addValAndOpenModal() {
   })
 }
 
-
-
-
-
-
-let editClient = function (event) {
-  let objectEdit = {
-    id: JSON.parse(sessionStorage.objectFilter).id,
-    name: $('#name').val(),
-    nit: $('#nit').val(),
-    size: $('#size').val(),
-    sector: $("#sector").val(),
-    typeClient: $("#typeClient").val(),
-    img: JSON.parse(sessionStorage.objectFilter).img
-  }
-  crudService(objectEdit, 1).then(data => {
-    if (data.switch == 1) {
-      M.toast({ html: `${data.message}` });
-      Route.routeTo('client');
-      setTimeout(function(){
-        let element = document.getElementById('clientes_titulo');
-        element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
-      }, 100);
-    } else {
-      M.toast({ html: `${data.message}` });
-      Route.routeTo('client');
-      setTimeout(function(){
-        let element = document.getElementById('clientes_titulo');
-        element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
-      }, 100);
-    }
-  });
-}
-
-function saveClient() {
-  $('#saveModal').click(function (event) {
-   
-    if(validateFields()){
-      M.toast({html: 'El registro no pudo ser ingresado, Faltan datos'});
-    }
-    else{
-    let client = new Client(
-      0,
-      $('#name').val(),
-      parseInt($('#nit').val()),
-      parseInt($('#size').val()),
-      $("#sector").val(),
-      parseInt($("#typeClient").val()),
-      "/src/assets/images/clients/default-client.jpg"
-    );
-    dataService.save(client).then(client => {
-      Route.routeTo('client');
-      setTimeout(function(){
-        let element = document.getElementById('clientes_titulo');
-        element.style.cssText = 'margin-top: -4% !important; position: fixed;color:white;';
-      }, 100);
-      console.log(client);
-    }, error => {
-      console.log(error);
+function addEvent(arrayObject) {
+  for (var i = 0; i < arrayObject.length; i++) {
+    $(`#editButtom${i}`).click(function (event) {
+      let num = event.delegateTarget.id;
+      let res = num.substring(10, num.length);
+      sessionStorage.referenceId = (parseInt(res) + 1);
+      addValAndOpenModal();
     })
-  
+    addValSelectViewInformation(i, arrayObject);
   }
-}
-)};
-
-function validateFields() {
-  return $('#name').val() === "" || $('#nit').val() === "" || $('#size').val() === "" || $("#sector").val() === "" || $("#typeClient").val() === "" ? true : false;
+  $('#editModal').click(function (event) {
+    editClient();
+  })
+  saveClient();
 }
 
 function addValSelectViewInformation(position, arrayObject) {
   for (var index = 0; index < arrayObject.length; index++) {
-    $(`#sector${position}`).find("option[value=" + arrayObject[index].sector + "]").prop("selected", true);
+    $(`#sector${position}`).find("option[value=" + arrayObject[index].sector + "]")
+      .prop("selected", true);
     $(`#sector${position}`).formSelect();
   }
   $('#modal-open').click(function (event) {
     refresh();
   })
 }
-
-function validateFieldsByMessage() {
-
-
-  $('select#typeClient').change(function (e) {
-    var select = $("select#typeClient option:checked").val();
-    if (select == 1) {
-      $("input#size").prop('disabled', true);
-      $('#size').attr('placeholder', '1');
-    }
-
-  });
-
-}
-
-
-function toggleAndEditTitle() {
-  $('#saveModal').hide();
-  $('#editModal').show();
-  $('#cardTitle').empty();
-  $('#cardTitle').text('Editar un cliente');
-}
-
-
-function validateTypeClientPerson() {
-
-  $('select#typeClient').change(function (e) {
-    var select = $("select#typeClient option:checked").val();
-    if (select == 1) {
-      $("input#size").prop('disabled', true);
-      $('#size').attr('placeholder', '1');
-    } else {
-      $("input#size").prop('disabled', false);
-      $('#size').attr('placeholder', 'Tamaño de la empresa');
-    }
-  });
-
-
-}
-
-
-function refresh() {
-  $('#cardTitle').text('Registrar un cliente');
-  $('#name').val("");
-  $('#sector-holder').text('Sector');
-  $("#typeClient").formSelect();
-  $('#typeClient').find("option[value=" + 0 + "]").prop("selected", true);
-  $("#typeClient").formSelect();
-  $('#sector').find("option[value=" + 0 + "]").prop("selected", true);
-  $("#sector").formSelect();
-  $('#size').val("");
-  $('#nit').val("");
-  $('#saveModal').show();
-  $('#editModal').hide();
-}
-
-
-function DomDeleteClient(clients) {
-  let btns = [];
-  clients.forEach(client => {
-    let btn = document.getElementById(`btn-client-delete-${client.id}`);
-    btn.addEventListener('click', function (event) {
-      dataService.delete(client).then(
-        clientDelete => {
-          M.toast(
-            {
-              html: `Se eliminó con exito ${clientDelete.name}!`,
-              outDuration: 300
-            })
-          Route.routeTo('client');
-        }
-      )
-        .catch(error => alert('is no delete', error))
-    })
-    btns.push(btn);
-  });
-}
-
-validateFieldsByMessage();
