@@ -11,6 +11,7 @@ import createProjectController from "./pages/create-project/controller.js";
 let init = {}
 
 Object.setPrototypeOf(init, {
+    
     "initsofkiano": function () {
         setTimeout(function () {
             sofkianoController.fillSofkiano();
@@ -42,5 +43,8 @@ Object.setPrototypeOf(init, {
             createProjectController();
         }, 300);
     }
+
+    
 });
+setTimeout(300);
 export default init;

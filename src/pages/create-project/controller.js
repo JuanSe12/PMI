@@ -46,42 +46,41 @@ export default async function createProject() {
         }
     )
 
-    ///////Client
-
-    //FIXXX
-    //var client = await project.getClient();
-
-    //deleteBusiness(client);
+    ///////Client   
 
         document.getElementById('add_modal_client').addEventListener('click', function () {
-            if (document.getElementById("business-name") != null) {
-                alert("No se puede tener más de un cliente");
-            } else {
                 let sessionClient = JSON.parse(sessionStorage.clients);
                 renderClient(sessionClient);
-            }
         });
     
 
     document.getElementById('add_client').addEventListener('click', function () {
-        let sofkiArray = document.getElementById("div_clientModal");
-        let checkClient = sofkiArray.getElementsByTagName('input');
+        let clientArray = document.getElementById("div_clientModal");
+        let checkClient = clientArray.getElementsByTagName('input');
         let arrayClientInput = [];
         for (var i = 0; i < checkClient.length; i++) {
             if (checkClient[i].checked) {
                 arrayClientInput.push(parseInt(checkClient[i].value));
             }
         }
+        let sessionClient = JSON.parse(sessionStorage.clients)[arrayClientInput[0] - 1];
+
+        let newClient = `<img src="${Config.baseUrl() + sessionClient.img}" alt="" class="resize circle" id="project-business-image${sessionClient.id}">
+                        
+                        ${sessionClient.name} <a href="#" onclick="" id="delete-icon-business"><i class="material-icons md-36">close</i></a>`
 
         let li = document.createElement("li");
         document.getElementById('content-Business').appendChild(li);
         $(li).addClass("collection-item avatar");
         $(li).attr("id", "business-name");
+        document.getElementById('business-name').innerHTML = newClient;        
 
         document.getElementById('modalClient').removeAttribute("style");
         document.getElementsByClassName('modal-overlay')[0].removeAttribute("style");
 
+        deleteBusiness();
     });
+    
     //////////////Sofkianos
     sofkianosContent = document.getElementById("project-sofkianos-list");
 
@@ -150,16 +149,15 @@ export default async function createProject() {
     });
 
     var sessionClient = await DataService.getAllClients();
-    editButton(project);
+    //editButton(project);
     //----------------------------------------
    // save();
     sessionStorage.clients = JSON.stringify(sessionClient);
 
 }
 
-//falta
-function deleteBusiness(client) {
 
+function deleteBusiness() {
     $(document).ready(function () {
         $(`#delete-icon-business`).click(function (event) {
             console.log("Imagen de la empresa eliminado");
