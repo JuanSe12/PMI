@@ -33,7 +33,8 @@ export function update(sofkianoUpdate) {
         }
 
         DataService.save(
-            new ModelSofkiano(1, 
+            new ModelSofkiano(
+                sofkianoUpdate.id, 
                 firstName, 
                 lastName, 
                 sofkianoUpdate.img, 

@@ -7,7 +7,7 @@ import {
     validateFieldsByMessage,
     validateFields,
     fillFieldsValidation
-} from './validationClient.js';
+} from './validation_client.js';
 import Client from '../../model/client.js';
 import Route from "../../services/route.js";
 

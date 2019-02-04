@@ -4,7 +4,7 @@ import fillSofkianoEdit from "./pages/view-sofkiano/controller.js";
 import fillProject from "./pages/view-project/controller.js";
 import sofkianoController from "./pages/sofkiano/controller.js";
 import projectController from "./pages/project/controller.js";
-import clientController from "./pages/client/clientController.js";
+import clientController from "./pages/client/client_controller.js";
 import searchContext from "./pages/head-bar/controller.js";
 import createProjectController from "./pages/create-project/controller.js";
 
@@ -16,7 +16,6 @@ Object.setPrototypeOf(init, {
         setTimeout(function () {
             sofkianoController.fillSofkiano();
             searchContext('sofkiano');
-            DOMsaveSofkiano();
         }, 150);
     },
     "initproject": function () {
