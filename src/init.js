@@ -33,7 +33,7 @@ Object.setPrototypeOf(init, {
     },
     "initview-sofkiano": function (value) {
         fillSofkianoEdit(value);
-        //aqui agrego el codigo para que renderize mi formulario de editar
+         //aqui agrego el codigo para que renderize mi formulario de editar
     },
     "initview-project": function (value) {
         setTimeout(() => {

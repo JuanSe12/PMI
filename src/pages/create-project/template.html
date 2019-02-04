@@ -3,84 +3,89 @@
         <div class="row">
             <div class="col s12">
                 <div class="icons">
-                    <a  href="#"   id="saveDocument"><i class="material-icons md-36">save</i></a>
+                    <a href="#" id="saveDocument"><i class="material-icons md-36">save</i></a>
                 </div>
             </div>
         </div>
-        
-        <div class="input-field col s6">
-                <input id="title-project" type="text" class="validate">
-                <label for="title_project">Título del proyecto</label>
-              </div>
-        <div class="row">
-            <form class="col s12">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <textarea id="input-project-objetive" class="materialize-textarea"></textarea>
-                        <label for="textarea1">Objetivo o descripción del proyecto</label>
-                    </div>
+
+        <form>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input id="title-project" type="text" class="validate" required>
+                    <label for="title_project">Título del proyecto *</label>
                 </div>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input id="input-project-start-date" class="datepicker" type="text">
-                        <label for="date_init">Fecha de Inicio</label>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <textarea id="input-project-objetive" class="materialize-textarea" required></textarea>
+                            <label for="textarea1">Objetivo o descripción del proyecto *</label>
+                        </div>
                     </div>
-                    <div class="input-field col s6">
-                        <input id="input-project-finish-date" class="datepicker" type="text">
-                        <label for="date_init">Fecha de Finalización</label>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="input-project-start-date" class="datepicker" type="text" required>
+                            <label for="date_init">Fecha de Inicio</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="input-project-finish-date" class="datepicker" type="text" required>
+                            <label for="date_init">Fecha de Finalización</label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col s12" id="dropdown-tech">
-                        <div class="col s6">
-                            <h5>Tecnologías</h5>
+                    <div class="row">
+                        <div class="col s12" id="dropdown-tech">
+                            <div class="col s6">
+                                <h5>Tecnologías</h5>
+                            </div>
+
+                            <div class="input-field col s2 offset-s4 ">
+                                <a class="btn-floating center-image modal-trigger" id="add_tech" href="#modal1"><i
+                                        class="material-icons">add</i></a>
+                            </div>
                         </div>
 
-                        <div  class="input-field col s2 offset-s4 ">
-                            <a class="btn-floating center-image modal-trigger" id="add_tech" href="#modal1"><i class="material-icons">add</i></a>
+                        <div class="col s12" id="container-tech">
                         </div>
                     </div>
-
-                    <div class="col s12" id="container-tech">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12">
-                        <div class="col 6">
-                            <h5>Cliente</h5>
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="col 6">
+                                <h5>Cliente</h5>
+                            </div>
+                            <div class="input-field col s2 offset-s4 ">
+                                <a class="btn-floating center-image modal-trigger" id="add_modal_client" href="#modalClient">
+                                    <i class="material-icons">add</i></a>
+                            </div>
                         </div>
-                        <div  class="input-field col s2 offset-s4 ">
-                            <a class="btn-floating center-image modal-trigger" id="add_modal_client" href="#modalClient">
-                                <i class="material-icons">add</i></a>
-                        </div>
-                    </div>
-                    <div class="col s12">
-                        <ul  id="content-Business">
-                            <!-- <li class="collection-item avatar" id="business-name">
+                        <div class="col s12">
+                            <ul id="content-Business">
+                                <!-- <li class="collection-item avatar" id="business-name">
 
                             </li> -->
-                        </ul>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="col 6">
+                                <h5>Sofkianos</h5>
+                            </div>
+                            <div class="input-field col s2 offset-s4 ">
+                                <a class="btn-floating center-image modal-trigger" id="add_modal_sofkiano" href="#modalSofkiano"><i
+                                        class="material-icons">add</i></a>
+                            </div>
+
+                        </div>
+                        <div class="col s12">
+                            <ul id="project-sofkianos-list">
+                            </ul>
+                        </div>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col s12">
-                        <div class="col 6">
-                            <h5>Sofkianos</h5>
-                        </div>
-                        <div  class="input-field col s2 offset-s4 ">
-                            <a class="btn-floating center-image modal-trigger" id="add_modal_sofkiano" href="#modalSofkiano"><i
-                                    class="material-icons">add</i></a>
-                        </div>
-
-                    </div>
-                    <div class="col s12">
-                        <ul  id="project-sofkianos-list">
-                        </ul>
-                    </div>
-                </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
     <script>
         $(document).ready(function () {

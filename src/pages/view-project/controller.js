@@ -1,7 +1,7 @@
 
 import DataService from "../../services/data_service.js";
 import Config from "../../config/config.js"
-import { save } from "./saveData.js";
+import { save } from "./save_data.js";
 import Project from "../../model/project.js";
 
 
@@ -10,10 +10,10 @@ let sofkianosAvailable = [];
 let sofkianoDeleteProject = new Set();
 let projectEdit = new Project();
 
-function deleteItem(id, array){
-    array.forEach((item,index) => {
-        if(item === id){
-            array.splice(index,1);
+function deleteItem(id, array) {
+    array.forEach((item, index) => {
+        if (item === id) {
+            array.splice(index, 1);
         }
     });
     return array;
@@ -28,28 +28,32 @@ export default async function fillProject(project) {
     let finishDate = "";
     let technologies = "";
     let sofkiano = "";
-    let prueba = "";
+    let clientImg = "";
+
+    sofkianoDeleteProject = new Set();
+    sofkianosAvailable = [];
+    technologiesAvailable = [];
     projectEdit = project;
 
     DataService.getAvailableSofkianosProject().then(
         sofkianos => {
-            sofkianos.forEach(sofkiano =>{
+            sofkianos.forEach(sofkiano => {
                 sofkianosAvailable.push(sofkiano.id);
             })
             projectEdit.sofkianos.forEach(idSofkiano => {
-                sofkianosAvailable = deleteItem(idSofkiano,sofkianosAvailable)
+                sofkianosAvailable = deleteItem(idSofkiano, sofkianosAvailable)
             });
         }
     )
 
     DataService.getAllTechnologies().then(
         technologies => {
-            technologies.forEach(technology =>{
+            technologies.forEach(technology => {
                 technologiesAvailable.push(technology.id);
             })
-            
+
             projectEdit.technologies.forEach(idTechnology => {
-                technologiesAvailable = deleteItem(idTechnology,technologiesAvailable)
+                technologiesAvailable = deleteItem(idTechnology, technologiesAvailable)
             });
         }
     )
@@ -109,7 +113,7 @@ export default async function fillProject(project) {
 
     });
 
-  
+
     //////////////Sofkianos
     var sofkianos = await project.getSofkianos();
     sofkiano = fillSofkianos(sofkianos);
@@ -135,16 +139,16 @@ export default async function fillProject(project) {
             }
         }
         console.log(sofkianoDeleteProject);
-        
+
 
         DataService.getSofkianoByIds(projectEdit.sofkianos).then(
             sofkiano => {
                 sofkianosContent.innerHTML = fillSofkianos(sofkiano);
             }
         )
-        setTimeout(function(){
-            $('.icons-delete-sofki').css("display","block");
-        },300)
+        setTimeout(function () {
+            $('.icons-delete-sofki').css("display", "block");
+        }, 300)
 
     });
 
@@ -160,7 +164,7 @@ export default async function fillProject(project) {
                 renderTech(technologies);
             }
         )
-        
+
     });
 
     document.getElementById('add_technologies').addEventListener('click', function () {
@@ -180,9 +184,9 @@ export default async function fillProject(project) {
                 TechnologiesContent.innerHTML = fillTecno(technologies);
             }
         )
-        setTimeout(function(){
-            $('.icons-delete').css("display","block");
-        },300)
+        setTimeout(function () {
+            $('.icons-delete').css("display", "block");
+        }, 300)
 
     });
 
@@ -197,7 +201,7 @@ export default async function fillProject(project) {
     sessionStorage.clients = JSON.stringify(sessionClient);
     sessionStorage.sofki = JSON.stringify(sessionSofki);
 
-    prueba = document.getElementById('project-business-image');
+    clientImg = document.getElementById('project-business-image');
     startDate = project.getDateInit();
     finishDate = project.getDateFinish();
     titleProject = document.getElementById('title-project');
@@ -206,7 +210,7 @@ export default async function fillProject(project) {
     document.getElementById('input-project-start-date').value = startDate;
     document.getElementById('input-project-finish-date').value = finishDate;
 
-    
+
     document.getElementById('saveDocument').addEventListener('click', function () {
         save(projectEdit, Array.from(sofkianoDeleteProject));
     });
@@ -298,7 +302,7 @@ function deleteIconSofki(index, projects) {
         $(`#icons-delete-view-sofki${index}`).click(function (event) {
             $(`#chip-sofki${index}`).remove();
             projectEdit.sofkianos = deleteItem(index, projectEdit.sofkianos)
-            sofkianoDeleteProject.add(index);          
+            sofkianoDeleteProject.add(index);
             sofkianosAvailable.push(index);
             console.log(sofkianoDeleteProject);
         })
@@ -309,8 +313,8 @@ function deleteIconSofki(index, projects) {
 function fillTecno(technologies) {
     let tecnoTemplate = "";
     for (let index = 0; index < technologies.length; index++) {
-        let tecno = 
-        `<div class="chips-div" id="chip-tech${technologies[index].id}">
+        let tecno =
+            `<div class="chips-div" id="chip-tech${technologies[index].id}">
             <div class="content-elements">
             <a href=# id="icons-delete-view${technologies[index].id}"><i class="close material-icons icons-delete" >close</i></a>
             <img src="${Config.baseUrl() + technologies[index].icon}" alt="">
