@@ -47,9 +47,10 @@ export function save() {
             arrayTech,
             "/src/assets/images/projects/project1.jpg",
             arraySofkiano
-        ))
+        )).then(()=>{
+             M.toast({html:"Se guardaron satisfactoriamente los datos"})
+             Route.routeTo("project")});
 
-        M.toast({html:"Se guardaron satisfactoriamente los datos"})
-        Route.routeTo("project");
+        
     })
 }

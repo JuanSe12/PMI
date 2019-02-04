@@ -12,17 +12,10 @@
         <i class="large material-icons">menu</i>
     </a>
     <ul>
-        <li><a class="btn-floating  amber darken-2 tooltipped" data-position="top" 
+        <li><a class="btn-floating  amber darken-2 tooltipped" data-delay="50" data-position="top" 
             data-tooltip="¡Agrega un nuevo Proyecto!" id="add-project-button">
             <i class="material-icons">add</i></a></li>
     </ul>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', 
-    function () {
-        var elems = document.querySelectorAll('.fixed-action-btn');
-        var instances = M.FloatingActionButton.init(elems, options);
-    });
-   M.AutoInit();
-</script>
+<script src="./src/assets/js/common/common.js"></script>
