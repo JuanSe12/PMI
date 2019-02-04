@@ -1,7 +1,6 @@
-
 import DataService from "../../services/data_service.js";
 import Config from "../../config/config.js"
-import { save } from "./saveData.js";
+//import { save } from "./saveData.js";
 import Project from "../../model/project.js";
 
 
@@ -18,22 +17,11 @@ function deleteItem(id, array){
     return array;
 }
 
-export default async function fillProject(project) {
+export default async function createProject() {
 
-    projectEdit = project;
+    //projectEdit = project;
     var TechnologiesContent = "";
     let sofkianosContent = "";
-    let titleProject = "";
-    let template = "";
-    let startDate = "";
-    let finishDate = "";
-    let technologies = "";
-    let sofkiano = "";
-    let prueba = "";
-    //console.log(project)
-    let nameBusiness = "";
-     //saveButton();
-    //save();
 
     DataService.getAllSofkianos().then(
         sofkianos => {
@@ -46,8 +34,6 @@ export default async function fillProject(project) {
         }
     )
 
-
-    debugger;
     DataService.getAllTechnologies().then(
         technologies => {
             technologies.forEach(technology =>{
@@ -60,68 +46,46 @@ export default async function fillProject(project) {
         }
     )
 
-    ///////Client
+    ///////Client   
 
-    var client = await project.getClient();
-
-
-    //console.log(client[0].name);
-    let clientStr = `<img src="${Config.baseUrl() + client[0].img}" alt="" class="resize circle" id="project-business-image${client[0].id}">
-                    ${client[0].name} <a style="display:none;" href="#" class="view-edit" onclick="" id="delete-icon-business"><i class="material-icons md-36">close</i></a>`
-
-
-    document.getElementById('business-name').innerHTML = clientStr;
-    deleteBusiness(client);
-
-
-    document.getElementById('add_modal_client').addEventListener('click', function () {
-
-        if (document.getElementById("business-name") != null) {
-
-            alert("No se puede tener más de un cliente");
-
-        } else {
-            let sessionClient = JSON.parse(sessionStorage.clients);
-            renderClient(sessionClient);
-        }
-
-    });
+        document.getElementById('add_modal_client').addEventListener('click', function () {
+                let sessionClient = JSON.parse(sessionStorage.clients);
+                renderClient(sessionClient);
+        });
+    
 
     document.getElementById('add_client').addEventListener('click', function () {
-        let sofkiArray = document.getElementById("div_clientModal");
-        let checkClient = sofkiArray.getElementsByTagName('input');
+        let clientArray = document.getElementById("div_clientModal");
+        let checkClient = clientArray.getElementsByTagName('input');
         let arrayClientInput = [];
         for (var i = 0; i < checkClient.length; i++) {
             if (checkClient[i].checked) {
                 arrayClientInput.push(parseInt(checkClient[i].value));
             }
         }
-
         let sessionClient = JSON.parse(sessionStorage.clients)[arrayClientInput[0] - 1];
 
         let newClient = `<img src="${Config.baseUrl() + sessionClient.img}" alt="" class="resize circle" id="project-business-image${sessionClient.id}">
                         
-                        ${sessionClient.name} <a style="display:none;" href="#" class="view-edit" onclick="" id="delete-icon-business"><i class="material-icons md-36">close</i></a>`
+                        ${sessionClient.name} <a href="#" onclick="" id="delete-icon-business"><i class="material-icons md-36">close</i></a>`
 
         let li = document.createElement("li");
         document.getElementById('content-Business').appendChild(li);
         $(li).addClass("collection-item avatar");
         $(li).attr("id", "business-name");
-
-        document.getElementById('business-name').innerHTML = newClient;
+        document.getElementById('business-name').innerHTML = newClient;        
 
         document.getElementById('modalClient').removeAttribute("style");
         document.getElementsByClassName('modal-overlay')[0].removeAttribute("style");
 
+        deleteBusiness();
     });
-
-  
+    
     //////////////Sofkianos
-    var sofkianos = await project.getSofkianos();
-    sofkiano = fillSofkianos(sofkianos);
     sofkianosContent = document.getElementById("project-sofkianos-list");
-    sofkianosContent.innerHTML = sofkiano;
+
     document.getElementById('add_modal_sofkiano').addEventListener('click', function () {
+        console.log('asdf');
         DataService.getSofkianoByIds(sofkianosAvailable).then(
             sofkianos => {
                 renderSofkianos(sofkianos);
@@ -131,7 +95,6 @@ export default async function fillProject(project) {
     document.getElementById('add_sofki').addEventListener('click', function () {
         let sofkiArray = document.getElementById("div_SofkiModal");
         let checkSofkiano = sofkiArray.getElementsByTagName('input');
-        let arraySofkiInput = [];
         for (var i = 0; i < checkSofkiano.length; i++) {
             if (checkSofkiano[i].checked) {
                 sofkianosAvailable = deleteItem(parseInt(checkSofkiano[i].value), sofkianosAvailable)
@@ -152,11 +115,9 @@ export default async function fillProject(project) {
 
     //////////////// Technologies
 
-    var tech = await project.getTechnologies();
-    technologies = fillTecno(tech);
     TechnologiesContent = document.getElementById("container-tech")
-    TechnologiesContent.innerHTML = technologies;
     document.getElementById('add_tech').addEventListener('click', function () {
+        console.log('click add tech')
         DataService.getTechnologiesByIds(technologiesAvailable).then(
             technologies => {
                 renderTech(technologies);
@@ -168,7 +129,6 @@ export default async function fillProject(project) {
     document.getElementById('add_technologies').addEventListener('click', function () {
         let technologiesArray = document.getElementById("div_techs");
         let checkTechnology = technologiesArray.getElementsByTagName('input');
-        let arrayTechnologiesInput = [];
 
         for (var i = 0; i < checkTechnology.length; i++) {
             if (checkTechnology[i].checked) {
@@ -188,39 +148,16 @@ export default async function fillProject(project) {
 
     });
 
-
-
-
-
-        
-
-
     var sessionClient = await DataService.getAllClients();
-    var sessionTech = await DataService.getAllTechnologies();
-    var sessionSofki = await DataService.getAllSofkianos();
-    editButton(project);
-    save();
-    sessionStorage.tec = JSON.stringify(sessionTech);
+    //editButton(project);
+    //----------------------------------------
+   // save();
     sessionStorage.clients = JSON.stringify(sessionClient);
-    sessionStorage.sofki = JSON.stringify(sessionSofki);
-
-    prueba = document.getElementById('project-business-image');
-    startDate = project.getDateInit();
-    finishDate = project.getDateFinish();
-    titleProject = document.getElementById('title-project');
-    titleProject.innerHTML = project.name;
-    document.getElementById('input-project-objetive').value = project.description;
-    document.getElementById('input-project-start-date').value = startDate;
-    document.getElementById('input-project-finish-date').value = finishDate;
-    // console.log(sessionTech);
-    //var selectTech = document.getElementById('dropTech');
-
 
 }
 
-//falta
-function deleteBusiness(client) {
 
+function deleteBusiness() {
     $(document).ready(function () {
         $(`#delete-icon-business`).click(function (event) {
             console.log("Imagen de la empresa eliminado");
@@ -233,19 +170,6 @@ function deleteBusiness(client) {
     })
 }
 
-function editButton(project) {
-    $(`#editDocument`).click(function (event) {
-        document.getElementById("input-project-objetive").disabled = false;
-        document.getElementById("input-project-start-date").disabled = false;
-        document.getElementById("input-project-finish-date").disabled = false;
-        $(".view-edit").css("display", "inline-block");
-        $(".icons-delete").css("display", "block");
-        $(".icons-delete-sofki").css("display", "block");
-        //cambiar etiqueta titulo
-        document.getElementById("content-title-project").innerHTML = `<input class="title" id="title-project"></input>`;
-        document.getElementById('title-project').value = project.name;
-    })
-}
 
 function renderSofkianos(data) {
     let div_SofkiModal = document.getElementById("div_SofkiModal");

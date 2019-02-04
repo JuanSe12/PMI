@@ -43,6 +43,7 @@ export default controller = {
                         arrayFeaturesDiv.push(parseInt(checkFeature[i].value));
                     }
                 }
+                //console.log(arrayFeaturesDiv);
                 let technologiesArray = document.getElementById(`div_technologies`);
                 let checkTechnology = technologiesArray.getElementsByTagName(`input`);
                 //console.log(checkTechnology);
