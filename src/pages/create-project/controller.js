@@ -1,11 +1,12 @@
 import DataService from "../../services/data_service.js";
 import Config from "../../config/config.js"
-//import { save } from "./saveData.js";
 import Project from "../../model/project.js";
+import { save } from "../view-project/saveData.js";
 
 
 let technologiesAvailable = []
 let sofkianosAvailable = [];
+let sofkianoDeleteProject = new Set();
 let projectEdit = new Project();
 
 function deleteItem(id, array){
@@ -19,7 +20,6 @@ function deleteItem(id, array){
 
 export default async function createProject() {
 
-    //projectEdit = project;
     var TechnologiesContent = "";
     let sofkianosContent = "";
 
@@ -98,7 +98,9 @@ export default async function createProject() {
         for (var i = 0; i < checkSofkiano.length; i++) {
             if (checkSofkiano[i].checked) {
                 sofkianosAvailable = deleteItem(parseInt(checkSofkiano[i].value), sofkianosAvailable)
-                projectEdit.sofkianos.push(parseInt(checkSofkiano[i].value))
+                projectEdit.sofkianos.push(parseInt(checkSofkiano[i].value));
+                sofkianoDeleteProject = new Set(deleteItem(parseInt(checkSofkiano[i].value),
+                    Array.from(sofkianoDeleteProject)));
             }
         }
 
@@ -151,7 +153,13 @@ export default async function createProject() {
     var sessionClient = await DataService.getAllClients();
     //editButton(project);
     //----------------------------------------
-   // save();
+    projectEdit.state = 1;
+
+
+    document.getElementById('saveDocument').addEventListener('click', function(){
+        save(projectEdit, Array.from(sofkianoDeleteProject));
+    })
+
     sessionStorage.clients = JSON.stringify(sessionClient);
 
 }
@@ -226,9 +234,9 @@ function deleteIconSofki(index, projects) {
     $(document).ready(function () {
         $(`#icons-delete-view-sofki${index}`).click(function (event) {
             $(`#chip-sofki${index}`).remove();
-            projectEdit.sofkianos = deleteItem(index, projectEdit.sofkianos)
-            sofkianosAvailable.push(index)
-            //console.log(projects);
+            projectEdit.sofkianos = deleteItem(index, projectEdit.sofkianos);
+            sofkianoDeleteProject.add(index);
+            sofkianosAvailable.push(index);
         })
     })
 
@@ -246,7 +254,6 @@ function fillTecno(technologies) {
             <p>${technologies[index].name}</p>
         </div>`;
         tecnoTemplate += tecno;
-        //debugger;
         deleteIcon(technologies[index].id, technologies);
 
     }
@@ -263,7 +270,6 @@ function fillSofkianos(sofkiano) {
         </div>
         <p>${sofkiano[index].firtsName}</p>
         </div>`;
-        //console.log(sofkianoList);
         sofkianoTemplate += sofkianoList;
 
         deleteIconSofki(sofkiano[index].id, sofkiano);

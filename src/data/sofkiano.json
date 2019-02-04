@@ -5,12 +5,10 @@
         "lastName": "Rios Arango",
         "img": "/src/assets/images/sofkianos/sofkiano2.jpg",
         "projects": [
-            2,
-            3
+            1, 3
         ],
         "percents": [
-            40,
-            60
+            20, 80
         ],
         "documentType": "CC",
         "documentNumber": 1040749576,
@@ -18,7 +16,7 @@
         "internalExperience": "1",
         "feactures": [
             1,
-            3
+            2
         ],
         "technologies": [
             1,
@@ -33,12 +31,10 @@
         "lastName": "Barba",
         "img": "/src/assets/images/sofkianos/sofkiano1.jpg",
         "projects": [
-            1,
-            4
+            1, 2
         ],
         "percents": [
-            60,
-            40
+            40, 60
         ],
         "documentType": "CC",
         "documentNumber": 94687049,
@@ -61,12 +57,10 @@
         "lastName": "Velez",
         "img": "/src/assets/images/sofkianos/sofkiano4.jpg",
         "projects": [
-            2,
-            3
+            5
         ],
         "percents": [
-            50,
-            50
+            100
         ],
         "documentType": "CC",
         "documentNumber": 92873982,
@@ -89,12 +83,10 @@
         "lastName": "Restrepo Mejía",
         "img": "/src/assets/images/sofkianos/sofkiano3.jpg",
         "projects": [
-            3,
-            4
+            2, 4
         ],
         "percents": [
-            50,
-            50
+            50, 50
         ],
         "documentType": "CC",
         "documentNumber": 92873982,
