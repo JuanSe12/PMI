@@ -1,8 +1,8 @@
 import DataService from "../services/data_service.js";
 
 export default class Sofkiano {
-    constructor(id, firtsName, lastName, img, projects, percents, documentType, documentNumber,
-        externalExperience, internalExperience, feactures, technologies) {
+    constructor(id, firtsName, lastName, img, projects=[], percents=[], documentType, documentNumber,
+        externalExperience, internalExperience, feactures=[], technologies=[]) {
         this.id = id;
         this.firtsName = firtsName;
         this.lastName = lastName;

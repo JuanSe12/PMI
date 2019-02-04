@@ -1,5 +1,3 @@
-
-
 <div id="div_content_pages_render">
     <div class="tab">
         <h1 class="title" id="proyectos_titulo">Proyectos</h1>
@@ -9,20 +7,22 @@
     </div>
 </div>
 
-
-
 <div class="fixed-action-btn">
     <a class="btn-floating btn-large grey darken-4 waves-effect">
         <i class="large material-icons">menu</i>
     </a>
     <ul>
         <li><a class="btn-floating  amber darken-2 tooltipped" data-position="top" 
-            data-tooltip="¡Agrega un nuevo cliente!"><i class="material-icons">add</i></a></li>
+            data-tooltip="¡Agrega un nuevo cliente!" id="add-project-button">
+            <i class="material-icons">add</i></a></li>
     </ul>
 </div>
 
 <script>
-$(function(){
-    $('.collapsible').collapsible();
-})
+    document.addEventListener('DOMContentLoaded', 
+    function () {
+        var elems = document.querySelectorAll('.fixed-action-btn');
+        var instances = M.FloatingActionButton.init(elems, options);
+    });
+   M.AutoInit();
 </script>
