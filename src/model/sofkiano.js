@@ -47,4 +47,16 @@ export default class Sofkiano {
                 );
         });
     }
+
+     deleteProjects(project){
+        
+          
+        let ar=this.projects.filter(proje=>{
+            proje!=project.id
+                
+        }) 
+        console.log(ar);
+        
+            
+    }
 }

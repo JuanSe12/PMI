@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost'
+const baseUrl = 'https://pmi.sytes.net'
 const port = ''
 export default class Config{
     static baseUrl(){

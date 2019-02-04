@@ -3,21 +3,14 @@ import DataService from "../../services/data_service.js";
 import Config from "../../config/config.js"
 import { save } from "./save_data.js";
 import Project from "../../model/project.js";
-
+import Route from "../../services/route.js";
 
 let technologiesAvailable = []
 let sofkianosAvailable = [];
 let sofkianoDeleteProject = new Set();
 let projectEdit = new Project();
 
-function deleteItem(id, array) {
-    array.forEach((item, index) => {
-        if (item === id) {
-            array.splice(index, 1);
-        }
-    });
-    return array;
-}
+
 
 export default async function fillProject(project) {
 
@@ -186,7 +179,10 @@ export default async function fillProject(project) {
         )
         setTimeout(function () {
             $('.icons-delete').css("display", "block");
+
         }, 300)
+
+
 
     });
 
@@ -210,11 +206,41 @@ export default async function fillProject(project) {
     document.getElementById('input-project-start-date').value = startDate;
     document.getElementById('input-project-finish-date').value = finishDate;
 
-
+    addDeleteEvent(project);
     document.getElementById('saveDocument').addEventListener('click', function () {
         save(projectEdit, Array.from(sofkianoDeleteProject));
     });
 
+}
+function deleteItem(id, array) {
+    array.forEach((item, index) => {
+        if (item === id) {
+            array.splice(index, 1);
+        }
+    });
+    return array;
+}
+
+function addDeleteEvent(project) {
+    document.getElementById("btn-project-delete").addEventListener('click', () => {
+        DataService.delete(project).then(elementDeleted => {
+            DataService.getAllSofkianos().then(
+                sofkianos => {
+                    sofkianos.forEach(sofkiano => {
+                        sofkiano.projects = deleteItem(project.id, sofkiano.projects);
+                    });
+                    localStorage.setItem('sofkiano.json', JSON.stringify(sofkianos));
+                    M.toast(
+                        {
+                            html: `Se eliminó con exito ${elementDeleted.name}!`,
+                            outDuration: 300
+                        })
+                    Route.routeTo('project');
+                }
+            )
+
+        })
+    })
 }
 
 //falta

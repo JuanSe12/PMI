@@ -27,8 +27,10 @@ export default controller = {
             let template = "";
             var ul = document.getElementById("sofkianos-list");
             sofkianos.map(async (sofkiano) => {
+               
                 idSofkList += 1;
                 let dataProject = await sofkiano.getProjects();
+                console.log(dataProject);
                 let dataTech = await sofkiano.getTechnologies();
                 let dataSkills = await sofkiano.getFeatures();
                 let tecnologhies = fillTecno(dataTech);

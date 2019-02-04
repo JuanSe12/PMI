@@ -4,9 +4,8 @@ import DataService from "../../services/data_service.js";
 import ModelProject from "../../model/project.js";
 import Route from "../../services/route.js";
 
-export function save() {
-  
-    document.getElementById('saveDocument').addEventListener('click', function () {
+export function save(project, deleteSofkianos) {
+   
 
         console.log(deleteSofkianos);
         
@@ -51,6 +50,15 @@ export function save() {
             }
         )
 
-        
-    })
+        M.toast({html:"Se guardaron satisfactoriamente los datos"})
+        Route.routeTo("project");
+}
+
+function deleteItem(id, array){
+    array.forEach((item,index) => {
+        if(item === id){
+            array.splice(index,1);
+        }
+    });
+    return array;
 }
