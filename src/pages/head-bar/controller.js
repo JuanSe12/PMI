@@ -2,7 +2,7 @@ import DataService from "../../services/data_service.js";
 import Search from "../../services/filter_service.js"
 import sofkianoController from "../sofkiano/controller.js";
 import projectController from "../project/controller.js";
-import clientController from "../client/clientController.js"
+import clientController from "../client/client_controller.js"
 
 
 let thiscontext;

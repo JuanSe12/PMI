@@ -1,6 +1,6 @@
 import DataService from "../../services/data_service.js";
 import Config from "../../config/config.js";
-import { update } from "./updateSofkiano.js";
+import { update } from "./update_sofkiano.js";
 import Sofkiano from "../../model/sofkiano.js";
 
 let technologiesAvailable = [];
