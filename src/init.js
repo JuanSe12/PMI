@@ -12,25 +12,35 @@ let init = {}
 
 Object.setPrototypeOf(init, {
     "initsofkiano": function () {
-        sofkianoController.fillSofkiano();
-        searchContext('sofkiano');
-        DOMsaveSofkiano();
+        setTimeout(function () {
+            sofkianoController.fillSofkiano();
+            searchContext('sofkiano');
+            DOMsaveSofkiano();
+        }, 300);
     },
     "initproject": function () {
-        projectController.fillProjects();
-        searchContext('project');
+        setTimeout(function () {
+            projectController.fillProjects();
+            searchContext('project');
+        }, 300);
+
     },
     "initclient": function () {
-        clientController.fillClient();
-        searchContext('client');
+        setTimeout(function () {
+            clientController.fillClient();
+            searchContext('client');
+        }, 300)
     },
     "initview-project": function (value) {
-        fillProject(value);
-        
+        setTimeout(() => {
+            fillProject(value);             
+        }, 300);
+
     },
     "initcreate-project": function () {
-        createProjectController();
-        
+        setTimeout(() => {
+            createProjectController();
+        }, 300);
     }
 });
 export default init;
