@@ -6,6 +6,7 @@ import sofkianoController from "./pages/sofkiano/controller.js";
 import projectController from "./pages/project/controller.js";
 import clientController from "./pages/client/clientController.js";
 import searchContext from "./pages/head-bar/controller.js";
+import createProjectController from "./pages/create-project/controller.js";
 
 let init = {}
 
@@ -25,6 +26,10 @@ Object.setPrototypeOf(init, {
     },
     "initview-project": function (value) {
         fillProject(value);
+        
+    },
+    "initcreate-project": function () {
+        createProjectController();
         
     }
 });
