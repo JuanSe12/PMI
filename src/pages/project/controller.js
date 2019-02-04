@@ -52,7 +52,7 @@ export default controller = {
                                     </div>
                                 </div>
                                 <div class="col s2">
-                                    <p> <a class="edit-buttom" id="showMore${idList}">  <i class="material-icons">add_circle</i><p>Ver mas</p></a></p>
+                                    <p> <a class="edit-buttom" id="showMore${idList}">  <i class="material-icons">add_circle</i></a></p>
                                 </div>
                             </div>
                             <div class="collapsible-body ">               
