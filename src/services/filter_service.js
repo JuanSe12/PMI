@@ -1,6 +1,7 @@
 export default function filterIt(array, searchKey) {
-    return array.filter(function(obj) {
-      return Object.keys(obj).some(function(key) {
+    return array.filter(obj=> {
+      
+      return Object.keys(obj).some((key)=> {
           return obj[key]
           .toString()
           .toUpperCase()

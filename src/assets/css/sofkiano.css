@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,900|Open+Sans');
-
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i');
 body {
     margin-left: 12pt;
     padding: 0%;  
-    font-family: 'Open Sans', sans-serif;  
+    font-family: 'Open Sans', sans-serif ; 
     
 }
 
@@ -11,6 +11,8 @@ body {
     max-width: 80%;
     margin: auto;
     padding-left: 2rem;
+    
+
 }
 .size-row {
     margin-bottom: 0px !important;
@@ -20,10 +22,11 @@ body {
 h1.title {
 
     font-size: 290%;     
-    color: #ffab40;
+    color: transparent;
      font-weight:350;  
     /* text-align: center;  */
     margin-left: 10%;
+    position: absolute!important;
     
 }
 
@@ -64,6 +67,10 @@ img.project-resize {
     width:50%; 
 }
 
+.btn-see-more{
+    cursor: pointer;
+}
+
 .title-sofkiano{
     font-size: 16px;
     font-weight: bold;
@@ -90,13 +97,51 @@ label.active {
 }
 
 div.chips {
-  
     display: inline-block;
    border-bottom: none;
+   padding-left: 1%;
+}
+div.big-chips {
+    padding-left: 5% !important;
+}
 
+div.big-chip{
+    transform: scale(1.3);
+    left: 2rem;
 }
 
 div.row-left {
     margin: 0rem;
 }
+.grow {
+     transition: all .2s ease-in-out;
+    }
 
+.grow:hover {
+     transform: scale(1.05);
+     -webkit-box-shadow: 1px 0px 15px -1px rgba(143,143,143,0.97);
+    -moz-box-shadow: 1px 0px 15px -1px rgba(143,143,143,0.97);
+    box-shadow: 1px 0px 15px -1px rgba(143,143,143,0.97);
+    }
+
+div.card-edit{
+    margin: 0rem ;   
+   
+}
+div.card-content{
+    border: transparent;
+    border-bottom: orange;
+    border-style: solid;
+
+}
+.card-title {
+    font-family: 'Raleway', sans-serif ;
+    color: #3e3e3e;
+    font-weight: 700 !important;
+}
+.card-second-title{
+    font-family: 'Raleway', sans-serif ;
+    font-weight: 700 !important;
+    color: #3e3e3e;
+    font-size: 110%;
+}

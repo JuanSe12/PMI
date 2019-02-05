@@ -6,6 +6,7 @@ import Project from "../model/project.js";
 import Sofkiano from "../model/sofkiano.js";
 import Technology from "../model/technology.js";
 import Config from "../config/config.js"
+import SofkianoProfile from "../model/sofkiano_profile.js";
 
 
 const CLIENT_TYPE_FILENAME = 'client_type.json';
@@ -13,8 +14,10 @@ const CLIENT_FILENAME = 'client.json';
 const FEATURES_FILENAME = 'feature.json';
 const PROJECT_STATE_FILENAME = 'project_state.json';
 const PROJECT_FILENAME = 'project.json';
+const SOFKIANO_PROFILE_FILENAME = 'sofkiano_profile.json';
 const SOFKIANO_FILENAME = 'sofkiano.json';
 const TECHNOLOGY_FILENAME = 'technology.json';
+
 
 
 let localStorage = window.localStorage
@@ -47,6 +50,11 @@ export default class DataService {
     }
 
 
+    static getAllSofkianoProfiles(){
+        return load(SOFKIANO_PROFILE_FILENAME, SofkianoProfile);
+    }
+
+
     static getAllSofkianos(){
         return load(SOFKIANO_FILENAME, Sofkiano);
     }
@@ -54,11 +62,6 @@ export default class DataService {
 
     static getAllTechnologies(){
         return load(TECHNOLOGY_FILENAME, Technology);
-    }
-
-
-    static saveLocalStorage(filename ,data){
-        localStorage.setItem(filename, JSON.stringify(data));
     }
 
 
@@ -76,6 +79,10 @@ export default class DataService {
         return loadByIds(FEATURES_FILENAME, Feature, ids)
     }
 
+    static getProjectSofkianoByIds(ids){
+        return loadByIds(PROJECT_FILENAME, Project, ids)
+    }
+
 
     static getProjectStateByIds(ids){
         return loadByIds(PROJECT_STATE_FILENAME, ProjectState, ids)
@@ -87,6 +94,11 @@ export default class DataService {
     }
 
 
+    static getSofkianoProfileByIds(ids){
+        return loadByIds(SOFKIANO_PROFILE_FILENAME, SofkianoProfile, ids)
+    }
+
+
     static getSofkianoByIds(ids){
         return loadByIds(SOFKIANO_FILENAME, Sofkiano, ids)
     }
@@ -94,6 +106,29 @@ export default class DataService {
 
     static getTechnologiesByIds(ids){
         return loadByIds(TECHNOLOGY_FILENAME, Technology, ids)
+    }
+
+
+    static getAvailableSofkianosProject(){
+        let arraySofkianos = [];
+        return new Promise(
+            (resolve, reject) =>{
+                load(SOFKIANO_FILENAME, Sofkiano).then(
+                    sofkianos =>{
+                        sofkianos.forEach(sofkiano => {
+                            
+                            if(sofkiano.projects.length < 2){
+                                arraySofkianos.push(sofkiano);
+                                console.log(sofkiano);
+                            } 
+                        });
+                        resolve(arraySofkianos);
+                    }
+                )
+                .catch(
+                    error => reject(error)
+                )
+            }); 
     }
 
 
@@ -113,6 +148,9 @@ export default class DataService {
         else if(model instanceof Project){
             return saveNewOrEditModel(PROJECT_FILENAME, Project, model)
         }
+        else if(model instanceof SofkianoProfile){
+            return saveNewOrEditModel(SOFKIANO_PROFILE_FILENAME, SofkianoProfile, model)
+        }
         else if(model instanceof Sofkiano){
             return saveNewOrEditModel(SOFKIANO_FILENAME, Sofkiano, model)
         }
@@ -120,13 +158,43 @@ export default class DataService {
             return saveNewOrEditModel(TECHNOLOGY_FILENAME, Technology, model)
         }
     }
+
+
+    static delete(model){
+        if(model instanceof ClientType){
+            return deleteModel(CLIENT_TYPE_FILENAME, ClientType, model)
+        }
+        else if(model instanceof Client){
+            return deleteModel(CLIENT_FILENAME, Client, model)
+        }
+        else if(model instanceof Feature){
+            return deleteModel(FEATURES_FILENAME, Feature, model)
+        }
+        else if(model instanceof ProjectState){
+            return deleteModel(PROJECT_STATE_FILENAME, ProjectState, model)
+        }
+        else if(model instanceof Project){
+            return deleteModel(PROJECT_FILENAME, Project, model)
+        }
+        else if(model instanceof SofkianoProfile){
+            return deleteModel(SOFKIANO_PROFILE_FILENAME, SofkianoProfile, model)
+        }
+        else if(model instanceof Sofkiano){
+            return deleteModel(SOFKIANO_FILENAME, Sofkiano, model)
+        }
+        else if(model instanceof Technology){
+            return deleteModel(TECHNOLOGY_FILENAME, Technology, model)
+        }
+    }
  
 }
+
+
 function load(filename, constructor){
     let variables =[];
     return new Promise((resolve, reject) =>{
         loadJsonFromFileOrLocalStorage(filename)
-        .then(jsonArray=>{ 
+        .then(jsonArray=>{
             jsonArray.forEach(item => {
                 variables.push(Object.cast(item, constructor));
             });
@@ -150,7 +218,7 @@ function loadJsonFromFileOrLocalStorage(filename){
         else{
             
             $.getJSON(`${Config.baseUrl()}/src/data/${filename}`, function(json) {
-                DataService.saveLocalStorage(filename,json);
+                saveLocalStorage(filename,json);
                 resolve(json)
             })
             .fail(function(){
@@ -200,19 +268,21 @@ function saveNewOrEditModel(filename,constructor, instance){
                     let index = getIndex(client.id, models);
                     instance.id = client.id;
                     try {
-                        models.splice(index,1,instance)
-                        DataService.saveLocalStorage(filename,models)
+                        models.splice(index, 1, instance)
+                        saveLocalStorage(filename, models)
                         resolve(instance)                            
                     } catch (error) {
                         reject(error)
                     }
                 }
                 else{
+                                   
+                    
                     let id = getLastId(models)
                     instance.id = id + 1;
                     try {
                         models.push(instance)
-                        saveLocalStorage(filename,models)
+                        saveLocalStorage(filename, models)
                         resolve(instance)                  
                     } catch (error) {
                         reject(error)
@@ -230,7 +300,7 @@ function saveNewOrEditModel(filename,constructor, instance){
 function getLastId(models){
     let id = 0;
     models.forEach(model => {
-        id < model.id ? id = model.id : id = id;
+        id < model.id ? id = model.id : id;
     });
     return id;
 }
@@ -239,9 +309,39 @@ function getLastId(models){
 function getIndex(id,models){
     let i = 0
     models.forEach((model,index) => {
-        model.id === id ? i = index : i = i;
+        model.id === id ? i = index : i;
     });
     return i;
+}
+
+
+function saveLocalStorage(filename ,data){
+    localStorage.setItem(filename, JSON.stringify(data));
+}
+
+
+function deleteModel(filename,constructor, instance){
+    return new Promise((resolve, reject) =>{
+        load(filename, constructor).then(
+            models =>{
+                let model = models.find(object => object.id === instance.id)
+
+                if(model){
+                    let index = getIndex(model.id, models);
+                    try {
+                        models.splice(index, 1)
+                        saveLocalStorage(filename, models)
+                        resolve(model)                            
+                    } catch (error) {
+                        reject(error)
+                    }
+                }
+            }
+        )
+        .catch(err=>{
+            reject(err)
+        })
+    });
 }
 
 

@@ -13,9 +13,7 @@
 .edit-buttom{
     color: #333 !important;
 }
-.collapsible-modify{
-    padding: 10px !important; 
-}
+
 .form-input {
     margin-top: 10px;
 }
@@ -25,16 +23,13 @@
 }
 
 .img-size {
-    width: 65% !important;
+    width: 40% !important;
+    height: auto;
 }
 
-.title-client{
-    font-size: 16px;
-}
 
-.modify-header {
-    padding-top: 1rem !important;
-}
+
+
 .size-row {
     margin-bottom: 0px !important;
     width: 100% !important;
@@ -63,9 +58,7 @@
 .title-client{
     font-size: 16px;
 }
-.modify-header {
-    padding-top: 1rem !important;
-}
+
 .size-row {
     margin-bottom: 0px !important;
     width: 100% !important;
@@ -73,9 +66,7 @@
 .edit-buttom{
     color: #333 !important;
 }
-.collapsible-modify{
-    padding: 10px !important; 
-}
+
 .form-input {
     margin-top: 10px;
 }
@@ -83,6 +74,18 @@
     color: #333 !important;
     font-size: 15px !important;
 }
-.selectEdit{
-    display: none;
+.input-field-edit {
+    margin-top: 0%;
 }
+#editModal{
+    display: none;
+    padding: 8.09px;
+}
+.container-client{
+    padding-block-end: 20px;
+}
+div.modal-content{
+    padding: 0rem !important    ;
+    height: auto !important;
+}
+

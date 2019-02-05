@@ -13,14 +13,14 @@
 }
 .list-sofkianos{
     display: inline-block;
-}
-
-li{
     padding-left: 1rem;
     padding-bottom: 1rem;
-    display: inline-block;
 }
 
+.list-sofkianos > img {
+    height: 60px !important;
+    width: 60px !important;
+}
 .btn-floating{
     vertical-align: super;
 }
@@ -28,4 +28,63 @@ li{
 .icons{
     text-align: right;
     margin-right: 30px;    
+}
+
+#title-project{
+    height: 50px;
+}
+
+.chips-div > img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.content-elements > img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.content-elements{
+    padding: 0px 13px 0px 13px;
+}
+
+.chips-div{
+    padding-left: 25px;
+    display: inline-block;
+    text-align: center;
+}
+
+.chips-div > p {
+    padding: 0px;
+    margin: 0px;
+
+}
+
+.icons-delete{
+    /*block*/
+    display: none;
+    margin-left: 42px;
+    margin-top: -6px;
+    position: absolute;
+    font-size: 20px;
+}
+.margin-project{
+    margin: 3%;
+}
+.icons-delete-sofki{
+    display: none;
+    margin-left: 42px;
+    margin-top: -6px;
+    position: absolute;
+    font-size: 20px;
+}
+
+.classTemp{
+    display: none;
+}
+
+.title-p{
+    color: #ffa836;
 }

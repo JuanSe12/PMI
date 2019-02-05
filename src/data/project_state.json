@@ -1,17 +1,17 @@
 [
     {
        "id": 1,
-       "name": "Pendiente",
+       "name": "TO DO",
        "description": "" 
     },
     {
         "id": 2,
-        "name": "Programación",
+        "name": "WIP",
         "description": "" 
      },
      {
         "id": 3,
-        "name": "Finalizado",
+        "name": "DONE",
         "description": "" 
      }
 ]

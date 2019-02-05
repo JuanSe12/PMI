@@ -5,44 +5,45 @@ import Client from "../model/client.js";
 import Project from "../model/project.js";
 import Sofkiano from "../model/sofkiano.js";
 
-export default async function (num, arrayObject, defineModel) {
-    let arrayValue = Object.values(arrayObject[num]);
+export default async function (arrayObject, defineModel) {
     let objectEdit = '';
     switch (defineModel) {
         case 1:
             objectEdit = new Client(
-                arrayValue[0],
-                arrayValue[1],
-                document.getElementById(`nit${num}`).value,
-                document.getElementById(`size${num}`).value,
-                document.getElementById(`sectorEdit${num}`).value,
-                document.getElementById(`type${num}`).value
+                arrayObject.id,
+                arrayObject.name,
+                arrayObject.nit,
+                arrayObject.size,
+                arrayObject.sector,
+                arrayObject.typeClient,
+                arrayObject.img
             )
             break;
         case 2:
             objectEdit = new Sofkiano(
-                arrayValue[0],
-                arrayValue[1],
-                arrayValue[2],
-                arrayValue[3],
-                arrayValue[4],
-                arrayValue[5],
-                arrayValue[6],
-                arrayValue[7],
-                arrayValue[8],
+                arrayObject.id,
+                arrayObject.firtsName,
+                arrayObject.lastName,
+                arrayObject.img,
+                arrayObject.documentType,
+                arrayObject.documentNumber,
+                arrayObject.externalExperience,
+                arrayObject.internalExperience,
+                arrayObject.feactures,
+                arrayObject.technologies
             )
             break;
         case 3:
             objectEdit = new Project(
-                arrayValue[0],
-                arrayValue[1],
-                arrayValue[2],
-                arrayValue[3],
-                arrayValue[4],
-                arrayValue[5],
-                arrayValue[6],
-                arrayValue[7],
-                arrayValue[8],
+                arrayObject.id,
+                arrayObject.name,
+                arrayObject.description,
+                arrayObject.state,
+                arrayObject.client,
+                arrayObject.dateInit,
+                arrayObject.dateFinish,
+                arrayObject.technologies,
+                arrayObject.sofkianos
             )
             break;
         default:
@@ -50,8 +51,9 @@ export default async function (num, arrayObject, defineModel) {
     }
     let response = await dataService.save(objectEdit)
     if (typeof (response.id) != undefined) {
-        return { message: 'Se edito el dato con éxito' };
+
+        return { message: 'Se edito el dato con éxito', switch: 1 };
     } else {
-        return { message: 'Fallo al editarse el dato' };
+        return { message: 'Fallo al editarse el dato', switch: 2 };
     }
 }

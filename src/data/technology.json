@@ -9,7 +9,8 @@
       "id": 2,
       "name": "React",
       "description": "",
-      "icon": ""
+      "icon": "./src/assets/images/tecnologhies/react.png"
+      
    },
    {
       "id": 3,
@@ -21,13 +22,13 @@
       "id": 4,
       "name": "Android",
       "description": "",
-      "icon": ""
+      "icon": "./src/assets/images/tecnologhies/android.png"
    },
    {
       "id": 5,
       "name": ".Net",
       "description": "",
-      "icon": ""
+      "icon": "./src/assets/images/tecnologhies/net.png"
    },
    {
       "id": 6,

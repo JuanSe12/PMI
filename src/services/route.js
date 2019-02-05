@@ -6,22 +6,32 @@ const ID_CONTAINER = 'container';
 const ID_MENU_CONTAINER = 'menu';
 
 export default class Route{
-    static routeTo(path){
+    static routeTo(path, params){
         
-        getElementAndRender(path);
+        getElementAndRender(path, params,ID_CONTAINER);
     }
 
     static renderMenu(){
-        getElementAndRender('menu',ID_MENU_CONTAINER);
+        getElementAndRender('menu',"",ID_MENU_CONTAINER);
     }
 }
 
-function getElementAndRender(path, idElement=ID_CONTAINER){
+function getElementAndRender(path,params,idElement=ID_CONTAINER){
+    
     let file = `${Config.baseUrl()}/src/pages/${path}/template.html`
     $(`#${idElement}`).load(file);
-
+    
     try {
-        init[`init${path}`]();
+        if(path==='view-project'){
+            
+            init[`init${path}`](params);
+        }
+        else if (path==='view-sofkiano') {
+            init[`init${path}`](params);
+        }
+        else
+            init[`init${path}`]();
+            
     } catch (error) {
         console.log(error);
     }

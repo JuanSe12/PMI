@@ -1,49 +1,98 @@
 import DataService from "../../services/data_service.js";
-import Config from "../../config/config.js"
+import Config from "../../config/config.js";
+import Route from "../../services/route.js";
 
-export default async function fillProjects() {
-    DataService.getAllProjects()
-        .then(async (projects) => {
-            console.log("Entró al promise");
+
+let controller;
+
+
+export default controller = {
+    fillProjects() {
+        DataService.getAllProjects()
+            .then(
+                projects => {
+                    this.renderProject(projects);
+                })
+    },
+
+
+    renderProject(projects) {
+        const MESSAGE = 'No existe un Proyecto con ese nombre';
+        if (projects.length == 0) {
+            M.toast({ html: MESSAGE });
+        }
+        else {
+            console.log(projects)
             var ul = document.getElementById("business-list");
             let template = " ";
-
+            let idList = 0;
             projects.map(async (project) => {
-            let state= await project.getState();
-            let clients= await project.getClient();
-                           
-               
+                let state = await project.getState();
+                let clients = await project.getClient();
+                idList += 1;
+
                 let li =
-                `<li class="collection-item avatar">
-                <div class="collapsible-header">
-                    <div class="row size-row">
-                        <div class=" col s10">
-                            <div class="row ">
-                                <div class=" col s4">
-                                    <img class="img-size circle" src="${Config.baseUrl()+project.img}" alt="NO">
+                    `<li class="collection-item avatar">
+                        <div class="collapsible-header grow">
+                            <div class="row size-row">
+                                <div class=" col s10">
+                                    <div class="row ">
+                                        <div class=" col s4">
+                                            <img class="img-size circle" src="${Config.baseUrl() + project.img}" alt="NO">
+                                        </div>
+                                        <div class=" col s4 ">
+                                            <div> <p class="title-client">${project.name} <p></div>
+                                            <p> Cliente:                  
+                                            ${clients[0].name}
+                                            </p>
+                                        </div>
+                                        <div class="col s4 ">
+                                            <p>Estado: ${state[0].name} </p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class=" col s4 ">
-                                    <div> <p class="title-client">${project.name} <p></div>
-                                    <p> Cliente:                  
-                                    ${clients[0].name}
-                                    </p>
-                                </div>
-                                <div class="col s4 ">
-                                    <p>Estado: ${state[0].name} </p>
+                                <div class="col s2">
+                                    <p> <a class="edit-buttom" id="showMore${idList}">  <i class="material-icons">add_circle</i></a></p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col s2">
-                           <p> <a class="edit-buttom">  <i class="material-icons">more_horiz</i></a></p>
-                      </div>
-                    </div>
-                </div>
-            </li>`;
+                            <div class="collapsible-body ">               
+                                                
+                            </div>
+                        </li>`;
                 template += li;
-               
+
             })
-            setTimeout(function(){
-                ul.innerHTML = template;},150);         
-            
-        })
+            setTimeout(() => {
+                ul.innerHTML = template;
+                let elementAt = 0;
+
+                setTimeout(() => {
+                    projects.map(project => {
+                        elementAt += 1;
+                        addEvents(elementAt, project);
+                    })
+                }, 250);
+            }, 150);
+            setEventAddProject();
+        }
+    }
 }
+
+
+function addEvents(elementAt, project) {
+    document.getElementById(`showMore${elementAt}`).addEventListener('click', function () {
+        Route.routeTo("view-project", project);
+    });
+}
+
+
+function setEventAddProject(){
+    document.getElementById('add-project-button').addEventListener('click',
+    function(){
+        setTimeout(() => {
+            
+        }, 100);
+        Route.routeTo('create-project');
+    })
+}
+

@@ -1,7 +1,7 @@
 import DataService from "../services/data_service.js";
 
-export default class Project{
-    constructor(id, name, description, state, client, dateInit, dateFinish,technologies, sofkianos){
+export default class Project {
+    constructor(id = 0, name, description, state, client, dateInit, dateFinish, technologies = [], img, sofkianos = []) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -10,41 +10,52 @@ export default class Project{
         this.dateInit = dateInit;
         this.dateFinish = dateFinish;
         this.technologies = technologies;
+        this.img = img;
         this.sofkianos = sofkianos;
     }
 
 
-    getState(){
+    getState() {
         let ids = new Array();
         ids.push(this.state)
         return DataService.getProjectStateByIds(ids);
     }
 
 
-    getClient(){
+    getClient() {
         let ids = new Array();
         ids.push(this.client)
         return DataService.getClientByIds(ids);
     }
 
 
-    getSofkianos(){
+    getSofkianos() {
         return DataService.getSofkianoByIds(this.sofkianos);
     }
 
 
-    getTechnologies(){
+    getTechnologies() {
         return DataService.getTechnologiesByIds(this.technologies)
     }
 
 
-    getDateInit(){
-        return new Date(...this.dateInit)
+    getDateInit() {
+        if (typeof this.dateInit == "object") {
+            return new Date(...this.dateInit)
+        }
+        else if (typeof this.dateInit == "string") {
+            return new Date(this.dateInit)
+        }
     }
 
 
-    getDateFinish(){
-        return new Date(...this.dateFinish)
+    getDateFinish() {
+        if (typeof this.dateFinish == "object") {
+            return new Date(...this.dateFinish)
+        }
+        else if (typeof this.dateFinish == "string") {
+            return new Date(this.dateFinish)
+        }
     }
 
 }
